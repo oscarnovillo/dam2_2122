@@ -1,6 +1,4 @@
 
-N
-src/main/java/main/MainFX.java,0\b\0b1ca344ee7d18831cec3b217c85cbfcc8a7e495
 I
 src/main/java/modelo.java,3\5\3520d6e2580283c2b9205a75d9e4186a825848d7
 R

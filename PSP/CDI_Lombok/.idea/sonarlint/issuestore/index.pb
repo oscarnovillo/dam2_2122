@@ -17,8 +17,6 @@ Y
 )src/main/java/gui/FXMLLoaderProducer.java,2\b\2b5940a7ad3179b7ce2b955a92b8d93c1aa08927
 N
 src/main/java/main/MainFX.java,0\b\0b1ca344ee7d18831cec3b217c85cbfcc8a7e495
-X
-(src/main/java/controllers/Pantalla2.java,3\b\3b439d47480949ffc3e622e949ad859dc2d50823
 P
  src/main/java/gui/Producers.java,0\c\0ccb22e4f4008479e9aa017246e1fb0c4f4d4461
 L
