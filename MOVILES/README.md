@@ -8,6 +8,7 @@
   
 - Primera App
   - Control activity
-  - layout
+  - layout 
+      - frame, linear horizontal vertical weigth ,constraitnlayout chainstyle, vo h bias, 
   - resources
     
