@@ -6,8 +6,8 @@
         - tipos
    - variables estaticas
   
-
 - Primera App
   - Control activity
   - layout
   - resources
+    
