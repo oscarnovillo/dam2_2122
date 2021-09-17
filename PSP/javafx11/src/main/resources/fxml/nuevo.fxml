@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="660.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Nuevo">
+   <children>
+      <Button fx:id="btAdd" layoutX="373.0" layoutY="159.0" mnemonicParsing="false" onAction="#addNombre" text="add" />
+      <ComboBox fx:id="cbNombres" layoutX="70.0" layoutY="93.0" onAction="#buscarPersona" prefWidth="150.0" />
+      <Label layoutX="70.0" layoutY="58.0" prefHeight="17.0" prefWidth="94.0" text="sexo" />
+      <ListView fx:id="lvNombres" layoutX="64.0" layoutY="454.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextField fx:id="txtNombre" layoutX="373.0" layoutY="27.0" promptText="nombre" />
+      <Button layoutX="566.0" layoutY="467.0" mnemonicParsing="false" onAction="#delNombre" text=" dell seleccionado" />
+      <TextField fx:id="txtEdad" layoutX="373.0" layoutY="54.0" promptText="edad" />
+      <ListView layoutX="337.0" layoutY="454.0" prefHeight="200.0" prefWidth="200.0" />
+      <DatePicker fx:id="registro" layoutX="373.0" layoutY="121.0" promptText="fecha de registro" />
+      <Button layoutX="271.0" layoutY="498.0" mnemonicParsing="false" text="-&gt;" />
+      <Button layoutX="271.0" layoutY="542.0" mnemonicParsing="false" text="&lt;-" />
+      <RadioButton fx:id="rbHombre" layoutX="381.0" layoutY="93.0" mnemonicParsing="false" text="Hombre">
+         <toggleGroup>
+            <ToggleGroup fx:id="sexo" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rbMujer" layoutX="504.0" layoutY="97.0" mnemonicParsing="false" text="Mujer" toggleGroup="$sexo" />
+      <Button layoutX="460.0" layoutY="159.0" mnemonicParsing="false" text="update" />
+      <Label layoutX="78.0" layoutY="384.0" text="Se cargan en el list segun el combo" />
+      <Label layoutX="367.0" layoutY="393.0" text="al seleccionar persona, se ponen sus datos en las cajas" />
+   </children>
+</AnchorPane>

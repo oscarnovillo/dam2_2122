@@ -34,7 +34,7 @@ public class Principal implements Initializable {
         pantalla = new FXMLLoader();
         try {
             if (pantallaPane == null) {
-                pantallaPane = pantalla.load(getClass().getResourceAsStream("/fxml/pantalla2.fxml"));
+                pantallaPane = pantalla.load(getClass().getResourceAsStream("/fxml/pantalla.fxml"));
             }
         } catch (Exception e) {
           Logger.getLogger("LOG").log(Level.INFO,"ME NSAE",e);
