@@ -73,7 +73,6 @@ public class Principal {
 
             pantall.boton.setText("conseguido2");
             pantall.setP(this);
-
         }
         root.setCenter(panePantalla);
     }
