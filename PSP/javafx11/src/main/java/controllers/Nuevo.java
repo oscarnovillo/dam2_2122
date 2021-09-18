@@ -25,7 +25,7 @@ public class Nuevo implements Initializable {
     public ToggleGroup sexo;
     public RadioButton rbHombre;
     public RadioButton rbMujer;
-    private ServicioAddPersona add = new ServicioAddPersona();
+    private final ServicioAddPersona add = new ServicioAddPersona();
     @FXML
     private TextField txtDel;
     @FXML

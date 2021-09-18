@@ -19,6 +19,9 @@ module javafx11 {
     //needed for JavaFX
     opens controllers to javafx.fxml;
 
+
+
+
 //    //needed for JSON
 //    opens com.edencoding.models.openVision to gson;
 //    opens com.edencoding.models.dogs to gson;
