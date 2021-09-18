@@ -2,6 +2,7 @@ package servicios.persona;
 
 import dao.DaoPersona;
 import modelo.Persona;
+import modelo.Persona;
 
 public class ServicioAddPersona {
 

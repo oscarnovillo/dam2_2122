@@ -9,8 +9,7 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  * @author dam2
@@ -31,7 +30,7 @@ public class Configuration {
                 config = yaml.loadAs(new FileInputStream("config/config.yaml"),
                         Configuration.class);
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
+               //Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return config;

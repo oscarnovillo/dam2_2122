@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -25,5 +26,7 @@
       <Button layoutX="460.0" layoutY="159.0" mnemonicParsing="false" text="update" />
       <Label layoutX="78.0" layoutY="384.0" text="Se cargan en el list segun el combo" />
       <Label layoutX="367.0" layoutY="393.0" text="al seleccionar persona, se ponen sus datos en las cajas" />
+      <Button layoutX="155.0" layoutY="184.0" mnemonicParsing="false" text="Button" />
+      <MFXButton buttonType="RAISED" depthLevel="LEVEL4" layoutX="155.0" layoutY="219.0" mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>
