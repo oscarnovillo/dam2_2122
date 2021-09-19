@@ -43,5 +43,54 @@
 
 
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <annotationProcessorPaths>
 
+                        <!-- SOLUTION -->
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.20</version>
+                        </path>
+
+
+                    </annotationProcessorPaths>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>maven</executable>
+                    <!-- optional -->
+<!--                    <workingDirectory>/tmp</workingDirectory>-->
+<!--                    <arguments>-->
+<!--                        <argument>-X</argument>-->
+<!--                        <argument>myproject:dist</argument>-->
+<!--                     -->
+<!--                    </arguments>-->
+<!--                    <environmentVariables>-->
+<!--                        <LANG>en_US</LANG>-->
+<!--                    </environmentVariables>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
