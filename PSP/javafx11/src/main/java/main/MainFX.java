@@ -13,8 +13,8 @@ public class MainFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loaderMenu = new FXMLLoader(
-                getClass().getResource("/fxml/nuevo.fxml"));
-        AnchorPane root = loaderMenu.load();
+                getClass().getResource("/fxml/principal.fxml"));
+        BorderPane root = loaderMenu.load();
         Scene scene = new Scene(root);
         primaryStage.setTitle("IES Quevedo");
         primaryStage.setScene(scene);

@@ -8,6 +8,6 @@
       <Button layoutX="248.0" layoutY="175.0" mnemonicParsing="false" text="Pantalla" />
 
       <Button layoutX="448.0" layoutY="175.0" mnemonicParsing="false" text="Pantalla" />
-      <Button layoutX="196.0" layoutY="50.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="lanzador" onAction="#irPantallaNuevo" layoutX="196.0" layoutY="50.0" mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>
