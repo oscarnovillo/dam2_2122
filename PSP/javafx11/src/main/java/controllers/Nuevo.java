@@ -1,16 +1,17 @@
 package controllers;
 
-import dao.DaoPersona;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import dao.DaoPersonaImpl;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.util.converter.IntegerStringConverter;
 import modelo.Persona;
+import servicios.persona.IServicioAddPersona;
 import servicios.persona.ServicioAddPersona;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,7 +26,9 @@ public class Nuevo implements Initializable {
     public ToggleGroup sexo;
     public RadioButton rbHombre;
     public RadioButton rbMujer;
-    private final ServicioAddPersona add = new ServicioAddPersona();
+    private final IServicioAddPersona add = new ServicioAddPersona();
+
+    public MFXButton botonFX;
     @FXML
     private TextField txtDel;
     @FXML
@@ -54,19 +57,19 @@ public class Nuevo implements Initializable {
 //        });
 
 
-        UnaryOperator<TextFormatter.Change> numberValidationFormatter = change -> {
-            if(change.getText().matches("-?\\d+")){
-                return change; //if change is a number
-            } else {
-                change.setText(""); //else make no change
-                change.setRange(    //don't remove any selected text either.
-                        change.getRangeStart(),
-                        change.getRangeStart()
-                );
-                return change;
-            }
-        };
-        txtEdad.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(),0,numberValidationFormatter));
+//        UnaryOperator<TextFormatter.Change> numberValidationFormatter = change -> {
+//            if(change.getText().matches("\\d+")){
+//                return change; //if change is a number
+//            } else {
+//                change.setText(""); //else make no change
+//                change.setRange(    //don't remove any selected text either.
+//                        change.getRangeStart(),
+//                        change.getRangeStart()
+//                );
+//                return change;
+//            }
+//        };
+//        txtEdad.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(),0,numberValidationFormatter));
     }
 
     @FXML
@@ -75,7 +78,6 @@ public class Nuevo implements Initializable {
         p.setNombre(txtNombre.getText());
         String edad = txtEdad.getText();
         try {
-
             p.setEdad(Integer.parseInt(txtEdad.getText()));
             p.setMujer(!((RadioButton) sexo.getSelectedToggle()).getText().equals("Hombre"));
             p.setMujer(rbMujer.isSelected());
@@ -89,7 +91,10 @@ public class Nuevo implements Initializable {
             }
             alert.showAndWait();
 
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
+            alert.setContentText("Edad no es numero");
+            alert.showAndWait();
+        }catch (Exception e) {
             alert.setContentText("Edad no es numero");
             alert.showAndWait();
         } finally {
@@ -115,9 +120,10 @@ public class Nuevo implements Initializable {
     }
 
     public void buscarPersona(ActionEvent actionEvent) {
+
         String hombre = cbNombres.getSelectionModel().getSelectedItem();
 
-        List<Persona> personas = DaoPersona.personas;
+        List<Persona> personas = DaoPersonaImpl.personas;
 
         lvNombres.getItems().clear();
         lvNombres.getItems().addAll(personas.stream().filter(

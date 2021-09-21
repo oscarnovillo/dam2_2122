@@ -7,6 +7,7 @@ module javafx11 {
     requires java.logging;
     requires MaterialFX;
 
+
     //requires javafx.swing;
 
     //needed for HTTP
@@ -18,9 +19,6 @@ module javafx11 {
 
     //needed for JavaFX
     opens controllers to javafx.fxml;
-
-
-
 
 //    //needed for JSON
 //    opens com.edencoding.models.openVision to gson;
