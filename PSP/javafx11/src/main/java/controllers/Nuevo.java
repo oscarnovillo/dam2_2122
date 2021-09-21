@@ -1,14 +1,13 @@
 package controllers;
 
-import dao.DaoPersona;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import dao.DaoPersonaImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.util.converter.IntegerStringConverter;
 import modelo.Persona;
+import servicios.persona.IServicioAddPersona;
 import servicios.persona.ServicioAddPersona;
 
 import java.net.URL;
@@ -25,7 +24,7 @@ public class Nuevo implements Initializable {
     public ToggleGroup sexo;
     public RadioButton rbHombre;
     public RadioButton rbMujer;
-    private final ServicioAddPersona add = new ServicioAddPersona();
+    private final IServicioAddPersona add = new ServicioAddPersona();
     @FXML
     private TextField txtDel;
     @FXML
@@ -117,7 +116,7 @@ public class Nuevo implements Initializable {
     public void buscarPersona(ActionEvent actionEvent) {
         String hombre = cbNombres.getSelectionModel().getSelectedItem();
 
-        List<Persona> personas = DaoPersona.personas;
+        List<Persona> personas = DaoPersonaImpl.personas;
 
         lvNombres.getItems().clear();
         lvNombres.getItems().addAll(personas.stream().filter(
