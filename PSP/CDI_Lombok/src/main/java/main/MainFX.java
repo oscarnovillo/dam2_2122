@@ -32,6 +32,7 @@ public class MainFX  {
       stage.show();
     } catch (IOException e) {
       e.printStackTrace();
+      System.exit(0);
     }
   }
 

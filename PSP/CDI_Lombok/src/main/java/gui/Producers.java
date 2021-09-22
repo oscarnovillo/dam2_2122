@@ -1,5 +1,6 @@
 package gui;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.validation.Validation;
 import javax.validation.Validator;

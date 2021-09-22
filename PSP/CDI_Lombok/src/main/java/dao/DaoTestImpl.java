@@ -2,8 +2,9 @@ package dao;
 
 import config.Configuration;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.inject.Singleton;
+
 import java.util.List;
 import java.util.Optional;
 

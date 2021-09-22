@@ -7,13 +7,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CDI_Lombok" />
         <module name="CDI_lombok" />
       </profile>
+      <profile name="Annotation profile for CDI_lombok" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.20/lombok-1.18.20.jar" />
+        </processorPath>
+        <module name="CDI_Lombok" />
+      </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="dao" target="11" />
-      <module name="javafx11" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
