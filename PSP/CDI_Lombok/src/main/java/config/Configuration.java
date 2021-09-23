@@ -28,6 +28,7 @@ public class Configuration {
     private String ruta;
     private String user;
     private String password;
+
     public Configuration() throws FileNotFoundException {
 
         Yaml yaml = new Yaml();

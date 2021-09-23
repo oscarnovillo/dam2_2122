@@ -28,7 +28,7 @@ module javafx11 {
 
     exports gui;
     exports config;
-exports config.modelo;
+    exports config.modelo;
     exports controllers;
     exports dao;
     exports servicios;

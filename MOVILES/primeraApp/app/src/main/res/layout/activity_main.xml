@@ -14,6 +14,7 @@
         android:id="@+id/text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
         android:text="Hello World!"
         app:layout_constraintBottom_toTopOf="@id/boton"
         app:layout_constraintEnd_toStartOf="@id/etName"
@@ -30,6 +31,8 @@
 
     <Button
         android:id="@+id/boton"
+        style="@style/Widget.MaterialComponents.Button"
+        app:icon= "@drawable/ic_baseline_arrow_back_24"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:text="Name"
         app:layout_constraintStart_toEndOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,6 +75,32 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="264dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+        app:counterEnabled="true"
+        app:counterMaxLength="@integer/maxCount"
+        app:helperText="@string/app_name"
+        app:errorEnabled="true"
+        app:startIconDrawable="@drawable/ic_baseline_arrow_back_24"
+        app:endIconDrawable="@drawable/ic_baseline_arrow_back_24"
+        app:endIconMode="password_toggle"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintBottom_toTopOf="@+id/boton"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/etName"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textSize="20sp"
+            android:inputType="number"
+            android:hint="hint" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
