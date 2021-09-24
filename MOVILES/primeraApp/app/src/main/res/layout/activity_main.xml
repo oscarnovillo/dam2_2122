@@ -34,6 +34,7 @@
         style="@style/Widget.MaterialComponents.Button"
         app:icon= "@drawable/ic_baseline_arrow_back_24"
         android:layout_width="0dp"
+        android:backgroundTint="@color/black"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
@@ -85,9 +86,9 @@
         app:helperText="@string/app_name"
         app:errorEnabled="true"
         app:startIconDrawable="@drawable/ic_baseline_arrow_back_24"
-        app:endIconDrawable="@drawable/ic_baseline_arrow_back_24"
+
         app:endIconMode="password_toggle"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         app:layout_constraintBottom_toTopOf="@+id/boton"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/etName"
@@ -98,7 +99,7 @@
             android:layout_height="wrap_content"
 
             android:textSize="20sp"
-            android:inputType="number"
+            android:inputType="textPassword"
             android:hint="hint" />
     </com.google.android.material.textfield.TextInputLayout>
 
