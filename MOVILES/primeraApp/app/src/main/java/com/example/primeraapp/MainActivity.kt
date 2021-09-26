@@ -12,21 +12,33 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.primeraapp.databinding.ActivityMainBinding
 
+
+data class Persona(var nombre:String,var appelido:String = "Perez")
+
+
 class MainActivity : AppCompatActivity() {
 
-    private val listaPersonas  = mutableListOf<String>()
+    private val listaPersonas  = mutableListOf<Persona>()
+
+
     private lateinit var binding: ActivityMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        var person = Persona("","")
+        person.appelido = ""
+
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //val boton = this.findViewById<Button>(R.id.boton)
 
         val etName = this.findViewById<EditText>(R.id.etName)
+
 //        boton.text = "HOLA BOTON"
 //        ponerlisteners()
         binding.boton.setSafeOnClickListener {
