@@ -5,8 +5,8 @@ module javafx11 {
     requires org.yaml.snakeyaml;
     requires transitive lombok;
     requires java.logging;
-    requires javax.el;
 
+    requires javax.el;
     requires jakarta.enterprise.cdi.api;
     requires jakarta.inject.api;
     requires java.validation;
