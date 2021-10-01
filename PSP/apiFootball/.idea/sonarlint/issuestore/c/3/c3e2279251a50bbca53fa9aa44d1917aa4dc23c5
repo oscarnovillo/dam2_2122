@@ -1,18 +1,0 @@
-
-~
-java:S1488""\Immediately return this expression instead of assigning it to the temporary variable "call".(ö¼åÓüÿÿÿÿ8á«Îª/
-P
-java:S1128".Remove this unused import 'java.time.Instant'.(Â‚éñÿÿÿÿÿ8Ş¶Œ³ò.
-U
-java:S1128"3Remove this unused import 'java.lang.reflect.Type'.(‰ûÕñıÿÿÿÿ8´ÏÈ³ò.
-V
-java:S1128"4Remove this unused import 'java.time.LocalDateTime'.(æÃ§ƒüÿÿÿÿ8´ÏÈ³ò.
-K
-java:S1481".Remove this unused "resultado" local variable.(ª»öû8á«Îª/
-J
-java:S1128"-Remove this unused import 'java.time.ZoneId'.( Æ½“8´ÏÈ³ò.
-]	java:S125$"<This block of commented-out lines of code should be removed.(ñ¥ùšøÿÿÿÿ8á«Îª/
-I
-java:S1612Y",Replace this lambda with a method reference.(Ğğù¨8Ö‡É³ò.
-e
-java:S2095W"CUse try-with-resources or close this "Jsonb" in a "finally" clause.(¦Ş„ìüÿÿÿÿ8ı««Şò.

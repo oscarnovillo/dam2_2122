@@ -1,15 +1,9 @@
 package gui;
 
 import com.google.gson.*;
-import config.ConfigurationSingleton_Client;
-import dao.modelo.AreasRequest;
 import dao.modelo.marvel.ApiError;
-import dao.modelo.marvel.Marvel;
 import dao.modelo.marvel.MarvelCharacters;
-import dao.retrofit.AreasAPI;
 import dao.retrofit.MarvelApi;
-import io.vavr.control.Either;
-import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Response;
@@ -18,8 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

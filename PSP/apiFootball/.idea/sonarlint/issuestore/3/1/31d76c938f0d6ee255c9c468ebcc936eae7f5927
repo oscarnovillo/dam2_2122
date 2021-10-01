@@ -1,9 +1,0 @@
-
-E
-java:S1068")Remove this unused "alert" private field.(”ØÑ8§Àæèæ.
-
-java:S1450"_Remove the "controller_login" field and declare it as a local variable in the relevant methods.(è“ĞÜøÿÿÿÿ8Øíæèæ.
-p
-java:S1450"TRemove the "alert" field and declare it as a local variable in the relevant methods.(”ØÑ8§Àæèæ.
-u	java:S116"[Rename this field "controller_login" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(è“ĞÜøÿÿÿÿ
-s	java:S116"YRename this field "pantalla_login" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ü‡ÊÕøÿÿÿÿ

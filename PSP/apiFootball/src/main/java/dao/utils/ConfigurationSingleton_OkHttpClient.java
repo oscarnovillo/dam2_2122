@@ -3,7 +3,9 @@ package dao.utils;
 import com.google.gson.*;
 import config.ConfigurationSingleton_Client;
 import lombok.extern.log4j.Log4j2;
-import okhttp3.JavaNetCookieJar;
+
+//import okhttp3.CookieJar;
+//import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
@@ -35,6 +37,10 @@ public class ConfigurationSingleton_OkHttpClient {
             CookieManager cookieManager = new CookieManager();
             cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
 
+//            CookieJar cookieJar =
+//                    new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
+
+
             clientOK = new OkHttpClient.Builder()
                     .readTimeout(Duration.of(10, ChronoUnit.MINUTES))
                     .callTimeout(Duration.of(10, ChronoUnit.MINUTES))
@@ -51,7 +57,7 @@ public class ConfigurationSingleton_OkHttpClient {
                         Request request = builder1.build();
                         return chain.proceed(request);}
                     )
-                    .cookieJar(new JavaNetCookieJar(cookieManager))
+//                    .cookieJar(new JavaNetCookieJar(cookieManager))
                     .build();
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
                 @Override
