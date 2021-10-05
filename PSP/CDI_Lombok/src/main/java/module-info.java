@@ -7,8 +7,7 @@ module javafx11 {
     requires java.logging;
 
     requires javax.el;
-    requires jakarta.enterprise.cdi.api;
-    requires jakarta.inject.api;
+
     requires java.validation;
 
 

@@ -33,6 +33,9 @@ module apiFootball {
     //needed for JavaFX
     opens gui.controllers to javafx.fxml;
 
+    // yaml
+   //opens config to org.yaml.snakeyaml.Yaml;
+
 //    //needed for JSON
 //    opens com.edencoding.models.openVision to gson;
 //    opens com.edencoding.models.dogs to gson;

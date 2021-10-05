@@ -7,4 +7,6 @@ public class MarvelCharacters extends Marvel{
 
     //    @Expose
     private DataCharacters data;
+
+
 }

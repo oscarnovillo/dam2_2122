@@ -1,12 +1,14 @@
 package gui;
 
 import com.google.gson.*;
+import config.ConfigurationSingleton_Client;
 import dao.modelo.ApiError;
 import dao.modelo.Usuario;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
 import java.lang.reflect.Type;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +16,7 @@ public class MainTest {
 
     public static void main(String[] args) {
 
-
+        ConfigurationSingleton_Client.getInstance().getPath_base();
         Jsonb jsonb = JsonbBuilder.create();
 
         System.out.println(jsonb.fromJson("{\"fecha\":\"2021-01-21T19:21:26.11391\",\"message\":\"must not be empty\"}",

@@ -26,6 +26,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import retrofit2.HttpException;
 import servicios.ServiciosAreas;
+import servicios.ServiciosMarvel;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -39,9 +40,7 @@ public class ApiFootballController implements Initializable {
     public TextField texto;
     private Alert alert;
 
-
     private PrincipalController principalController;
-
 
     public void setPrincipalController(PrincipalController principalController) {
         this.principalController = principalController;
@@ -56,32 +55,43 @@ public class ApiFootballController implements Initializable {
     @FXML
     private void clickEntrar(ActionEvent actionEvent) {
 
-        DaoMarvel dao = new DaoMarvel();
+
+        ServiciosMarvel sm = new ServiciosMarvel();
+
+        List<dao.modelo.marvel.Character> listado = sm.getCharacteres();
+
+        if (listado!=null)
+        System.out.println(listado);
+//        else
+            // sacar alert de error
 
 
-        dao.getCharacters(texto.getText())
-                .subscribeOn(Schedulers.io())
-                .observeOn(JavaFxScheduler.platform())
-                .doFinally(() -> this.principalController
-                        .getPantallaPrincipal().setCursor(Cursor.DEFAULT))
-                .subscribe(areas -> System.out.println(areas)
-                        , throwable -> {
-
-                    if (throwable instanceof HttpException)
-                    {
-                        Gson g = new Gson();
-                        dao.modelo.marvel.ApiError apierror = g.fromJson(((HttpException)throwable).response().errorBody().string(), dao.modelo.marvel.ApiError.class);
-
-                        System.out.println("error Code"+ ((HttpException)throwable).response().code());
-                        System.out.println("error Code"+ ((HttpException)throwable).response().message());
-                        System.out.println("error " +apierror.getMessage());
-                    }
-
-                    alert.setContentText(throwable.getMessage());
-                            alert.showAndWait();
-                        }
-
-                );
+//        DaoMarvel dao = new DaoMarvel();
+//
+//
+//        dao.getCharacters(texto.getText())
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(JavaFxScheduler.platform())
+//                .doFinally(() -> this.principalController
+//                        .getPantallaPrincipal().setCursor(Cursor.DEFAULT))
+//                .subscribe(areas -> System.out.println(areas)
+//                        , throwable -> {
+//
+//                    if (throwable instanceof HttpException)
+//                    {
+//                        Gson g = new Gson();
+//                        dao.modelo.marvel.ApiError apierror = g.fromJson(((HttpException)throwable).response().errorBody().string(), dao.modelo.marvel.ApiError.class);
+//
+//                        System.out.println("error Code"+ ((HttpException)throwable).response().code());
+//                        System.out.println("error Code"+ ((HttpException)throwable).response().message());
+//                        System.out.println("error " +apierror.getMessage());
+//                    }
+//
+//                    alert.setContentText(throwable.getMessage());
+//                            alert.showAndWait();
+//                        }
+//
+//                );
 
 //        ServiciosAreas dao = new ServiciosAreas();
 //        dao.getAreas(Integer.parseInt(texto.getText()))

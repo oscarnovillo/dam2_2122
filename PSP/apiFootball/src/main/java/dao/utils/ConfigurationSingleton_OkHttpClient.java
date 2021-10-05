@@ -32,7 +32,7 @@ public class ConfigurationSingleton_OkHttpClient {
     private ConfigurationSingleton_OkHttpClient() {
     }
 
-    public static Retrofit getInstance() {
+    public static synchronized Retrofit getInstance() {
         if (clientOK == null) {
             CookieManager cookieManager = new CookieManager();
             cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);

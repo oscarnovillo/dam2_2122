@@ -1,6 +1,7 @@
 package gui;
 
 import com.google.gson.*;
+import config.ConfigurationSingleton_Client;
 import dao.modelo.marvel.ApiError;
 import dao.modelo.marvel.MarvelCharacters;
 import dao.retrofit.MarvelApi;
@@ -54,6 +55,7 @@ public class MainMarvel {
                     }
                 }
         ).create();
+
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://gateway.marvel.com/v1/public/")
                 //.addConverterFactory(ScalarsConverterFactory.create())
@@ -63,7 +65,7 @@ public class MainMarvel {
 
         MarvelApi marvelAPI = retrofit.create(MarvelApi.class);
 
-        Response<MarvelCharacters> response = marvelAPI.getCharacters().execute();
+        Response<MarvelCharacters> response = marvelAPI.getCharacters("spider").execute();
 
         if (response.isSuccessful())
         {

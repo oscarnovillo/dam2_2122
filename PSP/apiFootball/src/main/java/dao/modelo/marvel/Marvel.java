@@ -1,9 +1,10 @@
 
 package dao.modelo.marvel;
 
+import lombok.Data;
 import com.google.gson.annotations.Expose;
 
-@lombok.Data
+@Data
 public abstract class Marvel {
 
 //    @Expose

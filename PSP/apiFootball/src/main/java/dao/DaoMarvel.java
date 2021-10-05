@@ -2,9 +2,9 @@ package dao;
 
 import com.google.gson.*;
 import dao.modelo.marvel.ApiError;
-import dao.modelo.marvel.Marvel;
 import dao.modelo.marvel.MarvelCharacters;
 import dao.retrofit.MarvelApi;
+import dao.utils.ConfigurationSingleton_OkHttpClient;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import okhttp3.OkHttpClient;
@@ -20,12 +20,35 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class DaoMarvel {
 
 
-    public Single<List<dao.modelo.marvel.Character>> getCharacters(String test)
-    {
+    public List<dao.modelo.marvel.Character> getCharacters() {
+
+        MarvelApi marvelAPI = ConfigurationSingleton_OkHttpClient.getInstance().create(MarvelApi.class);
+        List<dao.modelo.marvel.Character> resultado = null;
+
+        try {
+            Response<MarvelCharacters> response = marvelAPI.getCharacters().execute();
+
+            if (response.isSuccessful()) {
+                resultado = response.body().getData().getCharacters();
+            } else {
+                Gson g = new Gson();
+                ApiError apierror = g.fromJson(response.errorBody().string(), ApiError.class);
+
+            }
+        } catch (Exception e) {
+            Logger.getLogger("ljkhkj").log(Level.INFO, e.getMessage(), e);
+        }
+        return resultado;
+    }
+
+    public Single<List<dao.modelo.marvel.Character>> getCharacters(String test) {
         OkHttpClient clientOK;
 
         Retrofit retrofit;
@@ -36,16 +59,17 @@ public class DaoMarvel {
                 .callTimeout(Duration.of(10, ChronoUnit.MINUTES))
                 .connectTimeout(Duration.of(10, ChronoUnit.MINUTES))
                 .addInterceptor(chain -> {
-                    Request original = chain.request();
+                            Request original = chain.request();
 
-                    Request.Builder builder1 = original.newBuilder()
-                            .url(original.url().newBuilder()
-                                    .addQueryParameter("ts","1")
-                                    .addQueryParameter("apikey","a26d34b6ea64ce618360835be5888f91")
-                                    .addQueryParameter("hash","073e520a55d710ef1b77df866349e689")
-                                    .build());
-                    Request request = builder1.build();
-                    return chain.proceed(request);}
+                            Request.Builder builder1 = original.newBuilder()
+                                    .url(original.url().newBuilder()
+                                            .addQueryParameter("ts", "1")
+                                            .addQueryParameter("apikey", "a26d34b6ea64ce618360835be5888f91")
+                                            .addQueryParameter("hash", "073e520a55d710ef1b77df866349e689")
+                                            .build());
+                            Request request = builder1.build();
+                            return chain.proceed(request);
+                        }
                 )
 
                 .build();
@@ -54,7 +78,7 @@ public class DaoMarvel {
             public LocalDateTime deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
                 return LocalDateTime.parse(json.getAsJsonPrimitive().getAsString());
             }
-        }).registerTypeAdapter(LocalDateTime.class, new JsonSerializer<LocalDateTime>(){
+        }).registerTypeAdapter(LocalDateTime.class, new JsonSerializer<LocalDateTime>() {
                     @Override
                     public JsonElement serialize(LocalDateTime localDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
                         return new JsonPrimitive(localDateTime.toString());
@@ -72,10 +96,10 @@ public class DaoMarvel {
         MarvelApi marvelAPI = retrofit.create(MarvelApi.class);
 
         return (Single<List<dao.modelo.marvel.Character>>) Completable.fromAction(
-                () -> {
-                    Thread.sleep(5000);
-                    if (test.equals("error")) throw new Exception("error de validacion");
-                })
+                        () -> {
+                            Thread.sleep(5000);
+                            if (test.equals("error")) throw new Exception("error de validacion");
+                        })
                 .andThen(marvelAPI.getCharactersRx()
                         .map(marvelCharacters -> marvelCharacters.getData().getCharacters()))
                 ;
@@ -94,7 +118,6 @@ public class DaoMarvel {
 //            System.out.println("error Code"+ response.message());
 //            System.out.println("error " +apierror.getMessage());
 //        }
-
 
 
     }
