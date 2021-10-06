@@ -27,7 +27,7 @@ public class MainMinimos {
     }
 
     nueva = list.stream()
-        .filter(luismi ->  luismi.startsWith("L"))
+        .filter(nombre ->  nombre.startsWith("L"))
         .sorted()
         .limit(5)
         .map(String::toUpperCase)
