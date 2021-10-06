@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.R
 import com.example.recyclerview.domain.Persona
 
-class PersonasAdapter(private val personas:List<Persona>) : RecyclerView.Adapter<PersonasAdapter.PersonasViewHolder>() {
+class PersonasAdapter(private val personas:List<Persona>) : RecyclerView.Adapter<PersonasViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonasViewHolder {
@@ -27,14 +27,15 @@ class PersonasAdapter(private val personas:List<Persona>) : RecyclerView.Adapter
     }
 
 
-    class PersonasViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-        fun render( persona: Persona){
 
-            view.findViewById<TextView>(R.id.tvNombre).text =  persona.nombre
-            view.findViewById<TextView>(R.id.tvApellidos).text =  persona.apellidos
+}
+class PersonasViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-        }
+    fun render( persona: Persona){
+
+        view.findViewById<TextView>(R.id.tvNombre).text =  persona.nombre
+        view.findViewById<TextView>(R.id.tvApellidos).text =  persona.apellidos
+
     }
-
 }

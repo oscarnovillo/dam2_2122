@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.R
 import com.example.recyclerview.domain.Persona
@@ -15,16 +14,17 @@ class ReciclerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recicler)
 
-        val persona = intent.getParcelableArrayListExtra<Persona>(getString(R.string.persona))
-        Toast.makeText(this , " ${persona?.get(0)?.nombre}", Toast.LENGTH_SHORT).show()
+        val listaPersonas = intent.getParcelableArrayListExtra<Persona>(getString(R.string.persona))
+        Toast.makeText(this , "el nombre es ${listaPersonas?.get(0)?.nombre}", Toast.LENGTH_SHORT).show()
 
         val rvPersona = this.findViewById<RecyclerView>(R.id.rvPersonas)
-        Snackbar.make(rvPersona, " ${persona?.get(0)?.nombre} ", Snackbar.LENGTH_SHORT).show()
-        persona?.let {
+
+        Snackbar.make(rvPersona, " ${listaPersonas?.get(0)?.nombre} ", Snackbar.LENGTH_SHORT).show()
+
+        listaPersonas?.let {
             rvPersona.adapter = PersonasAdapter(it)
             rvPersona.layoutManager = GridLayoutManager(this@ReciclerActivity,2)
         }
-
 
     }
 }
