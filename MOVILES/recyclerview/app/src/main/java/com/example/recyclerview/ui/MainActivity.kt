@@ -10,9 +10,12 @@ import android.widget.Toast
 import com.example.recyclerview.R
 import com.example.recyclerview.domain.Persona
 
+
+
+
 class MainActivity : AppCompatActivity() {
 
-    private var temp: Int = 0;
+    private var temp: Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,12 +34,12 @@ class MainActivity : AppCompatActivity() {
             temp++
 
             editText.setText(temp.toString())
-//            val intent =  Intent(this, ReciclerActivity::class.java)
-//
-//            intent.putExtra(getString(R.string.persona),
-//                arrayListOf(Persona("nombre","appelidos",10),
-//                    Persona("nombre2","apellido2",90)))
-//            startActivity(intent)
+            val intent =  Intent(this, ReciclerActivity::class.java)
+
+            intent.putExtra(getString(R.string.persona),
+                arrayListOf(Persona("nombre","appelidos",10),
+                    Persona("nombre2","apellido2",90)))
+            startActivity(intent)
 
         }
 
