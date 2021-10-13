@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.R
 import com.example.recyclerview.domain.Persona
 
-class PersonasAdapter(private val personas:List<Persona>) : RecyclerView.Adapter<PersonasViewHolder>() {
+class PersonasAdapter(
+    private val personas: List<Persona>,
+    private val onClickBoton: (String) -> Unit
+) : RecyclerView.Adapter<PersonasViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonasViewHolder {
@@ -17,25 +20,29 @@ class PersonasAdapter(private val personas:List<Persona>) : RecyclerView.Adapter
     }
 
 
-
     override fun onBindViewHolder(holder: PersonasViewHolder, position: Int) {
-        holder.render(personas[position])
+        holder.render(personas[position],onClickBoton)
     }
 
-    override fun getItemCount(): Int {
-        return personas.size
-    }
-
+    override fun getItemCount(): Int = personas.size
 
 
 
 }
+
 class PersonasViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-    fun render( persona: Persona){
+    fun render(persona: Persona,
+               onClickBoton: (String) -> Unit) {
 
-        view.findViewById<TextView>(R.id.tvNombre).text =  persona.nombre
-        view.findViewById<TextView>(R.id.tvApellidos).text =  persona.apellidos
+        val text = view.findViewById<TextView>(R.id.tvNombre)
+        text.setText(persona.nombre)
+
+        view.findViewById<TextView>(R.id.tvApellidos).text = persona.apellidos
+
+        view.findViewById<TextView>(R.id.button2).setOnClickListener {
+            onClickBoton(text.text.toString());
+        }
 
     }
 }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/purple_200"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -17,7 +16,13 @@
         android:layout_height="wrap_content"
         tools:text="TextView"
         android:layout_marginEnd="10dp"
-     />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvApellidos"
+
+        />
+
 
     <TextView
         android:id="@+id/tvApellidos"
@@ -25,7 +30,22 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         tools:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button2"
+        app:layout_constraintTop_toBottomOf="@id/tvNombre"
+        app:layout_constraintBottom_toBottomOf="parent"
          />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Button"
 
-</LinearLayout>
+        app:layout_constraintStart_toEndOf="@id/tvNombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

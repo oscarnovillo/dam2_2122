@@ -10,6 +10,13 @@ import com.example.recyclerview.domain.Persona
 import com.google.android.material.snackbar.Snackbar
 
 class ReciclerActivity : AppCompatActivity() {
+
+
+    fun click(nombre:String){
+        Snackbar.make(findViewById<RecyclerView>(R.id.rvPersonas)
+            , " $nombre", Snackbar.LENGTH_SHORT).show()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recicler)
@@ -22,9 +29,14 @@ class ReciclerActivity : AppCompatActivity() {
         Snackbar.make(rvPersona, " ${listaPersonas?.get(0)?.nombre} ", Snackbar.LENGTH_SHORT).show()
 
         listaPersonas?.let {
-            rvPersona.adapter = PersonasAdapter(it)
+            rvPersona.adapter = PersonasAdapter(it,::click)
             rvPersona.layoutManager = GridLayoutManager(this@ReciclerActivity,2)
         }
 
+
+
     }
+
+
+
 }
