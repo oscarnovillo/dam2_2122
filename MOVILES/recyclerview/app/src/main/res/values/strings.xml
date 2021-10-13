@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">recyclerview</string>
+    <string name="place">%s.%s</string>
 </resources>

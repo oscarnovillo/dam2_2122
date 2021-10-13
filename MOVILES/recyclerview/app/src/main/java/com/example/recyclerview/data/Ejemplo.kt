@@ -15,7 +15,7 @@ data class Ejemplo(
     @Json(name = "id")
     val id: Int,
     @Json(name = "modified")
-    val modified: String,
+    val modified: LocalDateTime,
     @Json(name = "name")
     val name: String,
     @Json(name = "path")

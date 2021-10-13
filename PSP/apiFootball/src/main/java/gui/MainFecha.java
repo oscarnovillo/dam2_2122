@@ -18,5 +18,7 @@ public class MainFecha {
         System.out.format("Formatted date time with default zone ID is %s\n", todayWithDefaultTimeZone.format(formatTodayWithZoneId));
 
         LocalDateTime.parse("2014-12-09T13:50:51.644000Z", DateTimeFormatter.ISO_ZONED_DATE_TIME);
+        String fecha = LocalDateTime.parse("2014-04-29T14:18:17-0400", DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss-SSSS")).toString();
+        System.out.println(fecha);
     }
 }

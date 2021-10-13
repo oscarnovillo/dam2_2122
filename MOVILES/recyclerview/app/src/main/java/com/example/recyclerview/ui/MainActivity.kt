@@ -17,6 +17,7 @@ import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 import com.example.recyclerview.R
 import com.example.recyclerview.data.Ejemplo
+import com.example.recyclerview.data.EjemploRepository
 import com.example.recyclerview.domain.Persona
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -53,17 +54,15 @@ class MainActivity : AppCompatActivity() {
             val string = String(buffer)
             editText.setText(string)
 
-            val moshi = Moshi.Builder()
-                .addLast(KotlinJsonAdapterFactory())
-                .build()
+//            val moshi = Moshi.Builder()
+//                .addLast(KotlinJsonAdapterFactory())
+//                .build()
 
-            val ejemplo = moshi.adapter<Ejemplo>(Ejemplo::class.java).fromJson(assets.open("data.json").bufferedReader().readText())
+            val ejemplo = EjemploRepository(assets.open("data.json")).getLista()[0]
 
-            editText.setText("${ejemplo?.path}.${ejemplo?.extension}")
+            editText.setText(getString(R.string.place).format(ejemplo?.path,ejemplo?.extension))
 
-          imageview.load("http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"){
-              transformations(CircleCropTransformation())
-          }
+          imageview.load("http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg")
            // imageview.load(Uri.parse("file:///android_asset/image.jpg"))
             //imageview.load(File("/asset/lion.jpg"))
 
@@ -107,28 +106,8 @@ class MainActivity : AppCompatActivity() {
                     Persona("nombre2","apellido2",90)))
             startActivity(intent)
 
-        }
-
-
-
-
-
-
-        button.setOnClickListener {
-
-
-            temp++
-
-            editText.setText(temp.toString())
-            val intent =  Intent(this, ReciclerActivity::class.java)
-
-            intent.putExtra(getString(R.string.persona),
-                arrayListOf(Persona("nombre","appelidos",10),
-                    Persona("nombre2","apellido2",90)))
-            startActivity(intent)
 
         }
-
 
     }
 
