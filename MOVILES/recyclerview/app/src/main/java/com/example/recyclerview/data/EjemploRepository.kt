@@ -34,7 +34,7 @@ class EjemploRepository  {
     }
 
 
-    constructor(file: InputStream){
+    constructor(file: InputStream?=null){
         if (lista.size == 0)
         {
             val moshi = Moshi.Builder()
@@ -42,7 +42,7 @@ class EjemploRepository  {
                 .addLast(KotlinJsonAdapterFactory())
                 .build()
 
-            val ejemplo = moshi.adapter<Ejemplo>(Ejemplo::class.java).fromJson(file.bufferedReader().readText())
+            val ejemplo = moshi.adapter<Ejemplo>(Ejemplo::class.java).fromJson(file?.bufferedReader()?.readText())
 
             ejemplo?.let{ lista.add(it)}
         }
@@ -50,6 +50,11 @@ class EjemploRepository  {
 
     fun getLista() : List<Ejemplo>{
         return lista
+    }
+
+    fun addEjemplo(ejemplo:Ejemplo)
+    {
+        lista.add(ejemplo)
     }
 
 }

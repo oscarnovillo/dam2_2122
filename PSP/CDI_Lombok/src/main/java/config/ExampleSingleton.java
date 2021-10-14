@@ -3,7 +3,7 @@ package config;
 
 import lombok.Getter;
 
-import javax.enterprise.context.RequestScoped;
+
 import javax.inject.Singleton;
 import java.time.LocalDateTime;
 

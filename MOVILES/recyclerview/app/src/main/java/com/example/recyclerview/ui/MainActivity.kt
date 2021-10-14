@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -18,6 +19,7 @@ import coil.transform.RoundedCornersTransformation
 import com.example.recyclerview.R
 import com.example.recyclerview.data.Ejemplo
 import com.example.recyclerview.data.EjemploRepository
+import com.example.recyclerview.databinding.ActivityMainBinding
 import com.example.recyclerview.domain.Persona
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -25,11 +27,14 @@ import timber.log.Timber
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
+import java.time.LocalDateTime
 
 
 class MainActivity : AppCompatActivity() {
 
     private var temp: Int = 0
+    private lateinit var binding: ActivityMainBinding
+
 
     private lateinit var editText : EditText
     private lateinit var imageview : ImageView
@@ -37,6 +42,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
 
         val button = this.findViewById<Button>(R.id.button)
 
@@ -60,9 +69,11 @@ class MainActivity : AppCompatActivity() {
 
             val ejemplo = EjemploRepository(assets.open("data.json")).getLista()[0]
 
-            editText.setText(getString(R.string.place).format(ejemplo?.path,ejemplo?.extension))
+            editText.setText(getString(R.string.place).format(ejemplo.path,ejemplo.extension))
 
           imageview.load("http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg")
+            EjemploRepository().addEjemplo(Ejemplo("nombre","appelidos",10, LocalDateTime.now(),"",""))
+
            // imageview.load(Uri.parse("file:///android_asset/image.jpg"))
             //imageview.load(File("/asset/lion.jpg"))
 
@@ -101,9 +112,15 @@ class MainActivity : AppCompatActivity() {
             editText.setText(temp.toString())
             val intent =  Intent(this, ReciclerActivity::class.java)
 
-            intent.putExtra(getString(R.string.persona),
-                arrayListOf(Persona("nombre","appelidos",10),
-                    Persona("nombre2","apellido2",90)))
+            val repo = EjemploRepository(assets.open("data.json"))
+
+//            intent.putExtra(getString(R.string.persona),
+//                arrayListOf(Ejemplo("nombre","appelidos",10, LocalDateTime.now(),"",""),
+//                    Ejemplo("nombre","appelidos",10, LocalDateTime.now(),"","")))
+
+//            intent.putExtra(getString(R.string.persona),
+//                repo.getLista())
+
             startActivity(intent)
 
 
@@ -113,7 +130,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) { // Here You have to save count value
         super.onSaveInstanceState(outState)
-        Log.i("MyTag", "onSaveInstanceState")
+        Timber.i("onSaveInstanceState")
 
         outState.putInt("COUNT_KEY", temp)
     }

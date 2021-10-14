@@ -1,13 +1,16 @@
 package com.example.recyclerview.data
 
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
 import java.time.LocalDateTime
 
 @JsonClass(generateAdapter = true)
-data class Ejemplo(
+@Parcelize
+data class Ejemplo (
     @Json(name = "description")
     val description: String,
     @Json(name = "extension")
@@ -20,4 +23,4 @@ data class Ejemplo(
     val name: String,
     @Json(name = "path")
     val path: String
-)
+) : Parcelable

@@ -9,6 +9,9 @@ module javafx11 {
     requires javax.el;
 
     requires java.validation;
+    requires java.inject;
+
+//    requires javaee.web.api;
 
 
     //requires javafx.swing;
