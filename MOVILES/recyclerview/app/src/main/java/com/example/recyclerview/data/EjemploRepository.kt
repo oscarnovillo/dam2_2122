@@ -42,9 +42,10 @@ class EjemploRepository  {
                 .addLast(KotlinJsonAdapterFactory())
                 .build()
 
-            val ejemplo = moshi.adapter<Ejemplo>(Ejemplo::class.java).fromJson(file?.bufferedReader()?.readText())
+            val ejemplo = moshi.adapter<List<Ejemplo>>(Ejemplo::class.java)
+                .fromJson(file?.bufferedReader()?.readText())
 
-            ejemplo?.let{ lista.add(it)}
+            ejemplo?.let{ lista.addAll(it)}
         }
     }
 

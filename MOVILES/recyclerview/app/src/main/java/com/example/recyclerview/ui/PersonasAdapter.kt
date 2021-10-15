@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.R
 import com.example.recyclerview.data.Ejemplo
 import com.example.recyclerview.databinding.ItemPersonaBinding
+
 import com.example.recyclerview.domain.Persona
 
 class PersonasAdapter(
@@ -35,19 +36,23 @@ class PersonasAdapter(
 
 class PersonasViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-   // val binding = ItemPersonaBinding.bind(view)
+    val binding = ItemPersonaBinding.bind(view)
 
     fun render(persona: Ejemplo,
                onClickBoton: (String) -> Unit) {
 
-        val text = view.findViewById<TextView>(R.id.tvNombre)
-        //text = binding.tvNombre
-        text.setText(persona.name)
-
-        view.findViewById<TextView>(R.id.tvApellidos).text = persona.id.toString()
+        with(binding){
+            tvApellidos.text = persona.id.toString()
+            tvNombre.setText(persona.name)
+        }
+//        val text = view.findViewById<TextView>(R.id.tvNombre)
+//        //text = binding.tvNombre
+//        text.setText(persona.name)
+//
+//        view.findViewById<TextView>(R.id.tvApellidos).text =
 
         view.findViewById<TextView>(R.id.button2).setOnClickListener {
-            onClickBoton(text.text.toString());
+            onClickBoton(binding.tvNombre.toString());
         }
 
     }
