@@ -20,6 +20,7 @@ import com.example.recyclerview.R
 import com.example.recyclerview.data.Ejemplo
 import com.example.recyclerview.data.EjemploRepository
 import com.example.recyclerview.databinding.ActivityMainBinding
+
 import com.example.recyclerview.domain.Persona
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -33,6 +34,7 @@ import java.time.LocalDateTime
 class MainActivity : AppCompatActivity() {
 
     private var temp: Int = 0
+
     private lateinit var binding: ActivityMainBinding
 
 
@@ -51,6 +53,8 @@ class MainActivity : AppCompatActivity() {
 
         editText = this.findViewById<EditText>(R.id.editTextTextPersonName)
         imageview = this.findViewById<ImageView>(R.id.imageView)
+
+
 
         temp = 0;
 
@@ -105,8 +109,7 @@ class MainActivity : AppCompatActivity() {
             Timber.e(e,"Error leyendo fichero")
         }
 
-
-        button.setOnClickListener {
+        binding.button.setOnClickListener {
             temp++
 
             editText.setText(temp.toString())
@@ -137,7 +140,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) { // Here You have to restore count value
         super.onRestoreInstanceState(savedInstanceState)
-        Log.i("MyTag", "onRestoreInstanceState")
+        Log.i("::MyTag", "onRestoreInstanceState")
 
         temp = savedInstanceState.getInt("COUNT_KEY")
     }
