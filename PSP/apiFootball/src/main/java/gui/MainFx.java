@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -18,7 +17,7 @@ public class MainFx extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loaderMenu = new FXMLLoader(
-                getClass().getResource("/fxml/principal.fxml"));
+                getClass().getResource("/fxml/principalmio.fxml"));
         BorderPane root = loaderMenu.load();
         Scene scene = new Scene(root);
         primaryStage.setTitle("Tienda productos");

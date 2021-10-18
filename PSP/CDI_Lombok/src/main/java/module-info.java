@@ -3,13 +3,15 @@ module javafx11 {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.yaml.snakeyaml;
-    requires transitive lombok;
+    requires lombok;
     requires java.logging;
 
     requires javax.el;
 
     requires java.validation;
-    requires java.inject;
+
+    requires jakarta.enterprise.cdi.api;
+    requires jakarta.inject.api;
 
 //    requires javaee.web.api;
 

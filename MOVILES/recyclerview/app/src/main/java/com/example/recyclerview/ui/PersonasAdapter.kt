@@ -35,7 +35,7 @@ class PersonasAdapter(
 
 class PersonasViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-   // val binding = ItemPersonaBinding.bind(view)
+    val binding = ItemPersonaBinding.bind(view)
 
     fun render(persona: Ejemplo,
                onClickBoton: (String) -> Unit) {
@@ -43,6 +43,8 @@ class PersonasViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
         val text = view.findViewById<TextView>(R.id.tvNombre)
         //text = binding.tvNombre
         text.setText(persona.name)
+
+
 
         view.findViewById<TextView>(R.id.tvApellidos).text = persona.id.toString()
 

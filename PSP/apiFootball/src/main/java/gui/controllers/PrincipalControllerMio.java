@@ -14,7 +14,7 @@ import lombok.SneakyThrows;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PrincipalController implements Initializable {
+public class PrincipalControllerMio implements Initializable {
     private Alert alert;
 
     @Getter

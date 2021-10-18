@@ -26,7 +26,7 @@
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
             <artifactId>weld-se-core</artifactId>
-            <version>4.0.2.Final</version>
+            <version>3.1.4.Final</version>
         </dependency>
 
         <dependency>
@@ -86,12 +86,13 @@
             <artifactId>javax.el</artifactId>
             <version>3.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>jakarta.inject</groupId>
-            <artifactId>jakarta.inject-api</artifactId>
-            <version>1.0.3</version>
-        </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.jetbrains</groupId>-->
+<!--            <artifactId>annotations</artifactId>-->
+<!--            <version>17.0.0</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
 
         <!--        <dependency>-->
 <!--            <groupId>javax</groupId>-->

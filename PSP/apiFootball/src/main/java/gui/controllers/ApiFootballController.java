@@ -2,20 +2,16 @@ package gui.controllers;
 
 //import dao.DaoAreas;
 
-import com.google.gson.Gson;
-import dao.DaoMarvel;
-import dao.DaoRxAreas;
 import dao.DaoUsuarios;
 import dao.modelo.ApiError;
-import dao.modelo.Area;
 import dao.modelo.Competition;
 import dao.modelo.Usuario;
+import dao.modelo.marvel.Character;
 import io.reactivex.Single;
 import io.reactivex.rxjavafx.schedulers.JavaFxScheduler;
 import io.reactivex.schedulers.Schedulers;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,8 +20,6 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import retrofit2.HttpException;
-import servicios.ServiciosAreas;
 import servicios.ServiciosMarvel;
 
 import java.net.URL;
@@ -34,15 +28,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ApiFootballController implements Initializable {
-    public ListView<Area> listAreas;
+    public ListView<Character> listAreas;
     public ListView<Competition> listCompetitions;
     public ListView listTeams;
     public TextField texto;
     private Alert alert;
 
-    private PrincipalController principalController;
+    private PrincipalControllerMio principalController;
 
-    public void setPrincipalController(PrincipalController principalController) {
+    public void setPrincipalController(PrincipalControllerMio principalController) {
         this.principalController = principalController;
     }
 
@@ -60,10 +54,12 @@ public class ApiFootballController implements Initializable {
 
         List<dao.modelo.marvel.Character> listado = sm.getCharacteres();
 
-        if (listado!=null)
-        System.out.println(listado);
+        if (listado != null) {
+            System.out.println(listado);
+            listAreas.getItems().addAll(listado);
+        }
 //        else
-            // sacar alert de error
+        // sacar alert de error
 
 
 //        DaoMarvel dao = new DaoMarvel();
@@ -152,7 +148,7 @@ public class ApiFootballController implements Initializable {
 //        new Thread(tarea).start();
 ////        ExecutorService executorService = Executors.newFixedThreadPool(1);
 ////        executorService.submit(tarea);
-        this.principalController.getPantallaPrincipal().setCursor(Cursor.WAIT);
+//        this.principalController.getPantallaPrincipal().setCursor(Cursor.WAIT);
 
 
     }
@@ -175,10 +171,10 @@ public class ApiFootballController implements Initializable {
 //        fxText.textProperty().bind(tarea.valueProperty());
         tarea.setOnSucceeded(workerStateEvent -> {
             Try.of(() -> tarea.get().peek(competitions -> listCompetitions.getItems().addAll(competitions))
-                    .peekLeft(s -> {
-                        alert.setContentText(s);
-                        alert.showAndWait();
-                    }))
+                            .peekLeft(s -> {
+                                alert.setContentText(s);
+                                alert.showAndWait();
+                            }))
                     .onFailure(throwable -> {
                         alert.setContentText(throwable.getMessage());
                         alert.showAndWait();
@@ -292,22 +288,22 @@ public class ApiFootballController implements Initializable {
     public void delUsuario(ActionEvent actionEvent) {
 
         Single<Either<ApiError, Usuario>> s = Single.fromCallable(() ->
-                {
-                    DaoUsuarios dao = new DaoUsuarios();
-                    return dao.delUsuario(new Usuario("0", "nombre", LocalDateTime.now()));
-                }
+                        {
+                            DaoUsuarios dao = new DaoUsuarios();
+                            return dao.delUsuario(new Usuario("0", "nombre", LocalDateTime.now()));
+                        }
 
-        )
+                )
                 .subscribeOn(Schedulers.io())
                 .observeOn(JavaFxScheduler.platform())
                 .doFinally(() -> this.principalController
                         .getPantallaPrincipal().setCursor(Cursor.DEFAULT));
         s.subscribe(result ->
                         result.peek(System.out::println)
-                        .peekLeft(error -> {
-                            alert.setContentText(error.getMessage());
-                            alert.showAndWait();
-                        }),
+                                .peekLeft(error -> {
+                                    alert.setContentText(error.getMessage());
+                                    alert.showAndWait();
+                                }),
                 throwable -> {
                     alert.setContentText(throwable.getMessage());
                     alert.showAndWait();
