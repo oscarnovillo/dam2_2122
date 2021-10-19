@@ -30,6 +30,7 @@ class ReciclerActivity : AppCompatActivity() {
 
         Snackbar.make(rvPersona, " ${listaPersonas?.get(0)?.name} ", Snackbar.LENGTH_SHORT).show()
 
+
         listaPersonas?.let {
             rvPersona.adapter = PersonasAdapter(it,::click)
             rvPersona.layoutManager = GridLayoutManager(this@ReciclerActivity,2)

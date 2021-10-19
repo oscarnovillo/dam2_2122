@@ -22,6 +22,7 @@ import com.example.recyclerview.data.EjemploRepository
 import com.example.recyclerview.databinding.ActivityMainBinding
 
 import com.example.recyclerview.domain.Persona
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import timber.log.Timber
@@ -43,11 +44,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+       // setContentView(R.layout.activity_main)
 
 
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val button = this.findViewById<Button>(R.id.button)
 
@@ -112,19 +113,35 @@ class MainActivity : AppCompatActivity() {
         binding.button.setOnClickListener {
             temp++
 
-            editText.setText(temp.toString())
-            val intent =  Intent(this, ReciclerActivity::class.java)
+            val dialog = MaterialAlertDialogBuilder(this)
+                .setTitle("CONFIRMACION")
+                .setMessage("Seguro que has acabado la compra")
+                .setNegativeButton("NO") { view, _ ->
+                    view.dismiss()
+                }
+                .setPositiveButton("YES") { view, _ ->
+                    val intent =  Intent(this, ReciclerActivity::class.java)
+                    startActivity(intent)
+                    view.dismiss()
+                }
+                .setCancelable(false)
+                .create()
 
-            val repo = EjemploRepository(assets.open("data.json"))
+            dialog.show()
 
-//            intent.putExtra(getString(R.string.persona),
-//                arrayListOf(Ejemplo("nombre","appelidos",10, LocalDateTime.now(),"",""),
-//                    Ejemplo("nombre","appelidos",10, LocalDateTime.now(),"","")))
-
-//            intent.putExtra(getString(R.string.persona),
-//                repo.getLista())
-
-            startActivity(intent)
+//            editText.setText(temp.toString())
+//            val intent =  Intent(this, ReciclerActivity::class.java)
+//
+//            val repo = EjemploRepository(assets.open("data.json"))
+//
+////            intent.putExtra(getString(R.string.persona),
+////                arrayListOf(Ejemplo("nombre","appelidos",10, LocalDateTime.now(),"",""),
+////                    Ejemplo("nombre","appelidos",10, LocalDateTime.now(),"","")))
+//
+////            intent.putExtra(getString(R.string.persona),
+////                repo.getLista())
+//
+//            startActivity(intent)
 
 
         }
