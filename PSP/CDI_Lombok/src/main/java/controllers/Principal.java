@@ -41,12 +41,12 @@ public class Principal implements Initializable {
     private final ExampleSingleton eps;
 
 
-    private FXMLLoader fxmlloaderPantalla;
+    private final FXMLLoader fxmlloaderPantalla;
     private AnchorPane panePantalla;
     private Pantalla pantallaController;
 
 
-    private FXMLLoader fxmlloaderPantalla2;
+    private final FXMLLoader fxmlloaderPantalla2;
     private AnchorPane panePantalla2;
     private Pantalla2 pantalla2Controller;
 
@@ -129,7 +129,7 @@ public class Principal implements Initializable {
     public void ponerPantallaAdd(ActionEvent actionEvent) {
 
         cargarPantalla2();
-        
+
 
     }
 }

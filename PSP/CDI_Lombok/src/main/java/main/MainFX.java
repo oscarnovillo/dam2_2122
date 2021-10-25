@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import java.io.IOException;
 
 public class MainFX  {
+
   @Inject
   FXMLLoader fxmlLoader;
 

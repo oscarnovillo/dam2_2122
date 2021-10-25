@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.yaml.snakeyaml.Yaml;
 
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Singleton;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

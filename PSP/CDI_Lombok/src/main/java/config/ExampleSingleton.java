@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 import java.time.LocalDateTime;
 
 @Getter
+@Singleton
 public class ExampleSingleton {
 
     private LocalDateTime now = null;
