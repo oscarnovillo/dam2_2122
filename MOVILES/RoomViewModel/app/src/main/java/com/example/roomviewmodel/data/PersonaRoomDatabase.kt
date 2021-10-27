@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.roomviewmodel.domain.Persona
 
-@Database(entities = [Persona::class], version = 1, exportSchema = false)
+@Database(entities = [Persona::class], version =4, exportSchema = true)
+@TypeConverters(Converters::class)
 abstract class PersonaRoomDatabase : RoomDatabase() {
 
     abstract fun personaDao(): PersonaDao
@@ -24,10 +26,8 @@ abstract class PersonaRoomDatabase : RoomDatabase() {
                     PersonaRoomDatabase::class.java,
                     "item_database"
                 )
-
-                    // Wipes and rebuilds instead of migrating if no Migration object.
-                    // Migration is not part of this codelab.
-                    .fallbackToDestructiveMigration()
+                    .createFromAsset("database/personas.db")
+                    .fallbackToDestructiveMigrationFrom(5)
                     .build()
                 INSTANCE = instance
                 // return instance

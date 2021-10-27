@@ -1,6 +1,11 @@
 package com.example.roomviewmodel.data
 
+import com.example.roomviewmodel.domain.Persona
+
 class PersonaRepository(private val personaDao: PersonaDao) {
 
-    fun getPersonas() = personaDao.getItems()
+    suspend fun getPersonas() = personaDao.getPersonas()
+
+
+    suspend fun insertPersona(persona: Persona) = personaDao.insert(persona)
 }

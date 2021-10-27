@@ -1,8 +1,8 @@
-package com.example.roomviewmodel.usecases
+package com.example.roomviewmodel.usecases.personas
 
 import com.example.roomviewmodel.data.PersonaRepository
 
 class GetPersonas(val personasRepository: PersonaRepository) {
 
-    fun invoke() = personasRepository.getPersonas()
+    suspend fun invoke() = personasRepository.getPersonas()
 }

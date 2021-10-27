@@ -8,10 +8,11 @@ import java.time.LocalDate
 
 @Entity(tableName = "personas")
 data class Persona(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    @ColumnInfo(name = "name")
+
+    @ColumnInfo(name = "nombre")
     val nombre: String,
     @ColumnInfo(name = "nacimiento")
     val nacimiento: LocalDate,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int =0,
 )
