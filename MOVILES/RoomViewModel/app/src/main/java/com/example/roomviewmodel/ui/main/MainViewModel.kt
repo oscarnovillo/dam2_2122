@@ -21,12 +21,15 @@ class MainViewModel (private val getPersonas: GetPersonas,
         viewModelScope.launch {
             _personas.value = getPersonas.invoke()
         }
+
+
     }
 
     fun insertPersona(persona:Persona)
     {
         viewModelScope.launch {
             insertPersona.invoke(persona)
+            _personas.value = getPersonas.invoke()
         }
     }
 
