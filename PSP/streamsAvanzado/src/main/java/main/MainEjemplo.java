@@ -6,6 +6,7 @@ import pedidos.servicios.ServiciosPedido;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,16 @@ public class MainEjemplo {
 
         List<Cliente> clientes = sp.getTodosClientes();
         // Cliente con mas cuentas
-        clientes.stream().reduce((cliente, cliente2) -> cliente.getCuentas().size() >= cliente2.getCuentas().size() ? cliente : cliente2).get();
+        Optional<Cliente> opCli = clientes.stream()
+                .reduce((cliente, cliente2) ->
+                        cliente.getCuentas().size() >= cliente2.getCuentas().size() ? cliente : cliente2);
+
+        opCli.ifPresent(cliente -> {
+            System.out.println(cliente);
+        });
+
+        opCli.orElseGet(null);
+
 
         clientes.stream().max(Comparator.comparingInt(o -> o.getCuentas().size())).orElseGet(null);
 
@@ -30,6 +40,10 @@ public class MainEjemplo {
 
 
         // Cliente con la suma del saldo de todas sus cuentas.
+//        List<Cuenta> listado = clientes.stream()
+//                .flatMap(cliente -> cliente.getCuentas().stream())
+//                .mapToInt(cuenta-> cuenta.getSaldo()).average()
+//                .collect(Collectors.toList());
 
 
         // Clientes que tienen mas cuentas o iguales a la media.
@@ -38,7 +52,6 @@ public class MainEjemplo {
         System.out.println(media);
         System.out.println(clientes.stream()
                 .filter(cliente -> cliente.getCuentas().size() >= media)
-
                 .collect(Collectors.toList()).size());
 
 
@@ -51,7 +64,11 @@ public class MainEjemplo {
         //clientes que tienen todas las cuentas mayores a la media de dinero en cuenta.
         clientes.stream().filter(cliente -> !cliente.getCuentas().isEmpty()
                         && cliente.getCuentas().stream().allMatch(cuenta -> cuenta.getSaldo() >= mediaCuentas))
-                .forEach(System.out::println);
+                .forEach(cliente -> {
+                    System.out.println(cliente);
+                    System.out.println("hols");
+
+                });
 
         //numero de clientes según dominio del correo
         System.out.println(clientes.stream().collect(Collectors.groupingBy(cliente -> cliente.getEmail().substring(cliente.getEmail().indexOf("@") + 1), counting())).toString());

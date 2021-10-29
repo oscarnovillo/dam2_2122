@@ -44,20 +44,54 @@ public class ApiFootballController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         alert = new Alert(Alert.AlertType.INFORMATION);
 
+
     }
 
     @FXML
-    private void clickEntrar(ActionEvent actionEvent) {
+    public void clickEntrar() {
 
 
-        ServiciosMarvel sm = new ServiciosMarvel();
+//        ServiciosMarvel sm = new ServiciosMarvel();
+//
+//        List<dao.modelo.marvel.Character> listado = sm.getCharacteres();
+//
+//        if (listado != null) {
+//            System.out.println(listado);
+//            listAreas.getItems().addAll(listado);
+//        }
+//        else
+//        {
+//            alert.setContentText("ERROR");
+//            alert.showAndWait();
+//        }
 
-        List<dao.modelo.marvel.Character> listado = sm.getCharacteres();
+        var task = new Task<List<Character>>() {
+            @Override
+            protected List<Character> call() throws Exception {
+                ServiciosMarvel sm = new ServiciosMarvel();
+                Thread.sleep(5000);
+                return sm.getCharacteres();
+            }
+        };
+        task.setOnSucceeded(workerStateEvent -> {
+            List<Character> listado2 = task.getValue();
+            if (listado2 != null) {
+                System.out.println(listado2);
+                listAreas.getItems().addAll(listado2);
+            }
+            this.principalController.getPantallaPrincipal().setCursor(Cursor.DEFAULT);
+        });
+        task.setOnFailed(workerStateEvent -> {
+            alert.setContentText(workerStateEvent.getSource().getException().getMessage());
+            alert.showAndWait();
+            this.principalController.getPantallaPrincipal().setCursor(Cursor.DEFAULT);
+        });
+        this.principalController.getPantallaPrincipal().setCursor(Cursor.WAIT);
+        new Thread(task).start();
 
-        if (listado != null) {
-            System.out.println(listado);
-            listAreas.getItems().addAll(listado);
-        }
+        this.principalController.setNameUsuario("usuario");
+
+
 //        else
         // sacar alert de error
 
@@ -162,23 +196,21 @@ public class ApiFootballController implements Initializable {
 
 //                DaoAreas dao = new DaoAreas();
 
-//                Thread.sleep(5000);
+                Thread.sleep(5000);
                 return null; //dao.getCompetitions(listAreas.getSelectionModel().getSelectedItem());
             }
+
+
         };
 
 
 //        fxText.textProperty().bind(tarea.valueProperty());
         tarea.setOnSucceeded(workerStateEvent -> {
-            Try.of(() -> tarea.get().peek(competitions -> listCompetitions.getItems().addAll(competitions))
+            tarea.getValue().peek(competitions -> listCompetitions.getItems().addAll(competitions))
                             .peekLeft(s -> {
                                 alert.setContentText(s);
                                 alert.showAndWait();
-                            }))
-                    .onFailure(throwable -> {
-                        alert.setContentText(throwable.getMessage());
-                        alert.showAndWait();
-                    });
+                            });
             this.principalController.getPantallaPrincipal().setCursor(Cursor.DEFAULT);
         });
         tarea.setOnFailed(workerStateEvent -> {

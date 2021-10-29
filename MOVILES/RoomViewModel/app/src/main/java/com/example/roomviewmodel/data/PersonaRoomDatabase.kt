@@ -27,7 +27,7 @@ abstract class PersonaRoomDatabase : RoomDatabase() {
                     "item_database"
                 )
                     .createFromAsset("database/personas.db")
-                    .fallbackToDestructiveMigrationFrom(5)
+                    //.fallbackToDestructiveMigrationFrom(5)
                     .build()
                 INSTANCE = instance
                 // return instance

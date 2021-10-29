@@ -3,11 +3,13 @@ package com.example.roomviewmodel.ui.main
 import androidx.lifecycle.*
 import com.example.roomviewmodel.domain.Persona
 import com.example.roomviewmodel.usecases.personas.GetPersonas
+import com.example.roomviewmodel.usecases.personas.GetPersonasDes
 import com.example.roomviewmodel.usecases.personas.InsertPersona
 import kotlinx.coroutines.launch
 
 class MainViewModel (private val getPersonas: GetPersonas,
-            private val insertPersona:InsertPersona) : ViewModel(){
+            private val insertPersona:InsertPersona,
+                     private val getPersonasDes: GetPersonasDes,) : ViewModel(){
 
 
 
@@ -18,8 +20,23 @@ class MainViewModel (private val getPersonas: GetPersonas,
 
     fun getPersonas()
     {
+
         viewModelScope.launch {
             _personas.value = getPersonas.invoke()
+
+        }
+
+
+    }
+
+
+
+    fun getPersonasDes()
+    {
+
+        viewModelScope.launch {
+            _personas.value = getPersonasDes.invoke()
+
         }
 
 
@@ -29,7 +46,7 @@ class MainViewModel (private val getPersonas: GetPersonas,
     {
         viewModelScope.launch {
             insertPersona.invoke(persona)
-            _personas.value = getPersonas.invoke()
+            _personas.value = getPersonasDes.invoke()
         }
     }
 
@@ -40,11 +57,14 @@ class MainViewModel (private val getPersonas: GetPersonas,
 /**
  * Factory class to instantiate the [ViewModel] instance.
  */
-class MainViewModelFactory(private val getPersonas: GetPersonas,private val insertPersonas: InsertPersona) : ViewModelProvider.Factory {
+class MainViewModelFactory(private val getPersonas: GetPersonas,
+                           private val insertPersonas: InsertPersona,
+                           private val getPersonasDes: GetPersonasDes,)
+    : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainViewModel(getPersonas,insertPersonas) as T
+            return MainViewModel(getPersonas,insertPersonas,getPersonasDes) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

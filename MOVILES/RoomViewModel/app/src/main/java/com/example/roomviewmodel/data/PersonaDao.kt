@@ -10,6 +10,10 @@ interface PersonaDao {
     @Query("SELECT * from personas ORDER BY nombre ASC")
     suspend fun getPersonas(): List<Persona>
 
+    @Query("SELECT * from personas ORDER BY nombre DESC")
+    suspend fun getPersonasDes(): List<Persona>
+
+
     @Query("SELECT * from personas WHERE id = :id")
     fun getPersona(id: Int): Persona
 

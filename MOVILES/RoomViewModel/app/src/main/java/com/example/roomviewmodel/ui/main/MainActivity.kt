@@ -12,6 +12,7 @@ import com.example.roomviewmodel.data.PersonaRoomDatabase
 import com.example.roomviewmodel.databinding.ActivityMainBinding
 import com.example.roomviewmodel.domain.Persona
 import com.example.roomviewmodel.usecases.personas.GetPersonas
+import com.example.roomviewmodel.usecases.personas.GetPersonasDes
 import com.example.roomviewmodel.usecases.personas.InsertPersona
 import java.time.LocalDate
 
@@ -25,7 +26,8 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels{
         MainViewModelFactory(
             GetPersonas( PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
-                InsertPersona( PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao()))
+                InsertPersona( PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
+            GetPersonasDes( PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
         )
     }
 
@@ -39,9 +41,9 @@ class MainActivity : AppCompatActivity() {
         personasAdapter = PersonaAdapter()
         binding.rvPersonas.adapter = personasAdapter
 
-
         binding.button.setOnClickListener {
             viewModel.insertPersona(Persona("nombre", LocalDate.now()))
+            viewModel.getPersonasDes()
         }
 
         viewModel.personas.observe(this,{ personas->

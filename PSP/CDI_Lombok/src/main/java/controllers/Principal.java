@@ -52,7 +52,8 @@ public class Principal implements Initializable {
 
 
     @Inject
-    public Principal(ServiciosTest st, ExampleSingleton eps, FXMLLoader fxmlloaderPantalla, FXMLLoader fxmlloaderPantalla2) {
+    public Principal(ServiciosTest st, ExampleSingleton eps,
+                     FXMLLoader fxmlloaderPantalla, FXMLLoader fxmlloaderPantalla2) {
 
         this.st = st;
         this.eps = eps;
