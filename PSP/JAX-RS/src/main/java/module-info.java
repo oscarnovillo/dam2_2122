@@ -4,6 +4,8 @@ module JAX.RS {
     requires lombok;
     requires java.json.bind;
     requires modelmapper;
+    requires org.yaml.snakeyaml;
+    requires org.apache.logging.log4j;
 
 
 }

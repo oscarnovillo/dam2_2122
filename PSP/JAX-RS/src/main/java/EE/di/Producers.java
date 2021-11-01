@@ -1,5 +1,7 @@
-package EE.rest;
+package EE.di;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.ws.rs.core.Context;
 import org.modelmapper.ModelMapper;
 
 import jakarta.enterprise.inject.Produces;
@@ -10,9 +12,13 @@ import javax.json.bind.JsonbBuilder;
 public class Producers {
 
 
+
+
     @Produces
-    public ModelMapper producesModelMapper()
+    public ModelMapper producesModelMapper(@Context HttpServletRequest request)
     {
+
+        request.getServletContext();
         return new ModelMapper();
     }
 
