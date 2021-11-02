@@ -8,6 +8,7 @@ import com.example.roomviewmodel.domain.PersonaWithCosas
 import com.example.roomviewmodel.usecases.personas.GetPersonas
 import com.example.roomviewmodel.usecases.personas.GetPersonasDes
 import com.example.roomviewmodel.usecases.personas.InsertPersona
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -61,17 +62,21 @@ class MainViewModel (private val getPersonas: GetPersonas,
             //_personas.value = getPersonasDes.invoke(1)
         }
     }
+
+    val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+        Log.e("TAG:::","test",throwable)
+    }
     fun insertPersonaWithCosas(persona:Persona,cosas:List<Cosa>)
     {
-        viewModelScope.launch {
-            try {
+        viewModelScope.launch(exceptionHandler) {
+//            try {
                 insertPersona.invoke(PersonaWithCosas(persona, cosas))
                 println(persona.id)
-            }
-            catch(e:Exception)
-            {
-                Log.e("TAG:::",e.message,e)
-            }
+//            }
+//            catch(e:Exception)
+//            {
+//                Log.e("TAG:::",e.message,e)
+//            }
             //_personas.value = getPersonasDes.invoke(1)
         }
     }
