@@ -10,6 +10,7 @@ import com.example.roomviewmodel.R
 import com.example.roomviewmodel.data.PersonaRepository
 import com.example.roomviewmodel.data.PersonaRoomDatabase
 import com.example.roomviewmodel.databinding.ActivityMainBinding
+import com.example.roomviewmodel.domain.Cosa
 import com.example.roomviewmodel.domain.Persona
 import com.example.roomviewmodel.usecases.personas.GetPersonas
 import com.example.roomviewmodel.usecases.personas.GetPersonasDes
@@ -42,7 +43,8 @@ class MainActivity : AppCompatActivity() {
         binding.rvPersonas.adapter = personasAdapter
 
         binding.button.setOnClickListener {
-            viewModel.insertPersona(Persona("nombre", LocalDate.now()))
+            val cosas = listOf<Cosa>(Cosa("cosa1",22))
+            viewModel.insertPersonaWithCosas(Persona("nombre", LocalDate.now()),cosas)
             viewModel.getPersonasDes()
         }
 

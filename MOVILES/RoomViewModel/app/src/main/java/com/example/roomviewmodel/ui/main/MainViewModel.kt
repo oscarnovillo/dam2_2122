@@ -1,11 +1,15 @@
 package com.example.roomviewmodel.ui.main
 
+import android.util.Log
 import androidx.lifecycle.*
+import com.example.roomviewmodel.domain.Cosa
 import com.example.roomviewmodel.domain.Persona
+import com.example.roomviewmodel.domain.PersonaWithCosas
 import com.example.roomviewmodel.usecases.personas.GetPersonas
 import com.example.roomviewmodel.usecases.personas.GetPersonasDes
 import com.example.roomviewmodel.usecases.personas.InsertPersona
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class MainViewModel (private val getPersonas: GetPersonas,
             private val insertPersona:InsertPersona,
@@ -35,21 +39,42 @@ class MainViewModel (private val getPersonas: GetPersonas,
     {
 
         viewModelScope.launch {
-            _personas.value = getPersonasDes.invoke()
+            val personas = getPersonasDes.invoke(1)
+
+            val test = getPersonasDes.invoke()
+
+            val test2 = getPersonasDes.invokeCosas()
+
+           _personas.value = listOf(personas.persona)
 
         }
 
 
     }
+
+
 
     fun insertPersona(persona:Persona)
     {
         viewModelScope.launch {
             insertPersona.invoke(persona)
-            _personas.value = getPersonasDes.invoke()
+            //_personas.value = getPersonasDes.invoke(1)
         }
     }
-
+    fun insertPersonaWithCosas(persona:Persona,cosas:List<Cosa>)
+    {
+        viewModelScope.launch {
+            try {
+                insertPersona.invoke(PersonaWithCosas(persona, cosas))
+                println(persona.id)
+            }
+            catch(e:Exception)
+            {
+                Log.e("TAG:::",e.message,e)
+            }
+            //_personas.value = getPersonasDes.invoke(1)
+        }
+    }
 
 }
 

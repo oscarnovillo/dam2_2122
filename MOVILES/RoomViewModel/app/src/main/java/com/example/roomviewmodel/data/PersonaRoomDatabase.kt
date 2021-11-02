@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.roomviewmodel.domain.Cosa
 import com.example.roomviewmodel.domain.Persona
 
-@Database(entities = [Persona::class], version =4, exportSchema = true)
+@Database(entities = [Persona::class, Cosa::class], version =6, exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class PersonaRoomDatabase : RoomDatabase() {
 
@@ -27,7 +28,7 @@ abstract class PersonaRoomDatabase : RoomDatabase() {
                     "item_database"
                 )
                     .createFromAsset("database/personas.db")
-                    //.fallbackToDestructiveMigrationFrom(5)
+                    .fallbackToDestructiveMigrationFrom(4)
                     .build()
                 INSTANCE = instance
                 // return instance
