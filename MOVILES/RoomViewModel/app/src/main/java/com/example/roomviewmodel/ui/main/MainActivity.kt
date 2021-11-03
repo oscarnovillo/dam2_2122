@@ -3,6 +3,7 @@ package com.example.roomviewmodel.ui.main
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvPersonas.adapter = personasAdapter
 
         binding.button.setOnClickListener {
-            val cosas = listOf<Cosa>(Cosa("cosa1",22))
+            val cosas = listOf(Cosa("cosa1",22))
             viewModel.insertPersonaWithCosas(Persona("nombre", LocalDate.now()),cosas)
             viewModel.getPersonasDes()
         }
@@ -51,6 +52,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.personas.observe(this,{ personas->
 
             personasAdapter.submitList(personas)
+        })
+        viewModel.error.observe(this,{
+
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+
         })
 
         viewModel.getPersonas();

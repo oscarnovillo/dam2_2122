@@ -43,7 +43,7 @@ interface PersonaDao {
     @Transaction
     suspend fun createTransaction(personaCosas: PersonaWithCosas) {
         personaCosas.persona.id = insert(personaCosas.persona).toInt()
-        //personaCosas.cosa.forEach { it.personaId = personaCosas.persona.id  }
+        personaCosas.cosa.forEach { it.personaId = personaCosas.persona.id  }
         insert(personaCosas.cosa)
     }
 

@@ -21,6 +21,9 @@ class MainViewModel (private val getPersonas: GetPersonas,
     private val _personas = MutableLiveData<List<Persona>>()
     val personas: LiveData<List<Persona>> get() = _personas
 
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> get() = _error
+
 
 
     fun getPersonas()
@@ -31,7 +34,6 @@ class MainViewModel (private val getPersonas: GetPersonas,
 
         }
 
-
     }
 
 
@@ -40,13 +42,13 @@ class MainViewModel (private val getPersonas: GetPersonas,
     {
 
         viewModelScope.launch {
-            val personas = getPersonasDes.invoke(1)
+            val personas = getPersonasDes.invoke()
 
             val test = getPersonasDes.invoke()
 
             val test2 = getPersonasDes.invokeCosas()
 
-           _personas.value = listOf(personas.persona)
+           //_personas.value = listOf(personas)
 
         }
 
@@ -63,20 +65,21 @@ class MainViewModel (private val getPersonas: GetPersonas,
         }
     }
 
-    val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-        Log.e("TAG:::","test",throwable)
-    }
+//    val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+//        Log.e("TAG:::","test",throwable)
+//    }
     fun insertPersonaWithCosas(persona:Persona,cosas:List<Cosa>)
     {
-        viewModelScope.launch(exceptionHandler) {
-//            try {
+        viewModelScope.launch() {
+            try {
                 insertPersona.invoke(PersonaWithCosas(persona, cosas))
                 println(persona.id)
-//            }
-//            catch(e:Exception)
-//            {
-//                Log.e("TAG:::",e.message,e)
-//            }
+            }
+            catch(e:Exception)
+            {
+                _error.value = e.message
+                Log.e("TAG:::",e.message,e)
+            }
             //_personas.value = getPersonasDes.invoke(1)
         }
     }
