@@ -2,18 +2,20 @@ package com.example.roomviewmodel.ui.main
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.roomviewmodel.domain.Cosa
+import com.example.roomviewmodel.data.modelo.CosaEntity
+import com.example.roomviewmodel.data.modelo.PersonaEntity
+import com.example.roomviewmodel.data.modelo.PersonaWithCosas
 import com.example.roomviewmodel.domain.Persona
-import com.example.roomviewmodel.domain.PersonaWithCosas
 import com.example.roomviewmodel.usecases.personas.GetPersonas
 import com.example.roomviewmodel.usecases.personas.GetPersonasDes
 import com.example.roomviewmodel.usecases.personas.InsertPersona
-import kotlinx.coroutines.CoroutineExceptionHandler
+import com.example.roomviewmodel.usecases.personas.InsertPersonaWithCosas
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class MainViewModel (private val getPersonas: GetPersonas,
             private val insertPersona:InsertPersona,
+                     private val insertPersonaWithCosas:InsertPersonaWithCosas,
                      private val getPersonasDes: GetPersonasDes,) : ViewModel(){
 
 
@@ -48,7 +50,7 @@ class MainViewModel (private val getPersonas: GetPersonas,
 
             val test2 = getPersonasDes.invokeCosas()
 
-           //_personas.value = listOf(personas)
+           _personas.value = personas
 
         }
 
@@ -57,7 +59,7 @@ class MainViewModel (private val getPersonas: GetPersonas,
 
 
 
-    fun insertPersona(persona:Persona)
+    fun insertPersona(persona: Persona)
     {
         viewModelScope.launch {
             insertPersona.invoke(persona)
@@ -68,11 +70,11 @@ class MainViewModel (private val getPersonas: GetPersonas,
 //    val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
 //        Log.e("TAG:::","test",throwable)
 //    }
-    fun insertPersonaWithCosas(persona:Persona,cosas:List<Cosa>)
+    fun insertPersonaWithCosas(persona: Persona)
     {
         viewModelScope.launch() {
             try {
-                insertPersona.invoke(PersonaWithCosas(persona, cosas))
+                insertPersona.invoke(persona)
                 println(persona.id)
             }
             catch(e:Exception)
@@ -92,12 +94,13 @@ class MainViewModel (private val getPersonas: GetPersonas,
  */
 class MainViewModelFactory(private val getPersonas: GetPersonas,
                            private val insertPersonas: InsertPersona,
+                           private val insertPersonaWithCosas:InsertPersonaWithCosas,
                            private val getPersonasDes: GetPersonasDes,)
     : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainViewModel(getPersonas,insertPersonas,getPersonasDes) as T
+            return MainViewModel(getPersonas,insertPersonas,insertPersonaWithCosas,getPersonasDes) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

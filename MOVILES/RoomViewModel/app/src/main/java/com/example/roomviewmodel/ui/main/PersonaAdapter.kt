@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomviewmodel.R
 import com.example.roomviewmodel.databinding.ViewPersonaBinding
+import com.example.roomviewmodel.data.modelo.PersonaEntity
 import com.example.roomviewmodel.domain.Persona
 
 class PersonaAdapter:

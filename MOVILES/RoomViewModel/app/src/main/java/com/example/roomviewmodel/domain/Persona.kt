@@ -1,18 +1,12 @@
 package com.example.roomviewmodel.domain
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.example.roomviewmodel.data.modelo.CosaEntity
 import java.time.LocalDate
+import java.time.LocalDateTime
 
-
-@Entity(tableName = "personas")
 data class Persona(
-
-    @ColumnInfo(name = "nombre")
+    val id: Int,
     val nombre: String,
-    @ColumnInfo(name = "nacimiento")
     val nacimiento: LocalDate,
-    @PrimaryKey(autoGenerate = true)
-    var id: Int =0,
+    val cosas: List<Cosa>?
 )

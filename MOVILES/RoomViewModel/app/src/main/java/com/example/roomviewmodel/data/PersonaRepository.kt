@@ -1,7 +1,7 @@
 package com.example.roomviewmodel.data
 
-import com.example.roomviewmodel.domain.Persona
-import com.example.roomviewmodel.domain.PersonaWithCosas
+import com.example.roomviewmodel.data.modelo.PersonaEntity
+import com.example.roomviewmodel.data.modelo.PersonaWithCosas
 
 class PersonaRepository(private val personaDao: PersonaDao) {
 
@@ -15,7 +15,7 @@ class PersonaRepository(private val personaDao: PersonaDao) {
 
     suspend fun getPersonaWithCosas() = personaDao.getPersonaWithCosas()
 
-    suspend fun insertPersona(persona: Persona) = personaDao.insert(persona)
+    suspend fun insertPersona(persona: PersonaEntity) = personaDao.insert(persona)
 
     suspend fun insertPersonaEntera(persona: PersonaWithCosas) = personaDao.createTransaction(persona)
 }

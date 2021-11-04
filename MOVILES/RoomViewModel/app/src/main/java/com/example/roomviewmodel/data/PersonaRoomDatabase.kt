@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.roomviewmodel.domain.Cosa
-import com.example.roomviewmodel.domain.Persona
+import com.example.roomviewmodel.data.modelo.CosaEntity
+import com.example.roomviewmodel.data.modelo.PersonaEntity
 
-@Database(entities = [Persona::class, Cosa::class], version =6, exportSchema = true)
+@Database(entities = [PersonaEntity::class, CosaEntity::class], version =6, exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class PersonaRoomDatabase : RoomDatabase() {
 

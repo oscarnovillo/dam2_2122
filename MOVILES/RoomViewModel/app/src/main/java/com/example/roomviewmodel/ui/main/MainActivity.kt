@@ -1,13 +1,9 @@
 package com.example.roomviewmodel.ui.main
 
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
-import androidx.lifecycle.lifecycleScope
-import com.example.roomviewmodel.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.roomviewmodel.data.PersonaRepository
 import com.example.roomviewmodel.data.PersonaRoomDatabase
 import com.example.roomviewmodel.databinding.ActivityMainBinding
@@ -16,6 +12,7 @@ import com.example.roomviewmodel.domain.Persona
 import com.example.roomviewmodel.usecases.personas.GetPersonas
 import com.example.roomviewmodel.usecases.personas.GetPersonasDes
 import com.example.roomviewmodel.usecases.personas.InsertPersona
+import com.example.roomviewmodel.usecases.personas.InsertPersonaWithCosas
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
@@ -25,14 +22,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var personasAdapter: PersonaAdapter
 
 
-    private val viewModel: MainViewModel by viewModels{
+    private val viewModel: MainViewModel by viewModels {
         MainViewModelFactory(
-            GetPersonas( PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
-                InsertPersona( PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
-            GetPersonasDes( PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
+            GetPersonas(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
+            InsertPersona(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
+            InsertPersonaWithCosas(
+                PersonaRepository(
+                    PersonaRoomDatabase.getDatabase(this).personaDao()
+                )
+            ),
+            GetPersonasDes(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
         )
     }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,16 +45,16 @@ class MainActivity : AppCompatActivity() {
         binding.rvPersonas.adapter = personasAdapter
 
         binding.button.setOnClickListener {
-            val cosas = listOf(Cosa("cosa1",22))
-            viewModel.insertPersonaWithCosas(Persona("nombre", LocalDate.now()),cosas)
+            val cosas = listOf(Cosa("cosa1", 22))
+            viewModel.insertPersonaWithCosas(Persona(0, "nombre", LocalDate.now(), cosas))
             viewModel.getPersonasDes()
         }
 
-        viewModel.personas.observe(this,{ personas->
+        viewModel.personas.observe(this, { personas ->
 
             personasAdapter.submitList(personas)
         })
-        viewModel.error.observe(this,{
+        viewModel.error.observe(this, {
 
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 
