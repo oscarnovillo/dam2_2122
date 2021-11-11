@@ -1,20 +1,30 @@
-package com.example.roomviewmodel.ui.main
+package com.example.hiltmenu.ui.main
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.roomviewmodel.data.PersonaRepository
+import com.example.hiltmenu.R
+import com.example.hiltmenu.databinding.ActivityMainBinding
+import com.example.hiltmenu.data.PersonaRepository
 import com.example.roomviewmodel.data.PersonaRoomDatabase
-import com.example.roomviewmodel.databinding.ActivityMainBinding
-import com.example.roomviewmodel.domain.Cosa
-import com.example.roomviewmodel.domain.Persona
-import com.example.roomviewmodel.usecases.personas.GetPersonas
-import com.example.roomviewmodel.usecases.personas.GetPersonasDes
-import com.example.roomviewmodel.usecases.personas.InsertPersona
-import com.example.roomviewmodel.usecases.personas.InsertPersonaWithCosas
+
+import com.example.hiltmenu.domain.Cosa
+import com.example.hiltmenu.domain.Persona
+import com.example.hiltmenu.usecases.personas.GetPersonas
+import com.example.hiltmenu.usecases.personas.GetPersonasDes
+import com.example.hiltmenu.usecases.personas.InsertPersona
+import com.example.hiltmenu.usecases.personas.InsertPersonaWithCosas
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
+import java.io.Serializable
 import java.time.LocalDate
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -22,7 +32,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var personasAdapter: PersonaAdapter
 
 
-    private val viewModel: MainViewModel by viewModels {
+    private val viewModel: MainViewModel by viewModels()
+    /*{
         MainViewModelFactory(
             GetPersonas(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
             InsertPersona(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
@@ -33,8 +44,35 @@ class MainActivity : AppCompatActivity() {
             ),
             GetPersonasDes(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
         )
+    }*/
+
+    // añade el menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.action_action1 -> {
+
+
+                true
+            }
+            R.id.action_action2 -> {
+
+
+                true
+            }
+            R.id.action_action3 -> {
+
+
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

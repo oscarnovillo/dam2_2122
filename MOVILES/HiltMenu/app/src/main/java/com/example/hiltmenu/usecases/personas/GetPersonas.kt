@@ -1,9 +1,10 @@
-package com.example.roomviewmodel.usecases.personas
+package com.example.hiltmenu.usecases.personas
 
-import com.example.roomviewmodel.data.PersonaRepository
-import com.example.roomviewmodel.data.modelo.toPersona
+import com.example.hiltmenu.data.PersonaRepository
+import com.example.hiltmenu.data.modelo.toPersona
+import javax.inject.Inject
 
-class GetPersonas(val personasRepository: PersonaRepository) {
+class GetPersonas @Inject constructor(val personasRepository: PersonaRepository) {
 
      suspend fun invoke() = personasRepository.getPersonas().map { it.toPersona() }
 }

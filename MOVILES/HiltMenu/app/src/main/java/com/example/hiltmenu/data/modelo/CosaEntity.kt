@@ -1,4 +1,4 @@
-package com.example.roomviewmodel.data.modelo
+package com.example.hiltmenu.data.modelo
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

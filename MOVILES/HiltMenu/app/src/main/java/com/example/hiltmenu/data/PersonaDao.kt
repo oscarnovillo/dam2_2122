@@ -1,9 +1,9 @@
-package com.example.roomviewmodel.data
+package com.example.hiltmenu.data
 
 import androidx.room.*
-import com.example.roomviewmodel.data.modelo.CosaEntity
-import com.example.roomviewmodel.data.modelo.PersonaEntity
-import com.example.roomviewmodel.data.modelo.PersonaWithCosas
+import com.example.hiltmenu.data.modelo.CosaEntity
+import com.example.hiltmenu.data.modelo.PersonaEntity
+import com.example.hiltmenu.data.modelo.PersonaWithCosas
 
 @Dao
 interface PersonaDao {

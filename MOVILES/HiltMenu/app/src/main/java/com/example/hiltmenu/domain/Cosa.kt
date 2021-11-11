@@ -1,4 +1,4 @@
-package com.example.roomviewmodel.domain
+package com.example.hiltmenu.domain
 
 data class Cosa(
     val nombre: String,

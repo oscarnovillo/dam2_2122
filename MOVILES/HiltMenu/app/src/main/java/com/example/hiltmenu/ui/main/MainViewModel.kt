@@ -1,22 +1,22 @@
-package com.example.roomviewmodel.ui.main
+package com.example.hiltmenu.ui.main
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.roomviewmodel.data.modelo.CosaEntity
-import com.example.roomviewmodel.data.modelo.PersonaEntity
-import com.example.roomviewmodel.data.modelo.PersonaWithCosas
-import com.example.roomviewmodel.domain.Persona
-import com.example.roomviewmodel.usecases.personas.GetPersonas
-import com.example.roomviewmodel.usecases.personas.GetPersonasDes
-import com.example.roomviewmodel.usecases.personas.InsertPersona
-import com.example.roomviewmodel.usecases.personas.InsertPersonaWithCosas
+import com.example.hiltmenu.domain.Persona
+import com.example.hiltmenu.usecases.personas.GetPersonas
+import com.example.hiltmenu.usecases.personas.GetPersonasDes
+import com.example.hiltmenu.usecases.personas.InsertPersona
+import com.example.hiltmenu.usecases.personas.InsertPersonaWithCosas
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import javax.inject.Inject
 
-class MainViewModel (private val getPersonas: GetPersonas,
-            private val insertPersona:InsertPersona,
-                     private val insertPersonaWithCosas:InsertPersonaWithCosas,
-                     private val getPersonasDes: GetPersonasDes,) : ViewModel(){
+@HiltViewModel
+class MainViewModel @Inject constructor(private val getPersonas: GetPersonas,
+                                        private val insertPersona: InsertPersona,
+                                        private val insertPersonaWithCosas: InsertPersonaWithCosas,
+                                        private val getPersonasDes: GetPersonasDes,) : ViewModel(){
 
 
 
@@ -94,7 +94,7 @@ class MainViewModel (private val getPersonas: GetPersonas,
  */
 class MainViewModelFactory(private val getPersonas: GetPersonas,
                            private val insertPersonas: InsertPersona,
-                           private val insertPersonaWithCosas:InsertPersonaWithCosas,
+                           private val insertPersonaWithCosas: InsertPersonaWithCosas,
                            private val getPersonasDes: GetPersonasDes,)
     : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

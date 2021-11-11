@@ -1,7 +1,9 @@
-package com.example.roomviewmodel.data.modelo
+package com.example.hiltmenu.data.modelo
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.example.hiltmenu.data.modelo.CosaEntity
+import com.example.hiltmenu.data.modelo.PersonaEntity
 
 
 data class PersonaWithCosas(

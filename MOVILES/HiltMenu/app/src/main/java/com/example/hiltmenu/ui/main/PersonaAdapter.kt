@@ -1,4 +1,4 @@
-package com.example.roomviewmodel.ui.main
+package com.example.hiltmenu.ui.main
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.roomviewmodel.R
-import com.example.roomviewmodel.databinding.ViewPersonaBinding
-import com.example.roomviewmodel.data.modelo.PersonaEntity
-import com.example.roomviewmodel.domain.Persona
+import com.example.hiltmenu.R
+import com.example.hiltmenu.databinding.ViewPersonaBinding
+import com.example.hiltmenu.domain.Persona
+
 
 class PersonaAdapter:
     ListAdapter<Persona, PersonaAdapter.ItemViewholder>(DiffCallback())  {

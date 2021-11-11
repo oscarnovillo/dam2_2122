@@ -1,9 +1,10 @@
-package com.example.roomviewmodel.data
+package com.example.hiltmenu.data
 
-import com.example.roomviewmodel.data.modelo.PersonaEntity
-import com.example.roomviewmodel.data.modelo.PersonaWithCosas
+import com.example.hiltmenu.data.modelo.PersonaEntity
+import com.example.hiltmenu.data.modelo.PersonaWithCosas
+import javax.inject.Inject
 
-class PersonaRepository(private val personaDao: PersonaDao) {
+class PersonaRepository @Inject constructor(private val personaDao: PersonaDao) {
 
     suspend fun getPersonas() = personaDao.getPersonas()
 
