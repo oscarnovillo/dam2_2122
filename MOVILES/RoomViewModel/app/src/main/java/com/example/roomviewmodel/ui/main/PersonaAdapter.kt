@@ -38,15 +38,13 @@ class PersonaAdapter:
             tvId.text = item.id.toString()
         }
     }
-}
+    class DiffCallback : DiffUtil.ItemCallback<Persona>() {
+        override fun areItemsTheSame(oldItem: Persona, newItem: Persona): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-
-class DiffCallback : DiffUtil.ItemCallback<Persona>() {
-    override fun areItemsTheSame(oldItem: Persona, newItem: Persona): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Persona, newItem: Persona): Boolean {
-        return oldItem == newItem
+        override fun areContentsTheSame(oldItem: Persona, newItem: Persona): Boolean {
+            return oldItem == newItem
+        }
     }
 }

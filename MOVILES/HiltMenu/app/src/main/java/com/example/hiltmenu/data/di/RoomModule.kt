@@ -1,6 +1,5 @@
 package com.example.hiltmenu.data.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.example.roomviewmodel.data.PersonaRoomDatabase
@@ -9,6 +8,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 import javax.inject.Singleton
 
 
@@ -16,19 +16,26 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RoomModule {
 
-        @Provides
-        @Singleton
-        fun provideDatabase(@ApplicationContext context: Context)
-                = Room.databaseBuilder(context, PersonaRoomDatabase::class.java, "persona_database")
+    @Provides
+    @Named("assetDB")
+    fun getAssetDB() = "database/personas.db"
+
+
+    @Provides
+    @Singleton
+    fun provideDatabase(
+        @ApplicationContext context: Context,
+        @Named("assetDB") ruta: String
+    ) =
+        Room.databaseBuilder(context, PersonaRoomDatabase::class.java, "persona_database")
             .fallbackToDestructiveMigrationFrom(4)
-            .createFromAsset("database/personas.db")
+            .createFromAsset(ruta)
             .build()
 
-        @Provides
-        fun providesPersonaDao(articlesDatabase: PersonaRoomDatabase) =
-            articlesDatabase.personaDao()
+    @Provides
+    fun providesPersonaDao(articlesDatabase: PersonaRoomDatabase) =
+        articlesDatabase.personaDao()
 
 
-
-    }
+}
 

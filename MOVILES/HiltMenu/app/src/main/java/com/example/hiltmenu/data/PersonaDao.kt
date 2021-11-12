@@ -8,7 +8,7 @@ import com.example.hiltmenu.data.modelo.PersonaWithCosas
 @Dao
 interface PersonaDao {
 
-    @Query("SELECT * from personas ORDER BY nombre ASC")
+    @Query("SELECT * from ${Constantes.TABLA_PERSONAS} ORDER BY nombre ASC")
     suspend fun getPersonas(): List<PersonaEntity>
 
     @Query("SELECT * from personas ORDER BY nombre DESC")
@@ -18,7 +18,7 @@ interface PersonaDao {
     suspend fun getCosas(): List<CosaEntity>
 
     @Transaction
-    @Query("SELECT * FROM personas WHERE id = :id")
+    @Query(Constantes.QUERY)
     suspend fun getPersonaWithCosas(id: Int): PersonaWithCosas
 
     @Transaction

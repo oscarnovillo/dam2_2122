@@ -18,8 +18,6 @@ class MainViewModel @Inject constructor(private val getPersonas: GetPersonas,
                                         private val insertPersonaWithCosas: InsertPersonaWithCosas,
                                         private val getPersonasDes: GetPersonasDes,) : ViewModel(){
 
-
-
     private val _personas = MutableLiveData<List<Persona>>()
     val personas: LiveData<List<Persona>> get() = _personas
 
@@ -63,6 +61,7 @@ class MainViewModel @Inject constructor(private val getPersonas: GetPersonas,
     {
         viewModelScope.launch {
             insertPersona.invoke(persona)
+            _personas.value = getPersonas.invoke()
             //_personas.value = getPersonasDes.invoke(1)
         }
     }
@@ -88,20 +87,3 @@ class MainViewModel @Inject constructor(private val getPersonas: GetPersonas,
 
 }
 
-
-/**
- * Factory class to instantiate the [ViewModel] instance.
- */
-class MainViewModelFactory(private val getPersonas: GetPersonas,
-                           private val insertPersonas: InsertPersona,
-                           private val insertPersonaWithCosas: InsertPersonaWithCosas,
-                           private val getPersonasDes: GetPersonasDes,)
-    : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return MainViewModel(getPersonas,insertPersonas,insertPersonaWithCosas,getPersonasDes) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}

@@ -33,18 +33,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private val viewModel: MainViewModel by viewModels()
-    /*{
-        MainViewModelFactory(
-            GetPersonas(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
-            InsertPersona(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
-            InsertPersonaWithCosas(
-                PersonaRepository(
-                    PersonaRoomDatabase.getDatabase(this).personaDao()
-                )
-            ),
-            GetPersonasDes(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
-        )
-    }*/
+
 
     // añade el menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -83,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvPersonas.adapter = personasAdapter
 
         binding.button.setOnClickListener {
-            val cosas = listOf(Cosa("cosa1", 22))
+            val cosas = listOf(Cosa(getString(R.string.cosa1), 22))
             viewModel.insertPersonaWithCosas(Persona(0, "nombre", LocalDate.now(), cosas))
             viewModel.getPersonasDes()
         }
