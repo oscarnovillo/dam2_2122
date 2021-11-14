@@ -14,8 +14,6 @@ import com.example.hiltmenu.domain.Persona
 class PersonaAdapter:
     ListAdapter<Persona, PersonaAdapter.ItemViewholder>(DiffCallback())  {
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewholder {
         return ItemViewholder(
             LayoutInflater.from(parent.context)
@@ -37,6 +35,7 @@ class PersonaAdapter:
             tvNombre.text = item.nombre
             tvId.text = item.id.toString()
         }
+
     }
 }
 
