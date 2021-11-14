@@ -15,27 +15,5 @@ import com.example.hiltmenu.data.modelo.PersonaEntity
 abstract class PersonaRoomDatabase : RoomDatabase() {
 
     abstract fun personaDao(): PersonaDao
-//
-//    companion object {
-//        @Volatile
-//        private var INSTANCE: PersonaRoomDatabase? = null
-//
-//        fun getDatabase(context: Context): PersonaRoomDatabase {
-//            // if the INSTANCE is not null, then return it,
-//            // if it is, then create the database
-//            return INSTANCE ?: synchronized(this) {
-//                val instance = Room.databaseBuilder(
-//                    context.applicationContext,
-//                    PersonaRoomDatabase::class.java,
-//                    "item_database"
-//                )
-//                    .createFromAsset("database/personas.db")
-//                    .fallbackToDestructiveMigrationFrom(4)
-//                    .build()
-//                INSTANCE = instance
-//                // return instance
-//                instance
-//            }
-//        }
-//    }
+
 }
