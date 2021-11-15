@@ -14,6 +14,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor() : ViewModel() {
 
 
+    private val listaPersonas = mutableListOf<Persona>()
+
     private val _personas = MutableLiveData<List<Persona>>()
     val personas: LiveData<List<Persona>> get() = _personas
 
@@ -21,19 +23,40 @@ class MainViewModel @Inject constructor() : ViewModel() {
     val error: LiveData<String> get() = _error
 
 
+
+    init {
+
+        listaPersonas.addAll(listOf<Persona>(
+            Persona(1,"nombre", LocalDate.now(),null),
+            Persona(1,"nombre1", LocalDate.now(),null),
+            Persona(1,"nombre2", LocalDate.now(),null),
+        ))
+
+    }
+
     fun getPersonas() {
 
         viewModelScope.launch {
 
-            _personas.value = mutableListOf<Persona>(
-                Persona(1,"nombre", LocalDate.now(),null),
-                Persona(1,"nombre1", LocalDate.now(),null),
-                Persona(1,"nombre2", LocalDate.now(),null),
-            )
+            _personas.value = listaPersonas.toList()
 //            _personas.value = getPersonas.invoke()
 
         }
 
     }
+
+    fun deletePersona(persona: Persona) {
+
+        viewModelScope.launch {
+
+            listaPersonas.remove(persona)
+            _personas.value = listaPersonas.toList()
+//            _personas.value = getPersonas.invoke()
+
+        }
+
+    }
+
+
 
 }

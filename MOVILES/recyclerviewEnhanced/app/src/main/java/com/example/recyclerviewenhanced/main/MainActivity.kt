@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.recyclerviewenhanced.domain.Cosa
-import com.example.recyclerviewenhanced.domain.Persona
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hiltmenu.ui.main.PersonaAdapter
 import com.example.recyclerviewenhanced.databinding.ActivityMainBinding
+import com.example.recyclerviewenhanced.domain.Cosa
+import com.example.recyclerviewenhanced.domain.Persona
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 
@@ -34,14 +36,18 @@ class MainActivity : AppCompatActivity() {
     }*/
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        personasAdapter = PersonaAdapter()
+        personasAdapter = PersonaAdapter(this,onDelete = {
+            viewModel.deletePersona(it)
+        })
         binding.rvPersonas.adapter = personasAdapter
+
+        val touchHelper = ItemTouchHelper(personasAdapter.swipeGesture)
+        touchHelper.attachToRecyclerView(binding.rvPersonas)
 
         binding.button.setOnClickListener {
             val cosas = listOf(Cosa("cosa1", 22))
