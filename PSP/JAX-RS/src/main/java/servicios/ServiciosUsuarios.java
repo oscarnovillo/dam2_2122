@@ -1,7 +1,7 @@
 package servicios;
 
-import ee.errores.ApiError;
-import ee.errores.OtraException;
+import EE.errores.ApiError;
+import EE.errores.OtraException;
 import dao.DaoUsuario;
 import dao.modelo.Usuario;
 import io.vavr.control.Either;
@@ -26,6 +26,11 @@ public class ServiciosUsuarios {
     public List<Usuario> dameTodos()
     {
         return dao.dameTodos();
+    }
+
+    public boolean borrar(String id )
+    {
+        return dao.borrar(id);
     }
 
     public  Usuario addUser(Usuario u)
