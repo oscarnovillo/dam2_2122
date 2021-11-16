@@ -1,7 +1,7 @@
 package servicios;
 
-import EE.errores.ApiError;
-import EE.errores.OtraException;
+import ee.errores.ApiError;
+import ee.errores.OtraException;
 import dao.DaoUsuario;
 import dao.modelo.Usuario;
 import io.vavr.control.Either;

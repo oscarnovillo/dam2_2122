@@ -1,17 +1,23 @@
 package dao;
 
-import EE.errores.ApiError;
-import EE.errores.CustomException;
+import ee.errores.ApiError;
+import ee.errores.CustomException;
 import dao.modelo.Usuario;
 import io.vavr.control.Either;
 import jakarta.ws.rs.core.Response;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/***
+ *
+ * edte emeetodo
+ * @author
+ * 
+ */
 public class DaoUsuario {
 
     public static List<Usuario> usuarios = new ArrayList<>();
