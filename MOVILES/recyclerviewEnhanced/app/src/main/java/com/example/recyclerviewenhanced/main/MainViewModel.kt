@@ -28,8 +28,8 @@ class MainViewModel @Inject constructor() : ViewModel() {
 
         listaPersonas.addAll(listOf<Persona>(
             Persona(1,"nombre", LocalDate.now(),null),
-            Persona(1,"nombre1", LocalDate.now(),null),
-            Persona(1,"nombre2", LocalDate.now(),null),
+            Persona(2,"nombre1", LocalDate.now(),null),
+            Persona(3,"nombre2", LocalDate.now(),null),
         ))
 
     }
@@ -38,6 +38,30 @@ class MainViewModel @Inject constructor() : ViewModel() {
 
         viewModelScope.launch {
 
+            _personas.value = listaPersonas.toList()
+//            _personas.value = getPersonas.invoke()
+
+        }
+
+    }
+
+    fun getPersonas(filtro:String) {
+
+        viewModelScope.launch {
+
+            _personas.value = listaPersonas.filter { it.nombre.startsWith(filtro) }.toList()
+//            _personas.value = getPersonas.invoke()
+
+        }
+
+    }
+
+
+    fun deletePersona(persona: List<Persona>) {
+
+        viewModelScope.launch {
+
+            listaPersonas.removeAll(persona)
             _personas.value = listaPersonas.toList()
 //            _personas.value = getPersonas.invoke()
 
