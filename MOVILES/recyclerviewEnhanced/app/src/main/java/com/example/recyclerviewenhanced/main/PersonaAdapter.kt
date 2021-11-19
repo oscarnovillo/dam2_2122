@@ -17,9 +17,10 @@ import com.example.recyclerviewenhanced.main.SwipeGesture
 
 class PersonaAdapter(
     context: Context,
-    private val onDelete: (persona: Persona) -> Unit
+    personasAction : PersonaAdapter.PersonasAction
 ) :
     ListAdapter<Persona, PersonaAdapter.ItemViewholder>(DiffCallback()) {
+
 
     private var selectedItem = mutableListOf<Persona>()
 
@@ -89,6 +90,11 @@ class PersonaAdapter(
 
     }
 
+    interface PersonasAction{
+        fun onDelete(persona: Persona)
+    }
+
+
     class DiffCallback : DiffUtil.ItemCallback<Persona>() {
         override fun areItemsTheSame(oldItem: Persona, newItem: Persona): Boolean {
             return oldItem.id == newItem.id
@@ -105,7 +111,7 @@ class PersonaAdapter(
             if (!selectedMode) {
                 when (direction) {
                     ItemTouchHelper.LEFT -> {
-                        onDelete(currentList[viewHolder.adapterPosition])
+                        personasAction.onDelete(currentList[viewHolder.adapterPosition])
                     }
                 }
             }

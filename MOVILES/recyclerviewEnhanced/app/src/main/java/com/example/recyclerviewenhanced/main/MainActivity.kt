@@ -5,13 +5,11 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.example.hiltmenu.ui.main.PersonaAdapter
 import com.example.recyclerviewenhanced.databinding.ActivityMainBinding
 import com.example.recyclerviewenhanced.domain.Cosa
 import com.example.recyclerviewenhanced.domain.Persona
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDate
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -34,16 +32,23 @@ class MainActivity : AppCompatActivity() {
             GetPersonasDes(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
         )
     }*/
-
+    fun delete(persona:Persona){
+        viewModel.deletePersona(persona)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        personasAdapter = PersonaAdapter(this,onDelete = {
-            viewModel.deletePersona(it)
-        })
+        personasAdapter = PersonaAdapter(this,
+            object : PersonaAdapter.PersonasAction {
+                override fun onDelete(persona: Persona) {
+                    delete(persona)
+                }
+            }
+        )
+
         binding.rvPersonas.adapter = personasAdapter
 
         val touchHelper = ItemTouchHelper(personasAdapter.swipeGesture)
