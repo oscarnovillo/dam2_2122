@@ -13,16 +13,29 @@ import com.example.recyclerviewenhanced.R
 import com.example.recyclerviewenhanced.databinding.ViewPersonaBinding
 import com.example.recyclerviewenhanced.domain.Persona
 import com.example.recyclerviewenhanced.main.SwipeGesture
+import java.util.*
 
 
 class PersonaAdapter(
-    context: Context,
-    personasAction : PersonaAdapter.PersonasAction
+    val context: Context,
+    val actions: PersonaActions
 ) :
     ListAdapter<Persona, PersonaAdapter.ItemViewholder>(DiffCallback()) {
 
+    interface PersonaActions {
+        fun onDelete(persona: Persona)
+        fun onStartSelectMode()
+        fun itemHasClicked()
+
+    }
 
     private var selectedItem = mutableListOf<Persona>()
+
+    fun resetSelectMode() {
+        selectedMode = false
+
+        notifyDataSetChanged()
+    }
 
     fun getSelectedItems() = selectedItem.toList()
 
@@ -49,38 +62,49 @@ class PersonaAdapter(
         fun bind(item: Persona) {
 
             itemView.setOnLongClickListener {
-                selectedMode = !selectedMode
-                notifyDataSetChanged()
+                if (!selectedMode) {
+                    selectedMode = true
+                    actions.onStartSelectMode()
+                    binding.selected.isChecked = true
+                    selectedItem.add(item)
+                    notifyDataSetChanged()
+                }
                 true
             }
-            itemView.setOnClickListener {
-                if (selectedMode) {
-                    if (!binding.selected.isChecked) {
-                        itemView.setBackgroundColor(Color.GREEN)
-                        binding.selected.isChecked = true
-                        notifyItemChanged(adapterPosition)
-                        selectedItem.add(item)
-                    } else {
-                        itemView.setBackgroundColor(Color.WHITE)
-                        selectedItem.remove(item)
-                        binding.selected.isChecked = false
-                        notifyItemChanged(adapterPosition)
+            with(binding) {
+                selected.setOnClickListener {
+                    if (selectedMode) {
 
+                        if (binding.selected.isChecked) {
+                            itemView.setBackgroundColor(Color.GREEN)
+                            //binding.selected.isChecked = true
+                            //notifyItemChanged(adapterPosition)
+                            selectedItem.add(item)
+                        } else {
+                            itemView.setBackgroundColor(Color.WHITE)
+                            selectedItem.remove(item)
+                            //binding.selected.isChecked = false
+                            //notifyItemChanged(adapterPosition)
+
+                        }
+                        actions.itemHasClicked()
                     }
                 }
-            }
 
-            with(binding) {
+
+
                 tvNombre.text = item.nombre
                 tvId.text = item.id.toString()
                 if (selectedMode)
                     selected.visibility = View.VISIBLE
-                else
+                else{
+                    selected.isChecked = false
                     selected.visibility = View.GONE
+                }
 
                 if (selected.isChecked) {
                     itemView.setBackgroundColor(Color.GREEN)
-                    selected.visibility = View.VISIBLE
+                    //selected.visibility = View.VISIBLE
                 } else {
                     itemView.setBackgroundColor(Color.WHITE)
                 }
@@ -89,11 +113,6 @@ class PersonaAdapter(
 
 
     }
-
-    interface PersonasAction{
-        fun onDelete(persona: Persona)
-    }
-
 
     class DiffCallback : DiffUtil.ItemCallback<Persona>() {
         override fun areItemsTheSame(oldItem: Persona, newItem: Persona): Boolean {
@@ -106,15 +125,33 @@ class PersonaAdapter(
     }
 
     val swipeGesture = object : SwipeGesture(context) {
+//        override fun onMove(
+//            recyclerView: RecyclerView,
+//            viewHolder: RecyclerView.ViewHolder,
+//            target: RecyclerView.ViewHolder
+//        ): Boolean {
+//            var initPos = viewHolder.adapterPosition
+//            var targetPos = target.adapterPosition
+//
+//            val mutable = currentList.toMutableList()
+//            Collections.swap(mutable,initPos,targetPos)
+//
+//           // this@PersonaAdapter.submitList(mutable)
+//
+//            return false
+//
+//        }
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            if (!selectedMode) {
+            //if (!selectedMode) {
                 when (direction) {
                     ItemTouchHelper.LEFT -> {
-                        personasAction.onDelete(currentList[viewHolder.adapterPosition])
+                        selectedItem.remove(currentList[viewHolder.adapterPosition])
+                        actions.onDelete(currentList[viewHolder.adapterPosition])
+                        actions.itemHasClicked()
                     }
                 }
-            }
+            //}
         }
     }
 

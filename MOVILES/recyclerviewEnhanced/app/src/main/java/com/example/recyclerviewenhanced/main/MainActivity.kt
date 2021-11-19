@@ -1,11 +1,17 @@
 package com.example.recyclerviewenhanced.main
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ActionMode
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.hiltmenu.ui.main.PersonaAdapter
+import com.example.recyclerviewenhanced.R
 import com.example.recyclerviewenhanced.databinding.ActivityMainBinding
 import com.example.recyclerviewenhanced.domain.Cosa
 import com.example.recyclerviewenhanced.domain.Persona
@@ -20,35 +26,37 @@ class MainActivity : AppCompatActivity() {
 
 
     private val viewModel: MainViewModel by viewModels()
-    /*{
-        MainViewModelFactory(
-            GetPersonas(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
-            InsertPersona(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
-            InsertPersonaWithCosas(
-                PersonaRepository(
-                    PersonaRoomDatabase.getDatabase(this).personaDao()
-                )
-            ),
-            GetPersonasDes(PersonaRepository(PersonaRoomDatabase.getDatabase(this).personaDao())),
-        )
-    }*/
-    fun delete(persona:Persona){
-        viewModel.deletePersona(persona)
+
+
+
+    private val callback by lazy {
+        configContextBar()
     }
+
+    private lateinit var actionMode:ActionMode
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        personasAdapter = PersonaAdapter(this,
-            object : PersonaAdapter.PersonasAction {
-                override fun onDelete(persona: Persona) {
-                    delete(persona)
+        personasAdapter = PersonaAdapter(this, actions = object : PersonaAdapter.PersonaActions {
+            override fun onDelete(persona: Persona) = viewModel.deletePersona(persona)
+
+            override fun onStartSelectMode() {
+                startSupportActionMode(callback)?.let {
+                    actionMode  = it;
+                    actionMode.title = "1 selected"
+
                 }
             }
-        )
 
+            override fun itemHasClicked() {
+                actionMode.title = "${personasAdapter.getSelectedItems().size.toString()} selected"
+            }
+
+        })
         binding.rvPersonas.adapter = personasAdapter
 
         val touchHelper = ItemTouchHelper(personasAdapter.swipeGesture)
@@ -72,6 +80,88 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.getPersonas();
+        configAppBar();
 
+    }
+
+
+    private fun configContextBar() =
+        object : ActionMode.Callback {
+
+            override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                menuInflater.inflate(R.menu.context_bar, menu)
+                return true
+            }
+
+            override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                return false
+            }
+
+            override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+                return when (item?.itemId) {
+                    R.id.favorite -> {
+                        // Handle share icon press
+                        true
+                    }
+                    R.id.search -> {
+                        // Handle delete icon press
+                        true
+                    }
+                    R.id.more -> {
+                        viewModel.deletePersona(personasAdapter.getSelectedItems())
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+            override fun onDestroyActionMode(mode: ActionMode?) {
+                personasAdapter.resetSelectMode()
+            }
+
+        }
+
+    private fun configAppBar() {
+        binding.topAppBar.setNavigationOnClickListener {
+            // Handle navigation icon press
+        }
+
+
+        val actionSearch  = binding.topAppBar.menu.findItem(R.id.search).actionView as SearchView
+
+        actionSearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                newText?.let {
+                    viewModel.getPersonas(it)
+                }
+
+               return false
+            }
+
+
+        })
+
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.favorite -> {
+                    // Handle favorite icon press
+                    true
+                }
+                R.id.search -> {
+                    // Handle search icon press
+                    true
+                }
+                R.id.more -> {
+                    // Handle more item (inside overflow menu) press
+                    true
+                }
+                else -> false
+            }
+        }
     }
 }

@@ -19,12 +19,10 @@ abstract class SwipeGesture(context: Context) : ItemTouchHelper.SimpleCallback(0
     val deleteColor = ContextCompat.getColor(context, R.color.red)
 
     override fun onMove(
-        recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder,
-        target: RecyclerView.ViewHolder
-    ): Boolean {
-        return false
-    }
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {return false}
 
     override fun onChildDraw(
         c: Canvas,
