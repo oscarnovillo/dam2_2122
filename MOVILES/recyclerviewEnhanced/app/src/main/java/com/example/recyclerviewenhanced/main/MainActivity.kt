@@ -28,12 +28,11 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
 
 
-
     private val callback by lazy {
         configContextBar()
     }
 
-    private lateinit var actionMode:ActionMode
+    private lateinit var actionMode: ActionMode
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,22 +40,24 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        personasAdapter = PersonaAdapter(this, actions = object : PersonaAdapter.PersonaActions {
-            override fun onDelete(persona: Persona) = viewModel.deletePersona(persona)
+        personasAdapter = PersonaAdapter(this,
+            object : PersonaAdapter.PersonaActions {
+                override fun onDelete(persona: Persona) = viewModel.deletePersona(persona)
 
-            override fun onStartSelectMode() {
-                startSupportActionMode(callback)?.let {
-                    actionMode  = it;
-                    actionMode.title = "1 selected"
+                override fun onStartSelectMode() {
+                    startSupportActionMode(callback)?.let {
+                        actionMode = it;
+                        actionMode.title = "1 selected"
 
+                    }
                 }
-            }
 
-            override fun itemHasClicked() {
-                actionMode.title = "${personasAdapter.getSelectedItems().size.toString()} selected"
-            }
+                override fun itemHasClicked() {
+                    actionMode.title =
+                        "${personasAdapter.getSelectedItems().size.toString()} selected"
+                }
 
-        })
+            })
         binding.rvPersonas.adapter = personasAdapter
 
         val touchHelper = ItemTouchHelper(personasAdapter.swipeGesture)
@@ -127,9 +128,9 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val actionSearch  = binding.topAppBar.menu.findItem(R.id.search).actionView as SearchView
+        val actionSearch = binding.topAppBar.menu.findItem(R.id.search).actionView as SearchView
 
-        actionSearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        actionSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return false
             }
@@ -140,7 +141,7 @@ class MainActivity : AppCompatActivity() {
                     viewModel.getPersonas(it)
                 }
 
-               return false
+                return false
             }
 
 
