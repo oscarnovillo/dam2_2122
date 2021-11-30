@@ -148,7 +148,8 @@ class PersonaAdapter(
                     ItemTouchHelper.LEFT -> {
                         selectedItem.remove(currentList[viewHolder.adapterPosition])
                         actions.onDelete(currentList[viewHolder.adapterPosition])
-                        actions.itemHasClicked()
+                        if (selectedMode)
+                            actions.itemHasClicked()
                     }
                 }
             //}
