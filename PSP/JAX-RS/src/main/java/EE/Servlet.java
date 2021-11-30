@@ -10,6 +10,8 @@ public class Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.getWriter().println("HOLA MUNDO");
+        request.getSession().setAttribute("color","red");
+
 
     }
 
