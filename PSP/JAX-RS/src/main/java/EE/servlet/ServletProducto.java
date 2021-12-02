@@ -27,6 +27,8 @@ public class ServletProducto extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
         var usuario = (String)request.getSession().getAttribute("usuario");
 
 

@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@WebFilter(filterName = "FilterLogin",urlPatterns = {"/cesta","/productos","/privado/*"})
+@WebFilter(filterName = "FilterLogin",urlPatterns = {"/visitas","/productos","/privado/*"})
 public class FilterLogin implements Filter {
 
 
@@ -18,8 +18,8 @@ public class FilterLogin implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
 // codigo para comprobar session usuario
 
-        Usuario g = (Usuario) ((HttpServletRequest)req).getSession().getAttribute("usuario");
-        if (Math.random()>0.5)
+        Usuario g = (Usuario) ((HttpServletRequest)req).getSession().getAttribute("user");
+        if (g != null)
             chain.doFilter(req, resp);
         else
             req.getRequestDispatcher("/errorFiltro.html").forward(req,resp);

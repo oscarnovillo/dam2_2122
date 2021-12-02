@@ -18,6 +18,12 @@ public class Usuario {
     @NotEmpty
     private String name;
 
+    private String password;
+
     private LocalDateTime primerSopapoDeMiMadre;
 
+    public Usuario(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
 }

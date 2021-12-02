@@ -1,4 +1,4 @@
-package EE.servlet;
+package EE.login;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,9 +14,7 @@ public class ServletLogout extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().setAttribute("cesta",null);
-        request.getSession().setAttribute("login",null);
-
+        request.getSession().setAttribute("user",null);
         request.getSession().invalidate();
 
     }

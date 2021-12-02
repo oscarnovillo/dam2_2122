@@ -23,8 +23,10 @@ public class DaoUsuario {
 
     private static List<Usuario> usuarios = new ArrayList<>();
 
+
+
     static {
-        usuarios.add(new Usuario("1","nombre",LocalDateTime.now()));
+        usuarios.add(new Usuario("1","nombre","pass",LocalDateTime.now()));
     }
 
 
@@ -32,6 +34,21 @@ public class DaoUsuario {
 
 
     }
+
+    public Either<ApiError, Usuario> dameUsuarioPorNombre(String nombre)
+    {
+        Usuario u = usuarios.stream()
+                .filter(usuario -> usuario.getName().equals(nombre))
+                .findFirst().orElse(null);
+        if (u!=null) {
+            return Either.right(u);
+        }
+        else
+        {
+            return Either.left(new ApiError("error not found", LocalDateTime.now()));
+        }
+    }
+
 
     public Either<ApiError, Usuario> dameUno(String id)
     {

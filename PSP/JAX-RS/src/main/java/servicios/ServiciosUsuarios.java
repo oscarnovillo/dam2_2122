@@ -33,6 +33,17 @@ public class ServiciosUsuarios {
         return dao.borrar(id);
     }
 
+    public boolean login(String user,String pass){
+
+        boolean loginOk=false;
+        if (dao.dameUsuarioPorNombre(user).isRight())
+        {
+            loginOk = pass.equals(dao.dameUsuarioPorNombre(user).get().getPassword());
+        }
+        return loginOk;
+
+    }
+
     public  Usuario addUser(Usuario u)
     {
         final StringBuilder error = new StringBuilder();
