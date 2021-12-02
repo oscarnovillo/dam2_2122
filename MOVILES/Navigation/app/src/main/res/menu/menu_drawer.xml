@@ -4,21 +4,13 @@
     <item
         android:id="@+id/blankFragment"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="favortio"
+        android:title="blank1"
         android:contentDescription="descripcion"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="SEARCH"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        android:contentDescription="des2"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/blankFragment2"
-        android:title="MORE"
+        android:title="blank2"
         android:contentDescription="des1"
         app:showAsAction="never" />
 
