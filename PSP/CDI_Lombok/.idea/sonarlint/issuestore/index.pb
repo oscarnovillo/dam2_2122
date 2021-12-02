@@ -23,6 +23,8 @@ W
 'src/main/java/config/Configuration.java,7\f\7f9a1455549e9958f1cfe6993a695569484b133b
 X
 (src/main/java/controllers/Principal.java,f\0\f0b0d94d20e952ab19313696f8446cfde8c0aaec
+P
+ src/main/java/gui/Producers.java,0\c\0ccb22e4f4008479e9aa017246e1fb0c4f4d4461
 W
 'src/main/java/controllers/Pantalla.java,b\1\b19424946529331e25556ed4addcdf41fefa89c2
 X
@@ -33,7 +35,5 @@ Y
 )src/main/java/gui/FXMLLoaderProducer.java,2\b\2b5940a7ad3179b7ce2b955a92b8d93c1aa08927
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
-P
- src/main/java/gui/Producers.java,0\c\0ccb22e4f4008479e9aa017246e1fb0c4f4d4461
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
