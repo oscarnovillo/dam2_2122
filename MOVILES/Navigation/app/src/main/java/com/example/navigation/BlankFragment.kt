@@ -30,7 +30,7 @@ class BlankFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.button.setOnClickListener{
             val action = BlankFragmentDirections.actionBlankFragmentToBlankFragment22(Persona(1,"mmm"))
-            findNavController().navigate(BlankFragmentDirections.actionBlankFragmentToBlankFragment22(Persona(1,"mmm")))
+            findNavController().navigate(action)
 
         }
 

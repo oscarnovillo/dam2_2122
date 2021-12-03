@@ -26,14 +26,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        navController = navHostFragment.findNavController()
+        navController = navHostFragment.findNavController( )
         //navController = findNavController(R.id.fragmentContainerView)
 
       //  navController = Navigation.findNavController(this,R.id.fragmentContainerView)
         setSupportActionBar(binding.topAppBar)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.blankFragment, R.id.blankFragment2
+                R.id.blankFragment
             ), binding.drawerLayout
         )
         NavigationUI.setupActionBarWithNavController(this,navController, appBarConfiguration)

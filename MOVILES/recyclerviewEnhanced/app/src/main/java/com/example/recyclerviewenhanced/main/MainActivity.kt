@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onStartSelectMode() {
                     startSupportActionMode(callback)?.let {
                         actionMode = it;
-                        actionMode.title = "1 selected"
+                        it.title = "1 selected"
 
                     }
                 }

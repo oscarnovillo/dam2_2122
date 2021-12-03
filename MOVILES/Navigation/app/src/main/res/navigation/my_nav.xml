@@ -9,13 +9,16 @@
         android:id="@+id/blankFragment"
         android:name="com.example.navigation.BlankFragment"
         android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" >
+        tools:layout="@layout/fragment_blank">
         <action
             android:id="@+id/action_blankFragment_to_blankFragment22"
             app:destination="@id/blankFragment2"
 
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_blankFragment_to_blankFragment3"
+            app:destination="@id/blankFragment3" />
     </fragment>
     <fragment
         android:id="@+id/blankFragment2"
@@ -30,5 +33,18 @@
         <deepLink
             android:id="@+id/deepLink"
             app:uri="myapp://navigaton/bk2" />
+        <action
+            android:id="@+id/action_blankFragment2_to_blankFragment"
+            app:destination="@id/blankFragment"
+            app:popUpTo="@id/blankFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_blankFragment2_to_blankFragment3"
+            app:destination="@id/blankFragment3" />
     </fragment>
+    <fragment
+        android:id="@+id/blankFragment3"
+        android:name="com.example.navigation.BlankFragment3"
+        android:label="fragment_blank2"
+        tools:layout="@layout/fragment_blank2" />
 </navigation>

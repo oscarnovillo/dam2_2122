@@ -91,8 +91,6 @@ class PersonaAdapter(
                     }
                 }
 
-
-
                 tvNombre.text = item.nombre
                 tvId.text = item.id.toString()
                 if (selectedMode)
@@ -110,8 +108,6 @@ class PersonaAdapter(
                 }
             }
         }
-
-
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Persona>() {

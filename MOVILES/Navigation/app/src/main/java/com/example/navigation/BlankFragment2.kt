@@ -49,7 +49,7 @@ class BlankFragment2 : Fragment() {
             R.id.nuevo -> {
                 // Handle favorite icon press
                 //menuItem.onNavDestinationSelected(navController)
-                //findNavController().navigate(R.id.action_blankFragment_to_blankFragment22)
+                findNavController().navigate(R.id.action_blankFragment_to_blankFragment22)
 
                 //findNavController().navigate()
 
