@@ -2,6 +2,7 @@ package EE.servlet;
 
 import config.Configuration;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +12,15 @@ import java.io.IOException;
 
 @WebServlet(name = "ServletConfig",urlPatterns = {"/config"})
 public class ServletConfig extends HttpServlet {
+
+
+    Configuration config;
+
+    @Inject
+    public ServletConfig(Configuration config) {
+        this.config = config;
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -18,7 +28,7 @@ public class ServletConfig extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        response.getWriter().println(Configuration.getInstance().getRuta());
+        response.getWriter().println(config.getRuta());
 
     }
 }

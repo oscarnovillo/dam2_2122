@@ -19,6 +19,7 @@ module apiFootball {
     requires java.validation;
     requires rxjavafx;
     requires org.apache.logging.log4j;
+    requires okhttp3.urlconnection;
 
 
     //requires javafx.swing;

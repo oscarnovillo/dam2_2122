@@ -5,47 +5,51 @@
  */
 package config;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
+import java.util.Map;
 
 
 /**
  * @author dam2
  */
 @Getter
-@Setter
 @Log4j2
+@ApplicationScoped
 public class Configuration {
 
-    private static Configuration config;
     private String ruta;
     private String user;
     private String password;
 
-    private Configuration() {
+    public Configuration() {
 
     }
 
-    public static Configuration cargarInstance(InputStream file) {
+    void cargar(InputStream file) {
 
-        if (config == null) {
-            try {
-                Yaml yaml = new Yaml();
-                config = yaml.loadAs(file,
-                        Configuration.class);
-            } catch (Exception ex) {
-                log.error(ex.getMessage(), ex);
-            }
+        try {
+            Yaml yaml = new Yaml();
+
+            Iterable<Object> it = null;
+
+            it = yaml
+                    .loadAll(file);
+
+
+            Map<String, String> m = (Map) it.iterator().next();
+
+            this.ruta = m.get("ruta");
+
+
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
         }
-        return config;
-    }
-
-    public static Configuration getInstance() {
-
-        return config;
     }
 }
+
+
