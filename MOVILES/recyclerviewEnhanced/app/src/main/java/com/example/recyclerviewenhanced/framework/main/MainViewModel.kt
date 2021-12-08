@@ -1,17 +1,19 @@
-package com.example.recyclerviewenhanced.main
+package com.example.recyclerviewenhanced.framework.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.recyclerviewenhanced.data.repositories.DogRepository
 import com.example.recyclerviewenhanced.domain.Persona
+import com.example.recyclerviewenhanced.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
+class MainViewModel @Inject constructor(val dogRepository: DogRepository) : ViewModel() {
 
 
     private val listaPersonas = mutableListOf<Persona>()
@@ -23,20 +25,38 @@ class MainViewModel @Inject constructor() : ViewModel() {
     val error: LiveData<String> get() = _error
 
 
-
     init {
 
-        listaPersonas.addAll(listOf<Persona>(
-            Persona(1,"nombre", LocalDate.now(),null),
-            Persona(2,"nombre1", LocalDate.now(),null),
-            Persona(3,"nombre2", LocalDate.now(),null),
-        ))
+        listaPersonas.addAll(
+            listOf<Persona>(
+                Persona(1, "nombre", LocalDate.now(), null),
+                Persona(2, "nombre1", LocalDate.now(), null),
+                Persona(3, "nombre2", LocalDate.now(), null),
+            )
+        )
 
     }
 
     fun getPersonas() {
 
         viewModelScope.launch {
+
+            var result = dogRepository.getDog()
+
+            when (result) {
+                is NetworkResult.Error -> _error.value = result.message ?: ""
+                is NetworkResult.Loading -> TODO()
+                is NetworkResult.Success -> listaPersonas[0].nombre = result.data?.message ?: ""
+            }
+
+            result = dogRepository.getDog()
+
+            when (result) {
+                is NetworkResult.Error -> _error.value = result.message ?: ""
+                is NetworkResult.Loading -> TODO()
+                is NetworkResult.Success -> listaPersonas[1].nombre = result.data?.message ?: ""
+            }
+
 
             _personas.value = listaPersonas.toList()
 //            _personas.value = getPersonas.invoke()
@@ -45,7 +65,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
 
     }
 
-    fun getPersonas(filtro:String) {
+    fun getPersonas(filtro: String) {
 
         viewModelScope.launch {
 
@@ -80,7 +100,6 @@ class MainViewModel @Inject constructor() : ViewModel() {
         }
 
     }
-
 
 
 }

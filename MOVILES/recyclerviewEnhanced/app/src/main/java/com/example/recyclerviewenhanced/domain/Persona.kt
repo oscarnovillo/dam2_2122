@@ -4,7 +4,7 @@ import java.time.LocalDate
 
 data class Persona(
     val id: Int,
-    val nombre: String,
+    var nombre: String,
     val nacimiento: LocalDate,
     val cosas: List<Cosa>?
 )

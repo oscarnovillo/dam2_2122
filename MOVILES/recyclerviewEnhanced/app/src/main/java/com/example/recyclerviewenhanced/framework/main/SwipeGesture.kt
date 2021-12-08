@@ -1,4 +1,4 @@
-package com.example.recyclerviewenhanced.main
+package com.example.recyclerviewenhanced.framework.main
 
 import android.graphics.Canvas
 import androidx.recyclerview.widget.ItemTouchHelper

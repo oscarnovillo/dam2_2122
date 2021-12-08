@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewenhanced.R
 import com.example.recyclerviewenhanced.databinding.ViewPersonaBinding
 import com.example.recyclerviewenhanced.domain.Persona
-import com.example.recyclerviewenhanced.main.SwipeGesture
+import com.example.recyclerviewenhanced.framework.main.SwipeGesture
 import java.util.*
 
 

@@ -1,4 +1,4 @@
-package com.example.recyclerviewenhanced
+package com.example.recyclerviewenhanced.framework
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
