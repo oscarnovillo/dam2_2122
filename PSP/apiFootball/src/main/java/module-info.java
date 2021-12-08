@@ -1,5 +1,6 @@
 module apiFootball {
 
+    requires okhttp3;
 
     //needed for JavaFX
     requires javafx.controls;
@@ -7,19 +8,18 @@ module apiFootball {
     requires org.yaml.snakeyaml;
     requires lombok;
     requires java.logging;
-    requires io.reactivex.rxjava2;
     requires io.vavr;
     requires retrofit2;
-    requires okhttp3;
-    requires retrofit2.adapter.rxjava2;
+
+    requires retrofit2.adapter.rxjava3;
     requires retrofit2.converter.gson;
     requires retrofit2.converter.scalars;
     requires com.google.gson;
     requires jakarta.json.bind;
     requires java.validation;
-    requires rxjavafx;
+    requires io.reactivex.rxjava3;
     requires org.apache.logging.log4j;
-    requires okhttp3.urlconnection;
+    requires org.pdfsam.rxjavafx;
 
 
     //requires javafx.swing;

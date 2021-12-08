@@ -5,13 +5,13 @@ import dao.modelo.marvel.ApiError;
 import dao.modelo.marvel.MarvelCharacters;
 import dao.retrofit.MarvelApi;
 import dao.utils.ConfigurationSingleton_OkHttpClient;
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Single;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
@@ -89,7 +89,7 @@ public class DaoMarvel {
                 .baseUrl("https://gateway.marvel.com/v1/public/")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .client(clientOK)
                 .build();
 

@@ -7,9 +7,10 @@ import dao.modelo.ApiError;
 import dao.modelo.Competition;
 import dao.modelo.Usuario;
 import dao.modelo.marvel.Character;
-import io.reactivex.Single;
-import io.reactivex.rxjavafx.schedulers.JavaFxScheduler;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Single;
+import org.pdfsam.rxjavafx.schedulers.JavaFxScheduler;
+//import io.reactivex.rxjavafx.schedulers.JavaFxScheduler;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 import javafx.concurrent.Task;
@@ -328,6 +329,7 @@ public class ApiFootballController implements Initializable {
                 )
                 .subscribeOn(Schedulers.io())
                 .observeOn(JavaFxScheduler.platform())
+
                 .doFinally(() -> this.principalController
                         .getPantallaPrincipal().setCursor(Cursor.DEFAULT));
         s.subscribe(result ->

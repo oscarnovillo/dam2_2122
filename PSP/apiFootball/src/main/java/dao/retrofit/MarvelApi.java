@@ -4,7 +4,7 @@ import dao.modelo.AreasRequest;
 import dao.modelo.marvel.Marvel;
 import dao.modelo.marvel.MarvelCharacters;
 import dao.modelo.marvel.Series;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.GET;

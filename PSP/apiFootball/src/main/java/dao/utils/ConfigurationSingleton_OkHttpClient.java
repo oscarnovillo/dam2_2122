@@ -3,11 +3,11 @@ package dao.utils;
 import com.google.gson.*;
 import config.ConfigurationSingleton_Client;
 import lombok.extern.log4j.Log4j2;
-import okhttp3.JavaNetCookieJar;
+//import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
@@ -82,7 +82,7 @@ public class ConfigurationSingleton_OkHttpClient {
                     .baseUrl(ConfigurationSingleton_Client.getInstance().getPath_base())
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson))
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .client(clientOK)
                     .build();
         }

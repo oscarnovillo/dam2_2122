@@ -3,7 +3,7 @@ package dao;
 import dao.modelo.*;
 import dao.retrofit.AreasAPI;
 import dao.utils.ConfigurationSingleton_OkHttpClient;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Single;
 import io.vavr.control.Either;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -61,7 +61,7 @@ public class DaoAreas {
             else
             {
                 resultado = Either.left(response.errorBody().toString());
-                
+
             }
         }
         catch (Exception e)

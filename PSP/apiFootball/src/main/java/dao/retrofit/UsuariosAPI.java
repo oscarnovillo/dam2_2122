@@ -2,7 +2,7 @@ package dao.retrofit;
 
 import dao.modelo.AreasRequest;
 import dao.modelo.Usuario;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;

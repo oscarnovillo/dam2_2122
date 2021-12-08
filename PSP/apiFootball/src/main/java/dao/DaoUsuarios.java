@@ -5,7 +5,7 @@ import dao.modelo.ApiError;
 import dao.modelo.Usuario;
 import dao.retrofit.AreasAPI;
 import dao.utils.ConfigurationSingleton_OkHttpClient;
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 import jakarta.json.bind.Jsonb;

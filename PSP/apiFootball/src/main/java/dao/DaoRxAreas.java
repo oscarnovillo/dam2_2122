@@ -6,7 +6,7 @@ import dao.modelo.Competition;
 import dao.modelo.CompetitionsRequest;
 import dao.retrofit.AreasAPI;
 import dao.utils.ConfigurationSingleton_OkHttpClient;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Single;
 import io.vavr.control.Either;
 import retrofit2.Call;
 import retrofit2.Response;
