@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recyclerviewenhanced.data.repositories.DogRepository
 import com.example.recyclerviewenhanced.domain.Persona
-import com.example.recyclerviewenhanced.utils.NetworkResult
+import com.example.recyclerviewenhanced.utils.NetworkResultt
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -43,18 +43,19 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
 
             var result = dogRepository.getDog()
 
+
             when (result) {
-                is NetworkResult.Error -> _error.value = result.message ?: ""
-                is NetworkResult.Loading -> TODO()
-                is NetworkResult.Success -> listaPersonas[0].nombre = result.data?.message ?: ""
+                is NetworkResultt.Error -> _error.value = result.message ?: ""
+                is NetworkResultt.Loading -> TODO()
+                is NetworkResultt.Success -> listaPersonas[0].nombre = result.data?.message ?: ""
             }
 
             result = dogRepository.getDog()
 
             when (result) {
-                is NetworkResult.Error -> _error.value = result.message ?: ""
-                is NetworkResult.Loading -> TODO()
-                is NetworkResult.Success -> listaPersonas[1].nombre = result.data?.message ?: ""
+                is NetworkResultt.Error -> _error.value = result.message ?: ""
+                is NetworkResultt.Loading -> TODO()
+                is NetworkResultt.Success -> listaPersonas[1].nombre = result.data?.message ?: ""
             }
 
 

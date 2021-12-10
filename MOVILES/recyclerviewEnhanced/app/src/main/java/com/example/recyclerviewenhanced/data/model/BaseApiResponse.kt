@@ -1,17 +1,17 @@
 package com.example.recyclerviewenhanced.data.model
 
-import com.example.recyclerviewenhanced.utils.NetworkResult
+import com.example.recyclerviewenhanced.utils.NetworkResultt
 import retrofit2.Response
 
 abstract class BaseApiResponse {
 
-    suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): NetworkResult<T> {
+    suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): NetworkResultt<T> {
         try {
             val response = apiCall()
             if (response.isSuccessful) {
                 val body = response.body()
                 body?.let {
-                    return NetworkResult.Success(body)
+                    return NetworkResultt.Success(body)
                 }
             }
             return error("${response.code()} ${response.message()}")
@@ -20,7 +20,7 @@ abstract class BaseApiResponse {
         }
     }
 
-    private fun <T> error(errorMessage: String): NetworkResult<T> =
-        NetworkResult.Error("Api call failed $errorMessage")
+    private fun <T> error(errorMessage: String): NetworkResultt<T> =
+        NetworkResultt.Error("Api call failed $errorMessage")
 
 }
