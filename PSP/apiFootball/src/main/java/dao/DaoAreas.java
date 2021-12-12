@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 
 import java.util.List;
 
-public class DaoAreas {
+public class DaoAreas extends DaoGenerics {
 
     public Single<AreasRequest> getAreas() {
 //        Either<String, List<Area>> resultado = null;
@@ -43,34 +43,38 @@ public class DaoAreas {
 //        return resultado;
     }
 
-    public Either<String, List<Competition>> getCompetitions(Area area){
+
+
+
+
+    public Either<String, CompetitionsRequest> getCompetitions(Area area){
         Either<String, List<Competition>> resultado = null;
 
         Retrofit retrofit = ConfigurationSingleton_OkHttpClient.getInstance();
 
         AreasAPI areasAPI = retrofit.create(AreasAPI.class);
 
-        Call<CompetitionsRequest> call = areasAPI.loadCompetitions(area.getId());
-        try {
-            Response<CompetitionsRequest> response = call.execute();
-            if (response.isSuccessful())
-            {
-                CompetitionsRequest changesList = response.body();
-                resultado = Either.right(changesList.getCompetitions());
-            }
-            else
-            {
-                resultado = Either.left(response.errorBody().toString());
-
-            }
-        }
-        catch (Exception e)
-        {
-            resultado= Either.left("Error de comunicacion");
-
-        }
-
-        return resultado;
+        return this.safeApicall(areasAPI.loadCompetitions(area.getId()));
+//        try {
+//            Response<CompetitionsRequest> response = call.execute();
+//            if (response.isSuccessful())
+//            {
+//                CompetitionsRequest changesList = response.body();
+//                resultado = Either.right(changesList.getCompetitions());
+//            }
+//            else
+//            {
+//                resultado = Either.left(response.errorBody().toString());
+//
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            resultado= Either.left("Error de comunicacion");
+//
+//        }
+//
+//        return resultado;
     }
 
 //    public Either<String, List<Team>> getTeams(Competition competition,String season) {
