@@ -2,7 +2,7 @@ package com.maxi.dogapi.di
 
 import com.example.recyclerviewenhanced.data.sources.remote.DogService
 import com.example.recyclerviewenhanced.data.sources.remote.ServiceInterceptor
-import com.example.recyclerviewenhanced.utils.Constants.Companion.BASE_URL
+import com.example.recyclerviewenhanced.utils.Constants.BASE_URL
 
 import dagger.Module
 import dagger.Provides
