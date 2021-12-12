@@ -20,22 +20,25 @@
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>9.0.0</version>
+            <version>9.1.0</version>
             <scope>provided</scope>
         </dependency>
 
 
 <!--        <dependency>-->
+<!--            <groupId>org.primefaces</groupId>-->
+<!--            <artifactId>primefaces</artifactId>-->
+<!--            <version>11.0.0</version>-->
+<!--            <classifier>jakarta</classifier>-->
+<!--        </dependency>-->
+
+        <!--        <dependency>-->
 <!--            <groupId>javax</groupId>-->
 <!--            <artifactId>javaee-web-api</artifactId>-->
 <!--            <version>8.0.1</version>-->
 <!--            <scope>provided</scope>-->
 <!--        </dependency>-->
-        <dependency>
-            <groupId>javax.json.bind</groupId>
-            <artifactId>javax.json.bind-api</artifactId>
-            <version>1.0</version>
-        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -60,6 +63,11 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.14.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.soteria</groupId>
+            <artifactId>jakarta.security.enterprise</artifactId>
+            <version>2.0.1</version>
         </dependency>
 
 

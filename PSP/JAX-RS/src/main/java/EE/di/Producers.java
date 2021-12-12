@@ -1,13 +1,14 @@
 package EE.di;
 
+import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.ws.rs.core.Context;
 import org.modelmapper.ModelMapper;
 
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Singleton;
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
 
 public class Producers {
 
@@ -21,6 +22,9 @@ public class Producers {
         request.getServletContext();
         return new ModelMapper();
     }
+
+
+
 
     @Produces
     public Jsonb producesJsonb()
