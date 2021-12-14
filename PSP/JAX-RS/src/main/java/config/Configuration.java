@@ -25,10 +25,7 @@ public class Configuration {
     private String ruta;
     private String user;
     private String password;
-
-    public Configuration() {
-
-    }
+    private String driver;
 
     void cargar(InputStream file) {
 
@@ -40,10 +37,11 @@ public class Configuration {
             it = yaml
                     .loadAll(file);
 
-
             Map<String, String> m = (Map) it.iterator().next();
-
             this.ruta = m.get("ruta");
+            this.password = m.get("password");
+            this.user = m.get("user");
+            this.driver = m.get("driver");
 
 
         } catch (Exception ex) {

@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Path("/users")
-@Juan
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class RestUsuarios {

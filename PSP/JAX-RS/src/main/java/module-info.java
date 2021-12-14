@@ -8,4 +8,12 @@ module JAX.RS {
     requires org.apache.logging.log4j;
 
 
+    requires java.sql;
+    requires java.naming;
+
+    requires com.zaxxer.hikari;
+    requires spring.jdbc;
+//    requires org.hibernate.orm.core;
+
+
 }

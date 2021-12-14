@@ -1,82 +1,86 @@
 package dao;
 
 import EE.errores.ApiError;
-import EE.errores.CustomException;
 import dao.modelo.Usuario;
+import dao.modelo.UsuarioEntity;
 import io.vavr.control.Either;
-import jakarta.ws.rs.core.Response;
+import jakarta.inject.Inject;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 /***
  *
  * edte emeetodo
  * @author
- * 
+ *
  */
 public class DaoUsuario {
 
     private static List<Usuario> usuarios = new ArrayList<>();
 
 
-
     static {
-        usuarios.add(new Usuario("1","nombre","pass",LocalDateTime.now()));
+        usuarios.add(new Usuario("1", "nombre", "pass", LocalDateTime.now()));
     }
 
 
-    public DaoUsuario() {
+    private DBConnectionPool dbConnection;
+//    private Session session;
 
 
+    @Inject
+    public DaoUsuario(DBConnectionPool dbConnection) {
+//        this.session = session;
+        this.dbConnection = dbConnection;
     }
 
-    public Either<ApiError, Usuario> dameUsuarioPorNombre(String nombre)
-    {
+    public Either<ApiError, Usuario> dameUsuarioPorNombre(String nombre) {
         Usuario u = usuarios.stream()
                 .filter(usuario -> usuario.getName().equals(nombre))
                 .findFirst().orElse(null);
-        if (u!=null) {
+        if (u != null) {
             return Either.right(u);
-        }
-        else
-        {
+        } else {
             return Either.left(new ApiError("error not found", LocalDateTime.now()));
         }
     }
 
 
-    public Either<ApiError, Usuario> dameUno(String id)
-    {
+    public Either<ApiError, Usuario> dameUno(String id) {
         Usuario u = usuarios.stream()
                 .filter(usuario -> usuario.getId().equals(id))
                 .findFirst().orElse(null);
-        if (u!=null) {
+        if (u != null) {
             return Either.right(u);
-        }
-        else
-        {
+        } else {
             return Either.left(new ApiError("error not found", LocalDateTime.now()));
         }
     }
 
-    public List<Usuario> dameTodos()
-    {
-        if ( usuarios.size()==0)
-        {
-            throw new CustomException("lista vacia", Response.Status.NOT_FOUND);
-        }
-        return usuarios;
+    public List<Usuario> dameTodos() {
+        JdbcTemplate jtm = new JdbcTemplate(
+                dbConnection.getDataSource());
+
+        // select devuelve LIST
+        return jtm.query("Select * from usuarios",
+                BeanPropertyRowMapper.newInstance(Usuario.class));
     }
 
-    public Usuario addUser(Usuario user)
-    {
-        user.setId("" + (usuarios.size()+1));
-        usuarios.add(user);
+    public Usuario addUser(Usuario user) {
+
+        UsuarioEntity userE = new UsuarioEntity();
+        userE.setNombre(user.getName());
+        userE.setPrecio(100.0);
+//        session.beginTransaction();
+//        session.save(userE);
+//        session.getTransaction().commit();
+
         return user;
     }
 

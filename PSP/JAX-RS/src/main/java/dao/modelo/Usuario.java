@@ -20,9 +20,7 @@ public class Usuario {
 
     private String password;
 
-
-
-    private LocalDateTime primerSopapoDeMiMadre;
+    private LocalDateTime fecha;
 
     public Usuario(String name, String password) {
         this.name = name;

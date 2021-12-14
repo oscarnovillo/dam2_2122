@@ -19,8 +19,8 @@ public class CreateHash extends HttpServlet {
     private Pbkdf2PasswordHash passwordHash;
 
     @Inject
-    public CreateHash(Pbkdf2PasswordHash passwordHash) {
-        this.passwordHash = passwordHash;
+    public CreateHash() {
+        this.passwordHash = null;
     }
 
 
