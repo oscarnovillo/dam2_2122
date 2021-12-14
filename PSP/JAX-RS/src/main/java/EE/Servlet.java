@@ -1,5 +1,6 @@
 package EE;
 
+import config.Configuration;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -11,6 +12,7 @@ public class Servlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.getWriter().println("HOLA MUNDO");
         request.getSession().setAttribute("color","red");
+
 
 
     }

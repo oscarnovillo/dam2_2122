@@ -20,6 +20,8 @@ public class Usuario {
 
     private String password;
 
+
+
     private LocalDateTime primerSopapoDeMiMadre;
 
     public Usuario(String name, String password) {

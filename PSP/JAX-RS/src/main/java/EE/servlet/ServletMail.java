@@ -21,7 +21,7 @@ public class ServletMail extends HttpServlet {
         MandarMail mail = new MandarMail();
 
         try {
-            mail.generateAndSendEmail("oscar.novillo@gmail.com", "<html>generado <a href=\"http://localhost:8080/Activacion?codigo="+Utils.randomBytes()+"\" >marca</a> " + Utils.randomBytes() + "</html>"
+            mail.generateAndSendEmail("oscar.novillo@gmail.com", "<html>generado <a href=\"http://localhost:8080/jax/Activacion?codigo="+Utils.randomBytes()+"\" >marca</a> " + Utils.randomBytes() + "</html>"
                     , "mail de prueba");
             response.getWriter().println("correo enviado");
         } catch (Exception e) {

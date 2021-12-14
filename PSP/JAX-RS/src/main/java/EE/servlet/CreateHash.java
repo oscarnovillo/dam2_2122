@@ -30,15 +30,15 @@ public class CreateHash extends HttpServlet {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("Pbkdf2PasswordHash.Iterations", "3072");
         parameters.put("Pbkdf2PasswordHash.Algorithm", "PBKDF2WithHmacSHA512");
-        parameters.put("Pbkdf2PasswordHash.SaltSizeBytes", "64");
-        parameters.put("Pbkdf2PasswordHash.KeySizeBytes", "64");
+        parameters.put("Pbkdf2PasswordHash.SaltSizeBytes", "32");
+        parameters.put("Pbkdf2PasswordHash.KeySizeBytes", "32");
         passwordHash.initialize(parameters);
 
         String password = req.getParameter("pass");
 
         req.setAttribute("hash",passwordHash.generate(password.toCharArray()));
 
-        String s = "PBKDF2WithHmacSHA256:2048:/iYLdVpyv0Ux8pJbM5wYjEFAOdQL2V3l8fMjbdazh9Q=:NSS7upNSmyziDmvP/vg3nXO95y5a8g9Skq5wd5EsPxU=";
+        String s = "3072:5p4jNbXyIs7an1dYOwSrhwyAp1q98M/G2O8WNgooO+QZpPmgYJ5Fgbl96IrXUnDWee1HRCi+sJDiK3I4/fslPg==:Kx83yTGN7N8NFoqH/z/Ujn5tFs6SE/a0S9+c7bZEWXjoERDVLJFwfD1MQGmvn+rc2JWwSTQiQadkYtiEMwahAw==";
 
         req.setAttribute("ok",passwordHash.verify(password.toCharArray(),s));
 

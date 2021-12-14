@@ -5,18 +5,16 @@ import EE.errores.ApiError;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
-import jakarta.ws.rs.container.PreMatching;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
-import java.io.IOException;
 
 import java.time.LocalDateTime;
 
 
 @Provider
-@Filtered
+@Juan
 //@PreMatching
 public class ServerFilterJAX  implements ContainerRequestFilter {
 

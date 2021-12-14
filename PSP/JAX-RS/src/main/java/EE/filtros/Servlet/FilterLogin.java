@@ -16,13 +16,15 @@ public class FilterLogin implements Filter {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-// codigo para comprobar session usuario
+    // codigo para comprobar session usuario
 
         Usuario g = (Usuario) ((HttpServletRequest)req).getSession().getAttribute("user");
         if (g != null)
             chain.doFilter(req, resp);
         else
             req.getRequestDispatcher("/errorFiltro.html").forward(req,resp);
+
+
     }
 
     public void init(FilterConfig config) throws ServletException {

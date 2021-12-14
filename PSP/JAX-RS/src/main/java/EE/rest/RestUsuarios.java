@@ -2,11 +2,9 @@ package EE.rest;
 
 
 import EE.errores.ApiError;
-import EE.filtros.Filtered;
-import EE.filtros.Reader;
+import EE.filtros.Juan;
 import EE.filtros.Writer;
 import dao.modelo.Usuario;
-import dao.modelo.UsuarioGetDTO;
 import io.vavr.control.Either;
 import org.modelmapper.ModelMapper;
 import servicios.ServiciosUsuarios;
@@ -17,12 +15,13 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Path("/users")
+@Juan
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class RestUsuarios {
@@ -41,7 +40,8 @@ public class RestUsuarios {
     //@Context HttpServletRequest request;
 
     @GET
-    @Filtered
+    @Juan
+    @Writer
     @Path("/uno")
     public Response getUsuario(@QueryParam("id") String id,
                                @Context HttpServletRequest request) {

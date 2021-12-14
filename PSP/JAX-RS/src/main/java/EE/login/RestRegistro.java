@@ -27,10 +27,39 @@ public class RestRegistro {
         this.su = su;
     }
 
+
+    /*
+
+
+
+        usuarios (id,correo,h(pass),codActivacion,siActivo,fechaLimiteActivacion,idTipoUsuario)
+        tipoUsuario(id,String)
+
+        equipos(id, nombre)
+        jornadas(id, fecha)
+        partidos(idJornada,idEquipo,idEquipo,resultado) "120-56")
+
+
+
+
+     */
+
+
     @POST
     public Response addUsuario(Usuario user){
 
         Usuario s = su.addUser(user);
+
+        //hashear la pass
+
+        //array seguro
+
+
+
+
+        //mandar mail
+
+
         if (s !=null)
             return Response.status(Response.Status.CREATED).entity(s).build();
         else
