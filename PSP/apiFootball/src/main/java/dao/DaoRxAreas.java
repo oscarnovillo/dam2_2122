@@ -24,26 +24,8 @@ public class DaoRxAreas {
         AreasAPI areasAPI = retrofit.create(AreasAPI.class);
 
 
-        return areasAPI.loadAreas();
-//        Call<AreasRequest> call = areasAPI.loadAreas();
-//        try {
-//            Response<AreasRequest> response = areasAPI.loadAreas();
-//            if (response.isSuccessful())
-//            {
-//                AreasRequest changesList = response.body();
-//                resultado = Either.right(changesList.getAreas());
-//            }
-//            else
-//            {
-//                resultado = Either.left(response.errorBody().toString());
-//            }
-//        }
-//        catch (Exception e)
-//        {
-//            resultado= Either.left("Error de comunicacion");
-//        }
-//
-//        return resultado;
+        return Single.fromObservable(areasAPI.loadAreas());
+
     }
 
     public Either<String, List<Competition>> getCompetitions(Area area) {

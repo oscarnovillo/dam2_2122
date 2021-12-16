@@ -21,7 +21,7 @@ public class DaoAreas extends DaoGenerics {
         AreasAPI areasAPI = retrofit.create(AreasAPI.class);
 
 
-        return areasAPI.loadAreas();
+        return Single.fromObservable(areasAPI.loadAreas());
 //        Call<AreasRequest> call = areasAPI.loadAreas();
 //        try {
 //            Response<AreasRequest> response = areasAPI.loadAreas();
@@ -47,14 +47,14 @@ public class DaoAreas extends DaoGenerics {
 
 
 
-    public Either<String, CompetitionsRequest> getCompetitions(Area area){
+    public Either<String, List<Competition>> getCompetitions(Area area){
         Either<String, List<Competition>> resultado = null;
 
         Retrofit retrofit = ConfigurationSingleton_OkHttpClient.getInstance();
 
         AreasAPI areasAPI = retrofit.create(AreasAPI.class);
 
-        return this.safeApicall(areasAPI.loadCompetitions(area.getId()));
+        return this.safeApicall(areasAPI.loadCompetitions(area.getId())).map(CompetitionsRequest::getCompetitions);
 //        try {
 //            Response<CompetitionsRequest> response = call.execute();
 //            if (response.isSuccessful())

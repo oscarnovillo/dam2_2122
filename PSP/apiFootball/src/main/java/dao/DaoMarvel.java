@@ -38,6 +38,7 @@ public class DaoMarvel {
             if (response.isSuccessful()) {
                 resultado = response.body().getData().getCharacters();
             } else {
+
                 Gson g = new Gson();
                 ApiError apierror = g.fromJson(response.errorBody().string(), ApiError.class);
 

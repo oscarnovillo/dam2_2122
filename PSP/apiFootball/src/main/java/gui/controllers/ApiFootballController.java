@@ -29,8 +29,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ApiFootballController implements Initializable {
-    public ListView<Character> listAreas;
-    public ListView<Competition> listCompetitions;
+    public ListView listAreas;
+    public ListView listCompetitions;
     public ListView listTeams;
     public TextField texto;
     private Alert alert;
@@ -70,7 +70,7 @@ public class ApiFootballController implements Initializable {
             @Override
             protected List<Character> call() throws Exception {
                 ServiciosMarvel sm = new ServiciosMarvel();
-                Thread.sleep(5000);
+               // Thread.sleep(5000);
                 return sm.getCharacteres();
             }
         };
@@ -256,19 +256,19 @@ public class ApiFootballController implements Initializable {
 ////        executorService.submit(tarea);
 //        this.principalController.getPantallaPrincipal().setCursor(Cursor.WAIT);
 
-        DaoUsuarios dao = new DaoUsuarios();
-        Single<Usuario> s = Single.fromObservable(dao.updateUsuario(new Usuario(null, "nombre", LocalDateTime.now())))
-                .subscribeOn(Schedulers.io())
-                .observeOn(JavaFxScheduler.platform())
-                .doFinally(() -> this.principalController
-                        .getPantallaPrincipal().setCursor(Cursor.DEFAULT));
-
-        s.subscribe(System.out::println,
-                throwable -> {
-                    alert.setContentText(throwable.getMessage());
-                    alert.showAndWait();
-                });
-        this.principalController.getPantallaPrincipal().setCursor(Cursor.WAIT);
+//        DaoUsuarios dao = new DaoUsuarios();
+//        Single<Usuario> s = Single.fromObservable(dao.updateUsuario(new Usuario(null, "nombre", LocalDateTime.now())))
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(JavaFxScheduler.platform())
+//                .doFinally(() -> this.principalController
+//                        .getPantallaPrincipal().setCursor(Cursor.DEFAULT));
+//
+//        s.subscribe(System.out::println,
+//                throwable -> {
+//                    alert.setContentText(throwable.getMessage());
+//                    alert.showAndWait();
+//                });
+//        this.principalController.getPantallaPrincipal().setCursor(Cursor.WAIT);
 
 //        var tarea = new Task<Either<String, List<Team>>>() {
 //            public StringProperty test = new SimpleStringProperty();

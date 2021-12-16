@@ -55,6 +55,7 @@ public class ConfigurationSingleton_OkHttpClient {
                                 Request original = chain.request();
 
                                 Request.Builder builder1 = original.newBuilder()
+                                        .header("X-Auth-Token", "2deee83e549c4a6e9709871d0fd58a0a")
                                         .url(original.url().newBuilder()
                                                 .addQueryParameter("ts","1")
                                                 .addQueryParameter("apikey","a26d34b6ea64ce618360835be5888f91")

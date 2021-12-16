@@ -49,7 +49,6 @@ public class PrincipalControllerMio implements Initializable {
             pantalla_login = fxmlLoader.load();
             controller_login = fxmlLoader.getController();
             controller_login.setPrincipalController(this);
-            controller_login.clickEntrar();
         }
         pantallaPrincipal.setCenter(pantalla_login);
     }
