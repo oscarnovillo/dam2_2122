@@ -5,6 +5,7 @@ import EE.errores.ApiError;
 import EE.filtros.Juan;
 import EE.filtros.Writer;
 import dao.modelo.Usuario;
+import dao.modelo.UsuarioEntity;
 import io.vavr.control.Either;
 import org.modelmapper.ModelMapper;
 import servicios.ServiciosUsuarios;
@@ -33,6 +34,9 @@ public class RestUsuarios {
     public RestUsuarios(ServiciosUsuarios su, ModelMapper mapper) {
         this.su = su;
         this.mapper = mapper;
+    }
+
+    public RestUsuarios() {
     }
 
     //para todos los metodos
@@ -89,6 +93,13 @@ public class RestUsuarios {
     public List<Usuario> getAllUsuario() {
         return su.dameTodos();
     }
+
+    @GET
+    @Path("/hib")
+    public List<UsuarioEntity> getAllUsuarioHibernate() {
+        return su.dameTodosHibernate();
+    }
+
 
     @POST
     public Usuario addUsuario(Usuario user) {

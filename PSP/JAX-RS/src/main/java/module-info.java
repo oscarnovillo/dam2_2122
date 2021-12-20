@@ -13,7 +13,12 @@ module JAX.RS {
 
     requires com.zaxxer.hikari;
     requires spring.jdbc;
-//    requires org.hibernate.orm.core;
+
+    requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.datatype.jsr310;
+    requires org.hibernate.orm.core;
+    //requires jakarta.persistence;
+   // requires org.hibernate.orm.core;
 
 
 }

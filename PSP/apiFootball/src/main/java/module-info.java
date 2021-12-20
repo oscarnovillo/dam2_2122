@@ -13,6 +13,7 @@ module apiFootball {
 
     requires retrofit2.adapter.rxjava3;
     requires retrofit2.converter.gson;
+    requires retrofit2.converter.jackson;
     requires retrofit2.converter.scalars;
     requires com.google.gson;
     requires jakarta.json.bind;
@@ -20,6 +21,8 @@ module apiFootball {
     requires io.reactivex.rxjava3;
     requires org.apache.logging.log4j;
     requires org.pdfsam.rxjavafx;
+    requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.datatype.jsr310;
 
 
     //requires javafx.swing;
@@ -31,6 +34,7 @@ module apiFootball {
 //    requires gson;
 //    requires java.sql;
 
+    exports dao.modelo.jax;
     //needed for JavaFX
     opens gui.controllers to javafx.fxml;
 

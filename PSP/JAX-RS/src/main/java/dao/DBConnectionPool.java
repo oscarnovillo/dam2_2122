@@ -4,6 +4,7 @@ package dao;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import config.Configuration;
+import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -93,7 +94,9 @@ public class DBConnectionPool {
     }
 
 
+    @PreDestroy
     public void closePool() {
+        System.out.println("pre Destroy");
         ((HikariDataSource) hirakiDatasource).close();
     }
 

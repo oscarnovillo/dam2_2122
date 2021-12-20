@@ -9,12 +9,13 @@ import jakarta.servlet.annotation.WebListener;
 @WebListener()
 public class ListenerConfig implements ServletContextListener {
     Configuration config;
+
     DBConnectionPool pool;
 
     @Inject
     public ListenerConfig(Configuration config) {
         this.config = config;
-        //this.pool = pool;
+       // this.pool = pool;
     }
 
     // Public constructor is required by servlet spec
@@ -38,7 +39,7 @@ public class ListenerConfig implements ServletContextListener {
          (the Web application) is undeployed or
          Application Server shuts down.
       */
-        pool.closePool();
+       // pool.closePool();
 
 
     }

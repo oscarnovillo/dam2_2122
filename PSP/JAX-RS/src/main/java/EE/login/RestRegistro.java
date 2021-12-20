@@ -27,8 +27,10 @@ public class RestRegistro {
         this.su = su;
     }
 
+    public RestRegistro() {
+    }
 
-    /*
+/*
 
 
 

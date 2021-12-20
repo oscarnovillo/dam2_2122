@@ -4,10 +4,11 @@ import EE.errores.ApiError;
 import dao.modelo.Usuario;
 import dao.modelo.UsuarioEntity;
 import io.vavr.control.Either;
+import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
-//import org.hibernate.Session;
+import org.hibernate.Session;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -34,12 +35,12 @@ public class DaoUsuario {
 
 
     private DBConnectionPool dbConnection;
-//    private Session session;
+    private Session session;
 
 
     @Inject
-    public DaoUsuario(DBConnectionPool dbConnection) {
-//        this.session = session;
+    public DaoUsuario(DBConnectionPool dbConnection,Session session) {
+        this.session = session;
         this.dbConnection = dbConnection;
     }
 
@@ -75,14 +76,31 @@ public class DaoUsuario {
                 BeanPropertyRowMapper.newInstance(Usuario.class));
     }
 
+    public List<UsuarioEntity> dameTodosHibernate() {
+        List<UsuarioEntity> a = session.createQuery("from UsuarioEntity ",UsuarioEntity.class).getResultList();
+
+        session.close();
+        // select devuelve LIST
+        return a;
+    }
+
+
+//    @PreDestroy
+//    public void cerrarSession()
+//    {
+//        session.close();
+//    }
+
+
     public Usuario addUser(Usuario user) {
 
         UsuarioEntity userE = new UsuarioEntity();
-        userE.setNombre(user.getName());
-        userE.setPrecio(100.0);
-//        session.beginTransaction();
-//        session.save(userE);
-//        session.getTransaction().commit();
+        userE.setFecha(LocalDateTime.now());
+        userE.setName(user.getName());
+        userE.setPassword(user.getPassword());
+        session.beginTransaction();
+        session.save(userE);
+        session.getTransaction().commit();
 
         return user;
     }

@@ -4,6 +4,7 @@ import EE.errores.ApiError;
 import EE.errores.OtraException;
 import dao.DaoUsuario;
 import dao.modelo.Usuario;
+import dao.modelo.UsuarioEntity;
 import io.vavr.control.Either;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -62,5 +63,9 @@ public class ServiciosUsuarios {
         if (!error.toString().isEmpty())
             throw new OtraException(error.toString());
         return dao.addUser(u);
+    }
+
+    public List<UsuarioEntity> dameTodosHibernate() {
+        return dao.dameTodosHibernate();
     }
 }

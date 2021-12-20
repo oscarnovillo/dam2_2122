@@ -7,15 +7,18 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 //import org.hibernate.annotations.NaturalId;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
-@Table(name = "usuarios_hibernate")
+@Table(name = "usuarios")
 public class UsuarioEntity {
 
 
@@ -24,12 +27,16 @@ public class UsuarioEntity {
     private int id;
 
     @Basic
-    @Column(name = "nombre")
-    private String nombre;
+    @Column
+    private String name;
 
     @Basic
-    @Column(name = "precio")
-    private Double precio;
+    @Column
+    private String password;
+
+    @Basic
+    @Column
+    private LocalDateTime fecha;
 
 
 }
