@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Log4j2
-@ApplicationScoped
+
 public class DBConnection {
 
     DBConnectionPool pool;

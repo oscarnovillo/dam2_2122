@@ -3,11 +3,11 @@ package dao;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import config.Configuration;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,19 +15,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author oscar
  */
-@ApplicationScoped
+@Singleton
 public class DBConnectionPool {
 
     private DataSource hirakiDatasource = null;
 
+    private Configuration config;
 
-    public DBConnectionPool() {
+    @Inject
+    public DBConnectionPool(Configuration config) {
 
+        this.config = config;
         hirakiDatasource = getDataSourceHikari();
     }
+
+
 
     public Connection getConnection() throws Exception {
 
@@ -42,10 +46,10 @@ public class DBConnectionPool {
     private DataSource getDataSourceHikari() {
         HikariConfig config = new HikariConfig();
 
-        config.setJdbcUrl("jdbc:mysql://dam2.mysql.iesquevedo.es:3335/oscar?serverTimeZone=GMT+1&useSSL=false");
-        config.setUsername("root");
-        config.setPassword("quevedo2dam");
-        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        config.setJdbcUrl(this.config.getRuta());
+        config.setUsername(this.config.getUser());
+        config.setPassword(this.config.getPassword());
+        config.setDriverClassName(this.config.getDriver());
         config.setMaximumPoolSize(1);
 
         config.addDataSourceProperty("cachePrepStmts", "true");
@@ -89,9 +93,8 @@ public class DBConnectionPool {
     }
 
 
-    public void closePool()
-    {
-        ((HikariDataSource)hirakiDatasource).close();
+    public void closePool() {
+        ((HikariDataSource) hirakiDatasource).close();
     }
 
 }

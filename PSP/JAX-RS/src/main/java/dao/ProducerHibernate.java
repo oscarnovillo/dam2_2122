@@ -3,6 +3,7 @@ package dao;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Singleton;
 //import org.hibernate.HibernateException;
 //import org.hibernate.Session;
 //import org.hibernate.SessionFactory;
@@ -15,7 +16,7 @@ public class ProducerHibernate {
 //
 //
 //    @Produces
-//    @ApplicationScoped
+//    @Singleton
 //    public SessionFactory getHibernateSessionFactory( config.Configuration configurationApp) {
 //        try {
 //            Configuration configuration = new Configuration();

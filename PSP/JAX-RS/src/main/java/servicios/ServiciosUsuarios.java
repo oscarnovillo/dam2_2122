@@ -6,17 +6,26 @@ import dao.DaoUsuario;
 import dao.modelo.Usuario;
 import io.vavr.control.Either;
 
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.Validator;
 import java.util.List;
 
+
 public class ServiciosUsuarios {
 
-    @Inject
+
     private Validator validator;
 
-    @Inject
+
     private DaoUsuario dao;
+
+
+    @Inject
+    public ServiciosUsuarios(Validator validator, DaoUsuario dao) {
+        this.validator = validator;
+        this.dao = dao;
+    }
 
     public Either<ApiError, Usuario> dameUno(String id)
     {

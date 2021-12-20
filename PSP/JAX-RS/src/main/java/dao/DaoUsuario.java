@@ -4,8 +4,10 @@ import EE.errores.ApiError;
 import dao.modelo.Usuario;
 import dao.modelo.UsuarioEntity;
 import io.vavr.control.Either;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
+//import org.hibernate.Session;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -20,6 +22,7 @@ import java.util.List;
  * @author
  *
  */
+
 public class DaoUsuario {
 
     private static List<Usuario> usuarios = new ArrayList<>();

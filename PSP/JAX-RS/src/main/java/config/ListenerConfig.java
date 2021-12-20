@@ -12,9 +12,9 @@ public class ListenerConfig implements ServletContextListener {
     DBConnectionPool pool;
 
     @Inject
-    public ListenerConfig(Configuration config, DBConnectionPool pool) {
+    public ListenerConfig(Configuration config) {
         this.config = config;
-        this.pool = pool;
+        //this.pool = pool;
     }
 
     // Public constructor is required by servlet spec
