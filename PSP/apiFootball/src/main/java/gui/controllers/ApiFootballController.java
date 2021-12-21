@@ -320,7 +320,7 @@ public class ApiFootballController implements Initializable {
 
     public void delUsuario(ActionEvent actionEvent) {
 
-        Single<Either<ApiError, Usuario>> s = Single.fromCallable(() ->
+        Single<Either<String, Usuario>> s = Single.fromCallable(() ->
                         {
                             DaoUsuarios dao = new DaoUsuarios();
                             return dao.delUsuario(new Usuario("0", "nombre", LocalDateTime.now()));
@@ -335,13 +335,14 @@ public class ApiFootballController implements Initializable {
         s.subscribe(result ->
                         result.peek(System.out::println)
                                 .peekLeft(error -> {
-                                    alert.setContentText(error.getMessage());
+                                    alert.setContentText(error);
                                     alert.showAndWait();
                                 }),
                 throwable -> {
                     alert.setContentText(throwable.getMessage());
                     alert.showAndWait();
                 });
+
 
         this.principalController
                 .getPantallaPrincipal().setCursor(Cursor.WAIT);

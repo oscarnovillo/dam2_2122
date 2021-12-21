@@ -16,7 +16,7 @@ import retrofit2.http.*;
 public interface AreasAPI {
 
   @GET("areas/")
-  Observable<AreasRequest> loadAreas();
+  Single<AreasRequest> loadAreas();
 
   @GET("areas/{id}")
   Call<Area> loadOneArea(@Path("id") int id);

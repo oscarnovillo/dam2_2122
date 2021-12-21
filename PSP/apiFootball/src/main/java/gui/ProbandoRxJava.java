@@ -15,13 +15,10 @@ public class ProbandoRxJava {
     public static void main(String[] args) throws InterruptedException {
 
         ServiciosMarvel sm = new ServiciosMarvel();
-        // Thread.sleep(5000);
         System.out.println(sm.getCharacteres());
-
 
         DaoUsuarios dao = new DaoUsuarios();
         Disposable d = dao.updateUsuario(new Usuario(null, "nombre", LocalDateTime.now()))
-                .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .doFinally(() -> System.out.println("FIN"))
                 .subscribe(lists -> lists
@@ -30,6 +27,8 @@ public class ProbandoRxJava {
                         throwable -> {
                             System.out.println("Error" + throwable.getMessage());
                         });
+
+
         while(!d.isDisposed()){
             Thread.sleep(100);
         }

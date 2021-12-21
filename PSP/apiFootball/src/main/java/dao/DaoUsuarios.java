@@ -32,8 +32,8 @@ public class DaoUsuarios extends DaoGenerics{
 
         AreasAPI areasAPI = retrofit.create(AreasAPI.class);
 
-        return this.safeSingleApicall(Single.fromObservable(areasAPI.loadAreas()))
-                .map(areasRequests -> areasRequests.bimap(s -> s, AreasRequest::getAreas));
+        return this.safeSingleApicall(areasAPI.loadAreas())
+                .map(either -> either.map(AreasRequest::getAreas));
 
 
 
@@ -68,36 +68,38 @@ public class DaoUsuarios extends DaoGenerics{
 //        return resultado;
     }
 
-    public Either<ApiError, Usuario> delUsuario(Usuario usu) {
+    public Either<String, Usuario> delUsuario(Usuario usu) {
         Either<ApiError, Usuario> resultado = null;
 
         Retrofit retrofit = ConfigurationSingleton_OkHttpClient.getInstance();
 
         AreasAPI areasAPI = retrofit.create(AreasAPI.class);
 
-        Call<Usuario> call = areasAPI.delUsuario(usu);
-        try {
-            Response<Usuario> response = call.execute();
-            if (response.isSuccessful()) {
-                Usuario u = response.body();
-                resultado = Either.right(u);
-            } else {
-                String respuesta = response.errorBody().string();
-                AtomicReference<ApiError> api = new AtomicReference<>();
-                if (response.errorBody().contentType().equals(MediaType.get("application/json"))) {
-                    Jsonb jsonb = JsonbBuilder.create();
-                    Try.of(() -> jsonb.fromJson(respuesta, ApiError.class))
-                            .onSuccess(apiError -> api.set(apiError))
-                            .onFailure(throwable -> api.set(ApiError.builder().message(throwable.getMessage() + "Error de parseo de la respuesta").build()));
-                } else
-                    api.set(ApiError.builder().message("Error de comunicacion").build());
-                resultado = Either.left(api.get());
-            }
-        } catch (Exception e) {
 
-            resultado = Either.left(ApiError.builder().message(e.getMessage()).build());
-        }
-
-        return resultado;
+        return safeApicall(areasAPI.delUsuario(usu));
+//        Call<Usuario> call = areasAPI.delUsuario(usu);
+//        try {
+//            Response<Usuario> response = call.execute();
+//            if (response.isSuccessful()) {
+//                Usuario u = response.body();
+//                resultado = Either.right(u);
+//            } else {
+//                String respuesta = response.errorBody().string();
+//                AtomicReference<ApiError> api = new AtomicReference<>();
+//                if (response.errorBody().contentType().equals(MediaType.get("application/json"))) {
+//                    Jsonb jsonb = JsonbBuilder.create();
+//                    Try.of(() -> jsonb.fromJson(respuesta, ApiError.class))
+//                            .onSuccess(apiError -> api.set(apiError))
+//                            .onFailure(throwable -> api.set(ApiError.builder().message(throwable.getMessage() + "Error de parseo de la respuesta").build()));
+//                } else
+//                    api.set(ApiError.builder().message("Error de comunicacion").build());
+//                resultado = Either.left(api.get());
+//            }
+//        } catch (Exception e) {
+//
+//            resultado = Either.left(ApiError.builder().message(e.getMessage()).build());
+//        }
+//
+//        return resultado;
     }
 }

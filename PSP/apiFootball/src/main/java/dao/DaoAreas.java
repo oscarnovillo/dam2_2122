@@ -21,7 +21,7 @@ public class DaoAreas extends DaoGenerics {
         AreasAPI areasAPI = retrofit.create(AreasAPI.class);
 
 
-        return Single.fromObservable(areasAPI.loadAreas());
+        return areasAPI.loadAreas();
 //        Call<AreasRequest> call = areasAPI.loadAreas();
 //        try {
 //            Response<AreasRequest> response = areasAPI.loadAreas();

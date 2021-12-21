@@ -24,7 +24,7 @@ public class DaoRxAreas {
         AreasAPI areasAPI = retrofit.create(AreasAPI.class);
 
 
-        return Single.fromObservable(areasAPI.loadAreas());
+        return areasAPI.loadAreas();
 
     }
 
