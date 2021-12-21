@@ -96,8 +96,7 @@ public class DBConnectionPool {
 
     @PreDestroy
     public void closePool() {
-        System.out.println("pre Destroy");
-        ((HikariDataSource) hirakiDatasource).close();
+       ((HikariDataSource) hirakiDatasource).close();
     }
 
 }

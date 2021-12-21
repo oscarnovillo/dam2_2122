@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.WebListener;
 public class ListenerConfig implements ServletContextListener {
     Configuration config;
 
-    DBConnectionPool pool;
+    //DBConnectionPool pool;
 
     @Inject
     public ListenerConfig(Configuration config) {
@@ -32,6 +32,7 @@ public class ListenerConfig implements ServletContextListener {
       */
 
         config.cargar(sce.getServletContext().getResourceAsStream("/WEB-INF/config/config.yaml"));
+
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

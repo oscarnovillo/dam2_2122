@@ -4,10 +4,7 @@ package EE.login;
 import EE.errores.ApiError;
 import dao.modelo.Usuario;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.modelmapper.ModelMapper;
@@ -34,7 +31,7 @@ public class RestRegistro {
 
 
 
-        usuarios (id,correo,h(pass),codActivacion,siActivo,fechaLimiteActivacion,idTipoUsuario)
+        usuarios (id,correo,h(pass),codActivacion,codCambioPass,siActivo,fechaLimite,idTipoUsuario)
         tipoUsuario(id,String)
 
         equipos(id, nombre)
@@ -73,5 +70,29 @@ public class RestRegistro {
                     .build();
     }
 
+
+    @PUT
+    @Path("cambiarPass")
+    public Response actualizarContraseñaUsuario(Usuario u) {
+
+
+        // generas codigoCambioPass nuevo.
+
+        // actualziar codigoCambioPass y fecha limite
+
+
+
+        //main mail para cambiode contraseña
+
+
+        return null;
+    }
+
+    @PUT
+    public Response actualizarUsuario(Usuario user) {
+
+
+        return null;
+    }
 
 }
