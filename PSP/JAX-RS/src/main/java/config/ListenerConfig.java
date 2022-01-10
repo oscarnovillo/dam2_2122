@@ -10,12 +10,13 @@ import jakarta.servlet.annotation.WebListener;
 public class ListenerConfig implements ServletContextListener {
     Configuration config;
 
-    //DBConnectionPool pool;
+    DBConnectionPool pool;
 
     @Inject
-    public ListenerConfig(Configuration config) {
+    public ListenerConfig(Configuration config,DBConnectionPool pool) {
         this.config = config;
-       // this.pool = pool;
+        this.pool = pool;
+
     }
 
     // Public constructor is required by servlet spec
@@ -32,7 +33,7 @@ public class ListenerConfig implements ServletContextListener {
       */
 
         config.cargar(sce.getServletContext().getResourceAsStream("/WEB-INF/config/config.yaml"));
-
+        pool.cargarPool();
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
@@ -40,7 +41,7 @@ public class ListenerConfig implements ServletContextListener {
          (the Web application) is undeployed or
          Application Server shuts down.
       */
-       // pool.closePool();
+       pool.closePool();
 
 
     }

@@ -45,7 +45,7 @@ public class PrincipalControllerMio implements Initializable {
     @SneakyThrows
     public void cargarLogin() {
         if (pantalla_login == null) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/apifootball.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader( getClass().getResource("/fxml/apifootball.fxml"));
             pantalla_login = fxmlLoader.load();
             controller_login = fxmlLoader.getController();
             controller_login.setPrincipalController(this);

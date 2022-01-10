@@ -8,6 +8,8 @@ import com.example.recyclerviewenhanced.data.repositories.DogRepository
 import com.example.recyclerviewenhanced.domain.Persona
 import com.example.recyclerviewenhanced.utils.NetworkResultt
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
@@ -23,6 +25,9 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
+
+    private val _sharedFlow = MutableSharedFlow<String>()
+    val sharedFlow = _sharedFlow.asSharedFlow()
 
 
     init {
@@ -81,9 +86,9 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
     fun deletePersona(persona: List<Persona>) {
 
         viewModelScope.launch {
-
-            listaPersonas.removeAll(persona)
-            _personas.value = listaPersonas.toList()
+            _sharedFlow.emit("error")
+//            listaPersonas.removeAll(persona)
+//            _personas.value = listaPersonas.toList()
 //            _personas.value = getPersonas.invoke()
 
         }
@@ -93,9 +98,9 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
     fun deletePersona(persona: Persona) {
 
         viewModelScope.launch {
-
-            listaPersonas.remove(persona)
-            _personas.value = listaPersonas.toList()
+            _sharedFlow.emit("error")
+//            listaPersonas.remove(persona)
+//            _personas.value = listaPersonas.toList()
 //            _personas.value = getPersonas.invoke()
 
         }

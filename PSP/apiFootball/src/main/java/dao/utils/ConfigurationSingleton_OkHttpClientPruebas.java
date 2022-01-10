@@ -6,9 +6,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.gson.*;
 import config.ConfigurationSingleton_Client;
 import lombok.extern.log4j.Log4j2;
+import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
+import okhttp3.Response;
+import okhttp3.internal.http.HttpHeaders;
 import retrofit2.Retrofit;
 
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
@@ -66,8 +69,14 @@ public class ConfigurationSingleton_OkHttpClientPruebas {
                                                 .addQueryParameter("apikey","a26d34b6ea64ce618360835be5888f91")
                                                 .addQueryParameter("hash","073e520a55d710ef1b77df866349e689")
                                                 .build());
+
+
                                 Request request = builder1.build();
-                                return chain.proceed(request);
+                                request.newBuilder().header("Authorization", Credentials.basic("user","password")).build();
+                                Response response = chain.proceed(request);
+
+
+                                return response;
                             }
                     )
                     .cookieJar(new JavaNetCookieJar(cookieManager))

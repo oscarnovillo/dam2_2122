@@ -29,10 +29,13 @@ public class DBConnectionPool {
     public DBConnectionPool(Configuration config) {
 
         this.config = config;
-        hirakiDatasource = getDataSourceHikari();
+
     }
 
-
+    public void cargarPool()
+    {
+        hirakiDatasource = getDataSourceHikari();
+    }
 
     public Connection getConnection() throws Exception {
 
