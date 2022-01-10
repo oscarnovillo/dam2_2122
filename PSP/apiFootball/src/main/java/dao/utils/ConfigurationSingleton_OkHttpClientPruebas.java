@@ -75,7 +75,6 @@ public class ConfigurationSingleton_OkHttpClientPruebas {
                                 request.newBuilder().header("Authorization", Credentials.basic("user","password")).build();
                                 Response response = chain.proceed(request);
 
-
                                 return response;
                             }
                     )
