@@ -31,7 +31,12 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
 
 
     init {
+        //listaPersonas.addAll((1..20).map{Persona(it,"nombre$it", LocalDate.now(),null)})
 
+        //(1..20).map(transform = {Persona(it,"nombre$it", LocalDate.now(),null)})
+//        (1..20).forEach {
+//            listaPersonas.add(Persona(it,"nombre$it", LocalDate.now(),null))
+//        }
         listaPersonas.addAll(
             listOf<Persona>(
                 Persona(1, "nombre", LocalDate.now(), null),
@@ -68,7 +73,7 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
             when (result) {
                 is NetworkResultt.Error -> _error.value = result.message ?: ""
                 is NetworkResultt.Loading -> TODO()
-                is NetworkResultt.Success -> listaPersonas[0].nombre = result.data?.message ?: ""
+                is NetworkResultt.Success -> listaPersonas[0].nombre = result.data?.nombre ?: ""
             }
 
             result = dogRepository.getDog()
@@ -76,7 +81,7 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
             when (result) {
                 is NetworkResultt.Error -> _error.value = result.message ?: ""
                 is NetworkResultt.Loading -> TODO()
-                is NetworkResultt.Success -> listaPersonas[1].nombre = result.data?.message ?: ""
+                is NetworkResultt.Success -> listaPersonas[1].nombre = result.data?.nombre ?: ""
             }
 
 
