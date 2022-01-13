@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/blankFragment"
         android:name="com.example.navigation.BlankFragment"
-        android:label="fragment_blank"
+        android:label="blank Fragment"
         tools:layout="@layout/fragment_blank">
         <action
             android:id="@+id/action_blankFragment_to_blankFragment22"
@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/blankFragment2"
         android:name="com.example.navigation.BlankFragment2"
-        android:label="blank_fragment"
+        android:label="blank fragment 2"
         tools:layout="@layout/blank_fragment">
         <argument
             android:name="persona"
@@ -45,6 +45,6 @@
     <fragment
         android:id="@+id/blankFragment3"
         android:name="com.example.navigation.BlankFragment3"
-        android:label="fragment_blank2"
+        android:label="blank fragment 3"
         tools:layout="@layout/fragment_blank2" />
 </navigation>

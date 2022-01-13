@@ -3,16 +3,14 @@ package com.example.navigation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.example.navigation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -31,17 +29,32 @@ class MainActivity : AppCompatActivity() {
 
       //  navController = Navigation.findNavController(this,R.id.fragmentContainerView)
         setSupportActionBar(binding.topAppBar)
+//        val appBarConfiguration = AppBarConfiguration
+//            .Builder()
+//            .setFallbackOnNavigateUpListener {
+//                onBackPressed()
+//                true
+//            }.build()
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.blankFragment,R.id.blankFragment2
             ), binding.drawerLayout
-        )
-        NavigationUI.setupActionBarWithNavController(this,navController, appBarConfiguration)
+        ) {
+            onBackPressed()
+            true
+        }
+
+        //NavigationUI.setupActionBarWithNavController(this,navController, appBarConfiguration)
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
 
-        configAppBar()
+       // configAppBar()
     }
-
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration)
+    }
 
 //    override fun onSupportNavigateUp(): Boolean {
 //        return navController.navigateUp()
@@ -53,13 +66,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configAppBar() {
-        binding.topAppBar.setNavigationOnClickListener {
-             binding.drawerLayout.open()
-        }
+//        binding.topAppBar.setNavigationOnClickListener {
+//             binding.drawerLayout.open()
+//        }
 
         //binding.topAppBar.setNavigationIcon(R.drawable.ic_launcher_foreground)
-        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
+//        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+//            when (menuItem.itemId) {
+//                R.id.blankFragment,R.id.blankFragment2 -> {
+//                    // Handle favorite icon press
+//                    menuItem.onNavDestinationSelected(navController)
+//                    //navController.navigate(R.id.action_blankFragment_to_blankFragment22)
+//                    //findNavController().navigate()
+//                    true
+//                }
+//                R.id.search -> {
+//                    // Handle more item (inside overflow menu) press
+//                    true
+//                }
+//                else -> false
+//            }
+//
+//
+//        }
+    }
+
+    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
+        when (menuItem.itemId) {
                 R.id.blankFragment,R.id.blankFragment2 -> {
                     // Handle favorite icon press
                     menuItem.onNavDestinationSelected(navController)
@@ -73,6 +106,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
-        }
+        return super.onOptionsItemSelected(menuItem)
     }
+
 }

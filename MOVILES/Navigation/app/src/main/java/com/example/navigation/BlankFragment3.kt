@@ -1,10 +1,10 @@
 package com.example.navigation
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.Button
+import androidx.appcompat.view.ActionMode
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,12 +21,72 @@ class BlankFragment3 : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private val callback by lazy {
+        configContextBar()
+    }
+
+    private lateinit var actionMode: ActionMode
+
+
+
+    private fun configContextBar() =
+        object : ActionMode.Callback {
+
+            override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                requireActivity().menuInflater.inflate(R.menu.context_bar, menu)
+                return true
+            }
+
+            override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                return false
+            }
+
+            override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+                return when (item?.itemId) {
+                    R.id.favorite -> {
+                        // Handle share icon press
+                        true
+                    }
+                    R.id.search -> {
+                        // Handle delete icon press
+                        true
+                    }
+                    R.id.more -> {
+
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+            override fun onDestroyActionMode(mode: ActionMode?) {
+
+            }
+
+        }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val button = view.findViewById<Button>(R.id.button2)
+        button.setOnClickListener {
+            (activity as MainActivity).startSupportActionMode(callback)?.let {
+            actionMode = it;
+            it.title = "1 selected"
+
+            }
+        }
+
     }
 
     override fun onCreateView(
@@ -34,7 +94,10 @@ class BlankFragment3 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank2, container, false)
+        val view =  inflater.inflate(R.layout.fragment_blank2, container, false)
+
+
+        return view;
     }
 
     companion object {
