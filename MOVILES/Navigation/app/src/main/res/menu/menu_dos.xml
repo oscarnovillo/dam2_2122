@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/nuevo"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/ic_baseline_accessibility_24"
         android:title="favortio"
         android:contentDescription="descripcion"
         app:showAsAction="ifRoom" />

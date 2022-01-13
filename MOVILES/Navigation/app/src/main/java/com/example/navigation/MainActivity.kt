@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.topAppBar)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.blankFragment
+                R.id.blankFragment,R.id.blankFragment2
             ), binding.drawerLayout
         )
         NavigationUI.setupActionBarWithNavController(this,navController, appBarConfiguration)

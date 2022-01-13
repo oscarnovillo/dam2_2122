@@ -7,6 +7,7 @@ import EE.filtros.Writer;
 import dao.modelo.Usuario;
 import dao.modelo.UsuarioEntity;
 import io.vavr.control.Either;
+import jakarta.annotation.security.RolesAllowed;
 import org.modelmapper.ModelMapper;
 import servicios.ServiciosUsuarios;
 
@@ -43,7 +44,7 @@ public class RestUsuarios {
     //@Context HttpServletRequest request;
 
     @GET
-    @Juan
+    //@Juan
     @Writer
     @Path("/uno")
     public Response getUsuario(@QueryParam("id") String id,
@@ -73,6 +74,7 @@ public class RestUsuarios {
 
     @GET
     @Writer
+    @RolesAllowed("ADMIN")
     @Path("/{id}")
     public Response getUnUsuario(@PathParam("id") String id,
                                 @HeaderParam("kk") String head) {
@@ -90,6 +92,7 @@ public class RestUsuarios {
     }
 
     @GET
+    //@Juan
     public List<Usuario> getAllUsuario() {
         return su.dameTodos();
     }

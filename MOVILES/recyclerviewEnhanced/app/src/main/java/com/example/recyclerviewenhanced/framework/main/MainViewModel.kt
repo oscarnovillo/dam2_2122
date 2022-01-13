@@ -8,6 +8,8 @@ import com.example.recyclerviewenhanced.data.repositories.DogRepository
 import com.example.recyclerviewenhanced.domain.Persona
 import com.example.recyclerviewenhanced.utils.NetworkResultt
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
@@ -24,14 +26,38 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
 
+    private val _sharedFlow = MutableSharedFlow<String>()
+    val sharedFlow = _sharedFlow.asSharedFlow()
+
 
     init {
+        //listaPersonas.addAll((1..20).map{Persona(it,"nombre$it", LocalDate.now(),null)})
 
+        //(1..20).map(transform = {Persona(it,"nombre$it", LocalDate.now(),null)})
+//        (1..20).forEach {
+//            listaPersonas.add(Persona(it,"nombre$it", LocalDate.now(),null))
+//        }
         listaPersonas.addAll(
             listOf<Persona>(
                 Persona(1, "nombre", LocalDate.now(), null),
                 Persona(2, "nombre1", LocalDate.now(), null),
                 Persona(3, "nombre2", LocalDate.now(), null),
+                Persona(4, "nombre3", LocalDate.now(), null),
+                Persona(5, "nombre41", LocalDate.now(), null),
+                Persona(6, "nombre52", LocalDate.now(), null),
+                Persona(7, "nombre6", LocalDate.now(), null),
+                Persona(8, "nombre71", LocalDate.now(), null),
+                Persona(9, "nombre82", LocalDate.now(), null),
+                Persona(10, "nombre9", LocalDate.now(), null),
+                Persona(21, "nombre91", LocalDate.now(), null),
+                Persona(31, "nombre92", LocalDate.now(), null),
+                Persona(11, "nombre76", LocalDate.now(), null),
+                Persona(21, "nombre134", LocalDate.now(), null),
+                Persona(31, "nombre24545", LocalDate.now(), null),
+                Persona(131, "1nombre92", LocalDate.now(), null),
+                Persona(111, "1nombre76", LocalDate.now(), null),
+                Persona(121, "1nombre134", LocalDate.now(), null),
+                Persona(131, "1nombre24545", LocalDate.now(), null),
             )
         )
 
@@ -47,7 +73,7 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
             when (result) {
                 is NetworkResultt.Error -> _error.value = result.message ?: ""
                 is NetworkResultt.Loading -> TODO()
-                is NetworkResultt.Success -> listaPersonas[0].nombre = result.data?.message ?: ""
+                is NetworkResultt.Success -> listaPersonas[0].nombre = result.data?.nombre ?: ""
             }
 
             result = dogRepository.getDog()
@@ -55,7 +81,7 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
             when (result) {
                 is NetworkResultt.Error -> _error.value = result.message ?: ""
                 is NetworkResultt.Loading -> TODO()
-                is NetworkResultt.Success -> listaPersonas[1].nombre = result.data?.message ?: ""
+                is NetworkResultt.Success -> listaPersonas[1].nombre = result.data?.nombre ?: ""
             }
 
 
@@ -81,9 +107,9 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
     fun deletePersona(persona: List<Persona>) {
 
         viewModelScope.launch {
-
-            listaPersonas.removeAll(persona)
-            _personas.value = listaPersonas.toList()
+            _sharedFlow.emit("error")
+//            listaPersonas.removeAll(persona)
+//            _personas.value = listaPersonas.toList()
 //            _personas.value = getPersonas.invoke()
 
         }
@@ -93,9 +119,9 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
     fun deletePersona(persona: Persona) {
 
         viewModelScope.launch {
-
-            listaPersonas.remove(persona)
-            _personas.value = listaPersonas.toList()
+            _sharedFlow.emit("error")
+//            listaPersonas.remove(persona)
+//            _personas.value = listaPersonas.toList()
 //            _personas.value = getPersonas.invoke()
 
         }

@@ -65,6 +65,7 @@ class PersonaAdapter(
                 if (!selectedMode) {
                     selectedMode = true
                     actions.onStartSelectMode()
+                    item.isSelected = true
                     binding.selected.isChecked = true
                     selectedItem.add(item)
                     notifyDataSetChanged()
@@ -75,12 +76,14 @@ class PersonaAdapter(
                 selected.setOnClickListener {
                     if (selectedMode) {
 
-                        if (binding.selected.isChecked) {
+                        if (binding.selected.isChecked ) {
+                            item.isSelected = true
                             itemView.setBackgroundColor(Color.GREEN)
                             //binding.selected.isChecked = true
                             //notifyItemChanged(adapterPosition)
                             selectedItem.add(item)
                         } else {
+                            item.isSelected = false
                             itemView.setBackgroundColor(Color.WHITE)
                             selectedItem.remove(item)
                             //binding.selected.isChecked = false
@@ -96,15 +99,17 @@ class PersonaAdapter(
                 if (selectedMode)
                     selected.visibility = View.VISIBLE
                 else{
-                    selected.isChecked = false
+                    item.isSelected = false
                     selected.visibility = View.GONE
                 }
 
-                if (selected.isChecked) {
+                if (item.isSelected) {
                     itemView.setBackgroundColor(Color.GREEN)
+                    binding.selected.isChecked = true
                     //selected.visibility = View.VISIBLE
                 } else {
                     itemView.setBackgroundColor(Color.WHITE)
+                    binding.selected.isChecked = false
                 }
             }
         }

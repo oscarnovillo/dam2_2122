@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.hiltmenu.ui.main.PersonaAdapter
 import com.example.recyclerviewenhanced.R
@@ -16,6 +17,8 @@ import com.example.recyclerviewenhanced.databinding.ActivityMainBinding
 import com.example.recyclerviewenhanced.domain.Cosa
 import com.example.recyclerviewenhanced.domain.Persona
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -79,6 +82,14 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 
         })
+
+        val context = this
+        lifecycleScope.launch {
+            viewModel.sharedFlow.collect(){ error->
+                Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+            }
+
+        }
 
         viewModel.getPersonas();
         configAppBar();
