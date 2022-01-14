@@ -55,10 +55,16 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun itemHasClicked() {
+                override fun itemHasClicked(persona: Persona) {
                     actionMode.title =
                         "${personasAdapter.getSelectedItems().size.toString()} selected"
+                    viewModel.seleccionaPersona(persona)
                 }
+
+                override fun isItemSelected(persona: Persona): Boolean = viewModel.isSelected(persona)
+
+
+
 
             })
         binding.rvPersonas.adapter = personasAdapter
@@ -129,6 +135,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onDestroyActionMode(mode: ActionMode?) {
                 personasAdapter.resetSelectMode()
+
             }
 
         }

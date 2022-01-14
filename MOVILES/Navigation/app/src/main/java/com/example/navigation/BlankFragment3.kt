@@ -80,7 +80,7 @@ class BlankFragment3 : Fragment() {
 
         val button = view.findViewById<Button>(R.id.button2)
         button.setOnClickListener {
-            (activity as MainActivity).startSupportActionMode(callback)?.let {
+            (requireActivity() as MainActivity).startSupportActionMode(callback)?.let {
             actionMode = it;
             it.title = "1 selected"
 

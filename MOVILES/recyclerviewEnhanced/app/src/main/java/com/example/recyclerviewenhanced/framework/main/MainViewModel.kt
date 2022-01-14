@@ -29,6 +29,8 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
     private val _sharedFlow = MutableSharedFlow<String>()
     val sharedFlow = _sharedFlow.asSharedFlow()
 
+    private var selectedItem = mutableListOf<Persona>()
+
 
     init {
         //listaPersonas.addAll((1..20).map{Persona(it,"nombre$it", LocalDate.now(),null)})
@@ -126,6 +128,23 @@ class MainViewModel @Inject constructor(val dogRepository: DogRepository) : View
 
         }
 
+    }
+
+
+    fun seleccionaPersona(persona: Persona) {
+
+        if (isSelected(persona)) {
+            selectedItem.remove(persona)
+
+        }
+        else {
+            selectedItem.add(persona)
+        }
+
+    }
+
+    fun isSelected(persona: Persona): Boolean {
+        return selectedItem.contains(persona)
     }
 
 

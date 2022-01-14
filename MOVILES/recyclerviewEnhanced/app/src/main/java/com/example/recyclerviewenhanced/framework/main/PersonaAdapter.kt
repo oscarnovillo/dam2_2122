@@ -25,7 +25,9 @@ class PersonaAdapter(
     interface PersonaActions {
         fun onDelete(persona: Persona)
         fun onStartSelectMode()
-        fun itemHasClicked()
+        fun itemHasClicked(persona:Persona)
+        fun isItemSelected(persona:Persona) : Boolean
+
 
     }
 
@@ -91,7 +93,7 @@ class PersonaAdapter(
                             //notifyItemChanged(adapterPosition)
 
                         }
-                        actions.itemHasClicked()
+                        actions.itemHasClicked(item)
                     }
                 }
 
@@ -104,7 +106,7 @@ class PersonaAdapter(
                     selected.visibility = View.GONE
                 }
 
-                if (item.isSelected) {
+                if (actions.isItemSelected(item)) {
                     itemView.setBackgroundColor(Color.GREEN)
                     binding.selected.isChecked = true
                     //selected.visibility = View.VISIBLE

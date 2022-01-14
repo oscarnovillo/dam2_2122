@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         //navController = findNavController(R.id.fragmentContainerView)
 
       //  navController = Navigation.findNavController(this,R.id.fragmentContainerView)
-        setSupportActionBar(binding.topAppBar)
+
 //        val appBarConfiguration = AppBarConfiguration
 //            .Builder()
 //            .setFallbackOnNavigateUpListener {
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //NavigationUI.setupActionBarWithNavController(this,navController, appBarConfiguration)
-
+        setSupportActionBar(binding.topAppBar)
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
 
