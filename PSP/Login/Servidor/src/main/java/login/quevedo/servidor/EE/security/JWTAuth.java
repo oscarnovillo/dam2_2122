@@ -1,8 +1,7 @@
-package EE.security;
+package login.quevedo.servidor.EE.security;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
 import jakarta.security.enterprise.AuthenticationException;
 import jakarta.security.enterprise.AuthenticationStatus;
 import jakarta.security.enterprise.authentication.mechanism.http.HttpAuthenticationMechanism;
@@ -15,7 +14,7 @@ import jakarta.ws.rs.core.HttpHeaders;
 import java.util.Set;
 
 
-//@ApplicationScoped
+@ApplicationScoped
 public class JWTAuth //implements HttpAuthenticationMechanism
 {
 
@@ -29,6 +28,7 @@ public class JWTAuth //implements HttpAuthenticationMechanism
 
 
         String header = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
+
         identity.validate(new UsernamePasswordCredential("nombre","ppp")).getStatus();
         if (header!=null)
              return httpMessageContext.notifyContainerAboutLogin(

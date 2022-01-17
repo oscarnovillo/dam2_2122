@@ -153,7 +153,7 @@ class PersonaAdapter(
                         selectedItem.remove(currentList[viewHolder.adapterPosition])
                         actions.onDelete(currentList[viewHolder.adapterPosition])
                         if (selectedMode)
-                            actions.itemHasClicked()
+                            actions.itemHasClicked(currentList[viewHolder.adapterPosition])
                     }
                 }
             //}

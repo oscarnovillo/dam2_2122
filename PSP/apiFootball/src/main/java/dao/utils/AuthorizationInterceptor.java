@@ -24,6 +24,7 @@ public class AuthorizationInterceptor implements Interceptor {
         Request request = builder1.build();
         request.newBuilder().header("Authorization", Credentials.basic("user","password")).build();
         Response response = chain.proceed(request);
+        Response response2 = chain.proceed(request);
         response.header("jwt");
 
         return response;

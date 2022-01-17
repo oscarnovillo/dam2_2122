@@ -6,9 +6,9 @@ import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
 
-@BasicAuthenticationMechanismDefinition(realmName = "")
 @ApplicationPath("/api")
-@DeclareRoles({"admin","user"})
+@BasicAuthenticationMechanismDefinition(realmName = "")
+@DeclareRoles({"ADMIN","user"})
 public class JAXRSApplication extends Application {
 
 

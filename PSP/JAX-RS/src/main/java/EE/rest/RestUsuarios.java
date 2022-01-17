@@ -8,6 +8,7 @@ import dao.modelo.Usuario;
 import dao.modelo.UsuarioEntity;
 import io.vavr.control.Either;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.ws.rs.core.SecurityContext;
 import org.modelmapper.ModelMapper;
 import servicios.ServiciosUsuarios;
 
@@ -31,13 +32,14 @@ public class RestUsuarios {
 
     private ModelMapper mapper;
 
+    @Context
+    private SecurityContext security;
+
     @Inject
-    public RestUsuarios(ServiciosUsuarios su, ModelMapper mapper) {
+    public RestUsuarios(ServiciosUsuarios su, ModelMapper mapper,SecurityContext security) {
         this.su = su;
         this.mapper = mapper;
-    }
-
-    public RestUsuarios() {
+        this.security = security;
     }
 
     //para todos los metodos

@@ -40,6 +40,7 @@ public class ConfigurationSingleton_OkHttpClient {
                     .readTimeout(Duration.of(10, ChronoUnit.MINUTES))
                     .callTimeout(Duration.of(10, ChronoUnit.MINUTES))
                     .connectTimeout(Duration.of(10, ChronoUnit.MINUTES))
+                    //.authenticator((route, response) -> {return  })
                     .addInterceptor(chain -> {
 //                                Request original = chain.request();
 //
