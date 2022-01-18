@@ -15,7 +15,7 @@ import java.io.IOException;
 public class FilterLogin implements Filter {
 
 
-    private SecurityContext securityContext;
+    private final SecurityContext securityContext;
 
 
     @Inject

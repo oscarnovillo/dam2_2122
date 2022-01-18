@@ -30,8 +30,8 @@ public class InMemoryIdentityStore implements IdentityStore {
             switch (user.getCaller()) {
                 case "admin":
                     return new CredentialValidationResult("admin", Collections.singleton("ADMIN"));
-                case "manager":
-                    return new CredentialValidationResult("admin", Collections.singleton("MANAGER"));
+                case "paco":
+                    return new CredentialValidationResult("paco", Collections.singleton("user"));
                 case "user":
                     return new CredentialValidationResult("user", Collections.singleton("user"));
                 default:
