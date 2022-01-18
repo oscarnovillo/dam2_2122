@@ -34,6 +34,9 @@ class MainViewModel @Inject constructor(@ApplicationContext val appContext: Cont
     val uiError = _uiError.receiveAsFlow()
 
 
+
+
+
     fun handleEvent(event : MainContract.Event){
       when (event)
       {
