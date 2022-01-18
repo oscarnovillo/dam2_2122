@@ -13,6 +13,6 @@ interface MainContract {
 
     data class State(
         val movies: List<Movie>,
-        val error: String?,
+        val error: String = "",
     )
 }
