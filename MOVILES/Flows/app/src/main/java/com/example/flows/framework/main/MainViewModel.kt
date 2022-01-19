@@ -49,7 +49,7 @@ class MainViewModel @Inject constructor(@ApplicationContext val appContext: Cont
                      {
                          is NetworkResult.Error -> _uiError.send(it.message ?: "Error")
                          is NetworkResult.Loading ->  _uiState.value = UiState.Loading
-                         is NetworkResult.Success -> _uiState.value = UiState.Success(MainContract.State(it.data ?: emptyList()))
+                         is NetworkResult.Success -> _uiState.value = UiState.Success(MainContract.State(movies=it.data ?: emptyList()))
                      }
                  }
 //                  if (!Utils.hasInternetConnection(appContext))
