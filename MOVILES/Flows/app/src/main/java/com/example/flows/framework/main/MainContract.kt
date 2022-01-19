@@ -12,9 +12,9 @@ interface MainContract {
     }
 
     data class State(
-        val movies: List<Movie>,
+        val movies: List<Movie> = emptyList(),
         val isLoading : Boolean = false,
-        val error: String = "",
+        val error: String? = null,
 
     )
 }

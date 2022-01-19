@@ -7,7 +7,7 @@ import com.example.flows.data.modelo.MovieEntity
 interface MovieDao {
 
     @Query("SELECT * FROM movie order by popularity DESC")
-    fun getAll(): List<MovieEntity>?
+    fun getAll(): List<MovieEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(movies: List<MovieEntity>)

@@ -42,18 +42,19 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { value ->
-                    when (value) {
-                        is UiState.Failure -> {
-                            Toast.makeText(this@MainActivity, value.mensaje, Toast.LENGTH_SHORT)
-                                .show()
-                            binding.loading.visibility = View.GONE
+//                    when (value) {
+//                        is UiState.Failure -> {
+//                            Toast.makeText(this@MainActivity, value.mensaje, Toast.LENGTH_SHORT)
+//                                .show()
+//                            binding.loading.visibility = View.GONE
+//                        }
+                        binding.loading.visibility = if (value.isLoading) View.VISIBLE else View.GONE
+                        movieAdapter.submitList(value.movies)
+                        value.error.let{
+                            Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
+                            viewModel.handleEvent(MainContract.Event.MensajeMostrado)
                         }
-                        UiState.Loading -> binding.loading.visibility = View.VISIBLE
-                        is UiState.Success -> {
-                            movieAdapter.submitList(value.successData.movies)
-                            binding.loading.visibility = View.GONE
-                        }
-                    }
+//                    }
                 }
             }
         }
