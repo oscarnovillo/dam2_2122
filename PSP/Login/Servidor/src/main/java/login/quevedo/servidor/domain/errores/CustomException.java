@@ -4,7 +4,8 @@ import lombok.Data;
 
 
 
-@Data
+
 public class CustomException extends RuntimeException {
+
 
 }

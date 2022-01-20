@@ -1,7 +1,8 @@
-package login.quevedo.servidor.modelo;
+package login.quevedo.cliente.data.modelo;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Builder
