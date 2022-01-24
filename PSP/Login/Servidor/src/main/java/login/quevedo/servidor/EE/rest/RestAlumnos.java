@@ -85,7 +85,7 @@ public class RestAlumnos {
                 .setSubject("Joe")
                 .setIssuer("yo")
                 .setExpiration(Date
-                        .from(LocalDateTime.now().plusSeconds(10).atZone(ZoneId.systemDefault())
+                        .from(LocalDateTime.now().plusSeconds(60).atZone(ZoneId.systemDefault())
                                 .toInstant()))
                 .claim("user", "juan")
                 .claim("group", "admins")

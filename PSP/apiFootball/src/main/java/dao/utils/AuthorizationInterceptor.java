@@ -8,6 +8,11 @@ import okhttp3.Response;
 import java.io.IOException;
 
 public class AuthorizationInterceptor implements Interceptor {
+
+    private String jwt;
+
+
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();

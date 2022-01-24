@@ -31,6 +31,7 @@ public class JWTAuth implements HttpAuthenticationMechanism
             , HttpMessageContext httpMessageContext) throws AuthenticationException {
         CredentialValidationResult c = CredentialValidationResult.INVALID_RESULT;
 
+
         String header = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
         if (header != null) {
             String[] valores = header.split(" ");
@@ -52,6 +53,10 @@ public class JWTAuth implements HttpAuthenticationMechanism
                 c = (CredentialValidationResult)httpServletRequest.getSession().getAttribute("LOGIN");
         }
 
+        if (c.getStatus().equals(CredentialValidationResult.Status.INVALID))
+        {
+            return httpMessageContext.doNothing();
+        }
         return httpMessageContext.notifyContainerAboutLogin(c);
     }
 }

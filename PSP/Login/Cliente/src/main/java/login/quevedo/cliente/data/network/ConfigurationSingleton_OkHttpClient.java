@@ -2,6 +2,7 @@ package login.quevedo.cliente.data.network;
 
 import com.google.gson.*;
 
+import login.quevedo.cliente.data.CacheAuthorization;
 import lombok.extern.log4j.Log4j2;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -26,7 +27,7 @@ public class ConfigurationSingleton_OkHttpClient {
     private ConfigurationSingleton_OkHttpClient() {
     }
 
-    public static synchronized Retrofit getInstance() {
+    public static synchronized Retrofit getInstance(CacheAuthorization cache) {
         if (clientOK == null) {
             CookieManager cookieManager = new CookieManager();
             cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
@@ -39,7 +40,8 @@ public class ConfigurationSingleton_OkHttpClient {
                     .readTimeout(Duration.of(10, ChronoUnit.MINUTES))
                     .callTimeout(Duration.of(10, ChronoUnit.MINUTES))
                     .connectTimeout(Duration.of(10, ChronoUnit.MINUTES))
-                    .addInterceptor(new AuthorizationInterceptor())
+                    .addInterceptor(new AuthorizationInterceptor(cache))
+                    .cookieJar(new JavaNetCookieJar(cookieManager))
                     .build();
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
                 @Override
@@ -54,7 +56,7 @@ public class ConfigurationSingleton_OkHttpClient {
                     }
             ).create();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://localhost:8080/Servidor-1.0-SNAPSHOT/api/")
+                    .baseUrl("http://localhost:7070/Servidor-1.0-SNAPSHOT/api/")
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())

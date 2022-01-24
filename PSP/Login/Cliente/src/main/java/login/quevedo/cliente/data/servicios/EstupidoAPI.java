@@ -9,4 +9,11 @@ public interface EstupidoAPI {
 
     @GET("alumno")
     Single<Alumno> getAlumno();
+
+
+    @GET("alumno/filtro")
+    Single<String> getJWT();
+
+    @GET("alumno/verify")
+    Single<String> getVerify();
 }
