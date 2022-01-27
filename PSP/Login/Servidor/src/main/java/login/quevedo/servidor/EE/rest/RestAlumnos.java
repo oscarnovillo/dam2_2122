@@ -63,6 +63,7 @@ public class RestAlumnos {
     public String getOK() {
 
         return config.getRuta() + security.getCallerPrincipal().getName();
+
     }
 
     @GET
@@ -84,6 +85,7 @@ public class RestAlumnos {
         String jws = Jwts.builder()
                 .setSubject("Joe")
                 .setIssuer("yo")
+
                 .setExpiration(Date
                         .from(LocalDateTime.now().plusSeconds(60).atZone(ZoneId.systemDefault())
                                 .toInstant()))

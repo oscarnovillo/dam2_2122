@@ -34,7 +34,7 @@ class MainViewModel @Inject constructor(
         when (event) {
             MainContract.Event.PedirDatos -> {
                 viewModelScope.launch {
-                    movieRepository.fetchTrendingMovies().collect { result ->
+                    movieRepository.fetchTrendingMovies().catch(action = {cause -> _uiError.send(cause.message ?: "") }).collect { result ->
                         when (result) {
                             is NetworkResult.Error -> {
                                 _uiState.update { it.copy(error = result.message) }

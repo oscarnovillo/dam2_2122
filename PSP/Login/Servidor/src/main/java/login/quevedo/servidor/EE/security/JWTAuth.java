@@ -39,12 +39,22 @@ public class JWTAuth implements HttpAuthenticationMechanism
             if (valores[0].equalsIgnoreCase("Basic")) {
                 String userPass = new String(Base64.getUrlDecoder().decode(valores[1]));
                 String[] userPassSeparado = userPass.split(":");
-                c = identity.validate(new UsernamePasswordCredential(userPassSeparado[0], userPassSeparado[1]));
+                c = identity.validate(new UsernamePasswordCredential(userPassSeparado[0]
+                        , userPassSeparado[1]));
 
                 if (c.getStatus() == CredentialValidationResult.Status.VALID) {
                     httpServletRequest.getSession().setAttribute("LOGIN", c);
+                    //generar token
+
+
+                    //añadir al response
+
+
                 }
             }
+            //  else del bearer, bearer, bearer,beaer Ijust conat to wiat to vb warer
+
+            //vlidarlo
 
         }
         else
@@ -55,6 +65,7 @@ public class JWTAuth implements HttpAuthenticationMechanism
 
         if (c.getStatus().equals(CredentialValidationResult.Status.INVALID))
         {
+
             return httpMessageContext.doNothing();
         }
         return httpMessageContext.notifyContainerAboutLogin(c);
