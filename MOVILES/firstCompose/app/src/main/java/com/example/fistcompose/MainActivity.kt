@@ -84,6 +84,10 @@ fun PrimerBox() {
             modifier = Modifier.align(Alignment.TopStart)
         )
         Greeting(
+            name = "JJddJ",
+            modifier = Modifier.align(Alignment.TopStart)
+        )
+        Greeting(
             name = stringResource(R.string.ivan),
             modifier = Modifier.align(Alignment.BottomEnd)
         )
