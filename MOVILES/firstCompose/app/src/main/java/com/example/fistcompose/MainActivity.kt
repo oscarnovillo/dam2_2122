@@ -1,36 +1,36 @@
 package com.example.fistcompose
 
 import android.content.Intent
+import android.opengl.GLES31
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryUnknown
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 import com.example.fistcompose.ui.theme.FistComposeTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,13 +46,11 @@ class MainActivity : ComponentActivity() {
     }
 
 
-    fun irPantalla()
-    {
-        startActivity(Intent( this, MainActivity2::class.java))
+    fun irPantalla() {
+        startActivity(Intent(this, MainActivity2::class.java))
     }
 
 }
-
 
 
 @Composable
@@ -64,10 +62,21 @@ fun PrimerBox() {
         contentAlignment = Alignment.Center
 
     ) {
+        val snackbarHostState = remember { SnackbarHostState() }
+
+        val context = LocalContext.current
+        val circularProgressDrawable: CircularProgressDrawable = remember {
+            val c = CircularProgressDrawable(context)
+            c.strokeWidth = 5f
+            c.centerRadius = 30f
+            c.start()
+            c
+        }
         Image(
             painter = rememberImagePainter(
                 data = "https://placebear.com/200/300",
                 builder = {
+                    placeholder(circularProgressDrawable)
                     transformations(CircleCropTransformation())
                     crossfade(true)
                 }
@@ -95,31 +104,45 @@ fun PrimerBox() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            val context = LocalContext.current
+
+            val scope = rememberCoroutineScope()
 
             Icon(
 
                 imageVector = Icons.Default.BatteryUnknown,
                 contentDescription = null,
-                modifier = Modifier.size(200.dp)
+                modifier = Modifier
+                    .size(200.dp)
                     .clickable {
 
-                        context.startActivity(Intent( context, MainActivity2::class.java))
+                        context.startActivity(Intent(context, MainActivity2::class.java))
 
                     },
-                tint = MaterialTheme.colors.secondary,
+                tint = MaterialTheme.colors.primary,
 
-            )
+                )
             Icon(
                 painter = painterResource(id = R.drawable.ic_baseline_ac_unit_24),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(200.dp),
+                    .size(200.dp)
+                    .clickable {
+                        scope.launch {
+                            snackbarHostState.showSnackbar("Hello")
+                        }
+//                        Toast
+//                            .makeText(context, "TOAST", Toast.LENGTH_SHORT)
+//                            .show()
+
+                    },
 
                 tint = MaterialTheme.colors.primary,
             )
         }
-
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier.align(Alignment.BottomEnd)
+        )
 
     }
 }
