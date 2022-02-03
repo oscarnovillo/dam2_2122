@@ -65,7 +65,6 @@ public class CertBouncy {
     public X509Certificate generateSelfSignedX509Certificate() throws CertificateException, InvalidKeyException, IllegalStateException,
             NoSuchProviderException, NoSuchAlgorithmException, SignatureException {
         addBouncyCastleAsSecurityProvider();
-        addBouncyCastleAsSecurityProvider();
         // generate a key pair
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA", "BC");
         keyPairGenerator.initialize(4096, new SecureRandom());

@@ -8,6 +8,7 @@ module encriptacion {
     requires org.apache.httpcomponents.httpclient;
     requires lombok;
     requires com.google.gson;
+    requires org.bouncycastle.provider;
 
-    requires bcprov.jdk16;
+
 }

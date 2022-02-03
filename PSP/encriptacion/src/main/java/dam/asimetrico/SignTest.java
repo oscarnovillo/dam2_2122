@@ -32,6 +32,7 @@ public class SignTest {
             //Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
             Cipher cifrador = Cipher.getInstance("RSA");
 
+
             // Crear KeyFactory (depende del provider) usado para las transformaciones de claves*/
             KeyFactory keyFactoryRSA = KeyFactory.getInstance("RSA"); // Hace uso del provider BC
             //*** 4 Recuperar clave PUBLICA del fichero */
@@ -39,7 +40,7 @@ public class SignTest {
             byte[] bufferPub = new byte[5000];
             FileInputStream in = new FileInputStream(nombre + ".publica");
             DataInputStream d = new DataInputStream(in);
-            
+
             int charsPub = in.read(bufferPub, 0, 5000);
             in.close();
 
@@ -51,7 +52,7 @@ public class SignTest {
             X509EncodedKeySpec clavePublicaSpec = new X509EncodedKeySpec(bufferPub2);
             PublicKey clavePublica2 = keyFactoryRSA.generatePublic(clavePublicaSpec);
 
-                      
+
             // PASO 3b: Poner cifrador en modo DESCIFRADO
             // 2 Recuperar clave Privada del fichero */
             // 2.1 Leer datos binarios PKCS8
@@ -77,9 +78,9 @@ public class SignTest {
             sign.initVerify(clavePublica2);
             sign.update("hola".getBytes());
             System.out.println(sign.verify(firma));
-            
+
         } catch (Exception ex) {
             Logger.getLogger(CifrarRSAFicheros.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
 }

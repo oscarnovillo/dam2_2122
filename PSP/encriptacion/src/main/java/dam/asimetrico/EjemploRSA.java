@@ -1,17 +1,29 @@
 package dam.asimetrico;
 
+import org.bouncycastle.asn1.sec.SECNamedCurves;
+import org.bouncycastle.asn1.x9.X9ECParameters;
+import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
+import org.bouncycastle.crypto.generators.ECKeyPairGenerator;
+import org.bouncycastle.crypto.params.ECDomainParameters;
+import org.bouncycastle.crypto.params.ECKeyGenerationParameters;
+import org.bouncycastle.crypto.params.ECPrivateKeyParameters;
+import org.bouncycastle.crypto.params.ECPublicKeyParameters;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import java.math.BigInteger;
 import java.security.*;
 
 import   javax.crypto.*;
 
 import java.io.*;
+import java.security.spec.*;
 
 // Necesario para usar el provider Bouncy Castle (BC)
 //    Para compilar incluir el fichero JAR en el classpath
 //
 public class EjemploRSA  {
    public static void main (String[] args) throws Exception {
-
+      Security.addProvider(new BouncyCastleProvider());
       // Anadir provider JCE (provider por defecto no soporta RSA)
       //Security.addProvider(new BouncyCastleProvider());  // Cargar el provider BC
 
@@ -19,17 +31,20 @@ public class EjemploRSA  {
 
       // PASO 1: Crear e inicializar el par de claves RSA DE 512 bits
       KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA"); // Hace uso del provider BC
-      keyGen.initialize(2048);
-      KeyPair clavesRSA = keyGen.generateKeyPair();
-      PrivateKey clavePrivada = clavesRSA.getPrivate();
-      PublicKey clavePublica = clavesRSA.getPublic();
 
-      //maximo de caracteres keylength/8 - Padding (11 o  0)
-      System.out.print("2. Introducir Texto Plano (max. 64 caracteres): ");
+
+
+       KeyPair clavesRSA = keyGen.generateKeyPair();
+       PrivateKey clavePrivada = clavesRSA.getPrivate();
+       PublicKey clavePublica = clavesRSA.getPublic();
+       //maximo de caracteres keylength/8 - Padding (11 o  0)
+       System.out.print("2. Introducir Texto Plano (max. 64 caracteres): ");
       byte[] bufferPlano = leerLinea(System.in);
 
       // PASO 2: Crear cifrador RSA
+
       Cipher cifrador = Cipher.getInstance("RSA");
+
       /************************************************************************
        * IMPORTANTE: En BouncyCastle el algoritmo RSA no funciona realmente en modo ECB
        *		  * No divide el mensaje de entrada en bloques
@@ -42,7 +57,9 @@ public class EjemploRSA  {
       // PASO 3a: Poner cifrador en modo CIFRADO
       cifrador.init(Cipher.ENCRYPT_MODE, clavePublica);  // Cifra con la clave publica
 
-      System.out.println("3a. Cifrar con clave publica");
+
+
+       System.out.println("3a. Cifrar con clave publica");
       byte[] bufferCifrado = cifrador.doFinal(bufferPlano);
       System.out.println("TEXTO CIFRADO");
 
