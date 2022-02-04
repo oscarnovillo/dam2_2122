@@ -24,7 +24,7 @@ import java.security.spec.*;
 public class EjemploRSA  {
    public static void main (String[] args) throws Exception {
       Security.addProvider(new BouncyCastleProvider());
-      // Anadir provider JCE (provider por defecto no soporta RSA)
+      //Anadir provider JCE (provider por defecto no soporta RSA)
       //Security.addProvider(new BouncyCastleProvider());  // Cargar el provider BC
 
       System.out.println("1. Creando claves publica y privada");

@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryUnknown
+import androidx.compose.material.icons.outlined.BatteryUnknown
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -78,12 +79,12 @@ fun PrimerBox() {
                 builder = {
                     placeholder(circularProgressDrawable)
                     transformations(CircleCropTransformation())
-                    crossfade(true)
+                    crossfade(durationMillis = 2000)
                 }
             ),
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Fit
 
 
         )
@@ -97,6 +98,7 @@ fun PrimerBox() {
             modifier = Modifier.align(Alignment.TopStart)
         )
         Greeting(
+
             name = stringResource(R.string.ivan),
             modifier = Modifier.align(Alignment.BottomEnd)
         )
@@ -109,7 +111,7 @@ fun PrimerBox() {
 
             Icon(
 
-                imageVector = Icons.Default.BatteryUnknown,
+                imageVector = Icons.Outlined.BatteryUnknown,
                 contentDescription = null,
                 modifier = Modifier
                     .size(200.dp)
@@ -130,9 +132,9 @@ fun PrimerBox() {
                         scope.launch {
                             snackbarHostState.showSnackbar("Hello")
                         }
-//                        Toast
-//                            .makeText(context, "TOAST", Toast.LENGTH_SHORT)
-//                            .show()
+                        Toast
+                            .makeText(context, "TOAST", Toast.LENGTH_SHORT)
+                            .show()
 
                     },
 

@@ -6,6 +6,7 @@
 package dam.encriptacion;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.spec.KeySpec;
 import java.util.Base64;
@@ -44,7 +45,7 @@ public class MainAesTest {
 
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivspec);
-            return Base64.getUrlEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
+            return Base64.getUrlEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8)));
         } catch (Exception e) {
             System.out.println("Error while encrypting: " + e.toString());
         }
@@ -79,9 +80,9 @@ public class MainAesTest {
     public static void main(String[] args) throws UnsupportedEncodingException {
         String originalString = "howtodoinjava.com seef sdf sdf sdf sd";
 
-        
+
         String encryptedString = encrypt(originalString, sSecretKey);
-        
+
         String decryptedString = decrypt(encryptedString, sSecretKey);
 
         System.out.println(originalString);

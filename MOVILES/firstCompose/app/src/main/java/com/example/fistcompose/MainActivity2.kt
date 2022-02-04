@@ -1,21 +1,30 @@
 package com.example.fistcompose
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.absoluteOffset
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.BatteryUnknown
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.fistcompose.ui.theme.FistComposeTheme
+import kotlinx.coroutines.launch
 
 class MainActivity2 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,12 +48,25 @@ fun Navigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Routes.LISTADO
+        startDestination = Routes.LISTADO,
     ) {
-        composable(Routes.LISTADO) {
-            pantallaLista(text = "hola",
+        composable(
+            route = Routes.LISTADO
+        ) {
+            PantallaLista(
+                text = "1",
                 onNavigate = {
                     navController.navigate(Routes.DETALLE + "?todoId=${it}")
+                }
+            )
+        }
+        composable(
+            route = Routes.LISTADO
+        ) {
+            PantallaDos(
+
+                onNavigate = {
+                    navController.navigate(it)
                 }
             )
         }
@@ -57,52 +79,100 @@ fun Navigation() {
                 }
             )
         ) {
-            pantallaDetalle(
-                id = it.arguments?.get("todoId")as Int,
+            PantallaDetalle(
+                id = it.arguments?.get("todoId") as Int,
                 onPopBackStack = {
-                navController.popBackStack()
-            })
+                    navController.popBackStack()
+                })
         }
     }
 
 }
 
+@Composable
+fun PantallaDos(
+    onNavigate: (String) -> Unit,
+) {
+    var texto by rememberSaveable {
+        mutableStateOf(Routes.LISTADO)
+    }
+
+    TextField(value = texto, onValueChange = {texto = it})
+
+    Button(onClick = { onNavigate(texto) }) {
+        Row() {
+            Icon(
+                imageVector = Icons.Outlined.BatteryUnknown,
+                contentDescription = null,
+                tint = MaterialTheme.colors.primary,
+            )
+            Text(text = "kkk")
+        }
+    }
+}
 
 @Composable
-fun pantallaLista(text: String,
-onNavigate: (Int) -> Unit) {
+fun PantallaLista(
+    text: String,
+    onNavigate: (String) -> Unit,
+) {
+    var texto by rememberSaveable { mutableStateOf(text) }
+
+    Column(modifier = Modifier.fillMaxWidth()) {
+
+        PrimerTrozo(
+            text = texto,
+            onNavigate = onNavigate,
+            onTextChange = { texto = it }
+        )
+        Button(onClick = {texto = (texto.toInt() +1).toString()}) {
+            Text(text = "suma")
+        }
+        PantallaDetalle(id = 89) {}
+
+    }
+}
+
+
+@Composable
+fun PrimerTrozo(
+    text: String = "inicio",
+    onTextChange: (String)->Unit,
+    onNavigate: (Int) -> Unit,
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Greeting(
             "Android"
         )
 
-        var texto = text
+
 
         OutlinedTextField(
-            value = "hola",
+            value = text,
             isError = true,
-            onValueChange = { texto = it },
+            onValueChange = onTextChange,
         )
 
-        Button(onClick = { onNavigate(10) } ) {
+        Button(onClick = { onNavigate(text.toInt()) }) {
             Text(
                 text = "vete"
             )
         }
     }
+
 }
 
-
 @Composable
-fun pantallaDetalle(
-    id : Int,
-                    onPopBackStack: () -> Unit) {
+fun PantallaDetalle(
+    id: Int,
+    onPopBackStack: () -> Unit
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Greeting(
             "Pantalla Detalle $id"
 
         )
-        Button(onClick =  onPopBackStack ) {
+        Button(onClick = onPopBackStack) {
             Text(
                 text = "Volver"
             )
