@@ -5,6 +5,8 @@ import login.quevedo.cliente.data.CacheAuthorization;
 import login.quevedo.cliente.data.DaoEstupido;
 import lombok.SneakyThrows;
 
+import java.util.concurrent.CompletableFuture;
+
 public class Main {
 
     @SneakyThrows
@@ -16,52 +18,58 @@ public class Main {
         ca.setPass("pass");
 
 
-        DaoEstupido dao = new DaoEstupido(ca);
+        CompletableFuture.runAsync(() -> {
 
-        dao.getAlumno().observeOn(Schedulers.io())
-                .subscribe(either -> {
-                    if (either.isRight()) {
-                        System.out.println(either.get());
+            DaoEstupido dao = new DaoEstupido(ca);
 
-                    } else if (either.isLeft()) {
-                        System.out.println(either.getLeft());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            dao.getAlumno().observeOn(Schedulers.single())
+                    .blockingSubscribe(either -> {
+                        if (either.isRight()) {
+                            System.out.println(either.get());
 
-                    }
+                        } else if (either.isLeft()) {
+                            System.out.println(either.getLeft());
 
-
-                });
-
-        dao.getJwt().observeOn(Schedulers.io())
-                .subscribe(either -> {
-                    if (either.isRight()) {
-
-                        System.out.println(either.get());
-                        dao.getVerify().observeOn(Schedulers.io())
-                                .subscribe(either2 -> {
-                                    if (either2.isRight()) {
-                                        System.out.println(either2.get());
-
-                                    } else if (either2.isLeft()) {
-                                        System.out.println(either2.getLeft());
-
-                                    }
+                        }
 
 
-                                });
+                    });
+
+            dao.getJwt().observeOn(Schedulers.single())
+                    .blockingSubscribe(either -> {
+                        if (either.isRight()) {
+
+                            System.out.println(either.get());
+                            dao.getVerify().observeOn(Schedulers.io())
+                                    .subscribe(either2 -> {
+                                        if (either2.isRight()) {
+                                            System.out.println(either2.get());
+
+                                        } else if (either2.isLeft()) {
+                                            System.out.println(either2.getLeft());
+
+                                        }
 
 
-                    } else if (either.isLeft()) {
-                        System.out.println(either.getLeft());
-
-                    }
+                                    });
 
 
-                });
+                        } else if (either.isLeft()) {
+                            System.out.println(either.getLeft());
+
+                        }
 
 
+                    });
 
 
-        Thread.sleep(5000);
+        }).join();
+
     }
 
 
