@@ -1,7 +1,8 @@
 package com.antonioleiva.mymovies.ui.navigation
 
 import androidx.navigation.NavType
-import androidx.navigation.compose.navArgument
+
+import androidx.navigation.navArgument
 
 sealed class NavItem(
     internal val baseRoute: String,

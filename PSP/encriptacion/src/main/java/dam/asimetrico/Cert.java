@@ -92,6 +92,9 @@ public class Cert {
 
         X509Certificate certBase64 = X509CertUtils.parse(Base64.getUrlDecoder().decode(certificado));
 
+
+
+
         System.out.println("FUNCIONA" +certBase64.getIssuerX500Principal());
 
 
@@ -144,6 +147,7 @@ public class Cert {
             System.out.println(cert.getIssuerX500Principal());
 
             String dn = cert.getSubjectX500Principal().getName();
+
             LdapName ldapDN = new LdapName(dn);
             for (Rdn rdn : ldapDN.getRdns()) {
                 if (rdn.getType().equals("CN")) {
@@ -165,6 +169,8 @@ public class Cert {
             FileOutputStream fos = new FileOutputStream("keystore.pfx");
             ks.store(fos, password);
             fos.close();
+
+
 
             //leer fichero
             KeyStore ksLoad = KeyStore.getInstance("PKCS12");
