@@ -10,12 +10,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.BatteryUnknown
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -113,6 +116,10 @@ fun PantallaDos(
     }
 }
 
+fun cambiaTexto( nombre:String, pass:String){
+
+}
+
 @Composable
 fun PantallaLista(
     viewModel: PantallaListaViewModel = hiltViewModel(),
@@ -133,7 +140,17 @@ fun PantallaLista(
             Text(text = "suma")
         }
 
-
+        TopAppBar(
+            title = { Text(stringResource(id = R.string.app_name)) },
+            actions = {
+                IconButton(onClick = {}) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = null
+                    )
+                }
+            }
+        )
 
         LazyColumn(
             modifier = Modifier
@@ -164,6 +181,9 @@ fun PantallaLista(
 
 
         }
+
+
+
     }
 }
 
