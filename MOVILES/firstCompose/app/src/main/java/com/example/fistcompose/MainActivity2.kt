@@ -194,7 +194,8 @@ fun PrimerTrozo(
     onTextChange: (String) -> Unit,
     onNavigate: (Int) -> Unit,
 ) {
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(modifier = Modifier.fillMaxWidth(),
+    ) {
         Greeting(
             "Android"
         )

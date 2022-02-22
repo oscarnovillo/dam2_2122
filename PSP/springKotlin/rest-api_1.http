@@ -1,0 +1,81 @@
+GET http://localhost:8080/api/pokemon/filtro?categoria=de los primeros
+Accept: application/json
+
+<> 2022-02-22T201245.200.json
+<> 2022-02-22T201222.200.json
+<> 2022-02-22T201150.200.json
+<> 2022-02-22T201124.200.json
+<> 2022-02-22T201105.400.json
+
+###
+
+
+
+GET http://localhost:8080/api/pokemon/1
+Accept: application/json
+
+<> 2022-02-22T201245-1.200.json
+<> 2022-02-22T201222-1.200.json
+<> 2022-02-22T201139.200.json
+<> 2022-02-22T201056.200.json
+<> 2022-02-22T201013.200.json
+<> 2022-02-22T201008.200.json
+<> 2022-02-22T200956.200.json
+
+###
+GET http://localhost:8080/api/pokemon/categorias
+Accept: application/json
+
+<> 2022-02-22T201245-2.200.json
+<> 2022-02-22T201222-2.200.json
+<> 2022-02-22T200809.200.json
+<> 2022-02-22T200037.200.json
+<> 2022-02-22T200031.200.json
+
+###
+###
+GET http://localhost:8080/api/pokemon
+Accept: application/json
+
+<> 2022-02-22T201246.200.json
+<> 2022-02-22T201222-3.200.json
+<> 2022-02-22T200916.200.json
+<> 2022-02-22T195030.200.json
+<> 2022-02-22T195024.200.json
+<> 2022-02-22T195018.200.json
+<> 2022-02-22T194851.200.json
+<> 2022-02-22T194513.200.json
+<> 2022-02-22T193651.200.json
+<> 2022-02-19T213110.200.json
+<> 2022-02-19T212731.200.json
+<> 2022-02-19T212501.200.json
+
+###
+POST http://localhost:8080/api/pokemon
+Content-Type: application/json
+
+  {
+    "nombre": "picatu",
+    "generacion": "de los primeros",
+    "habilidades": [
+      "es mono",
+      "carga los moviles"
+    ],
+    "caracteristicasInutiles": "protagonista de todo, sin el no existiría ninguno más"
+  }
+
+<> 2022-02-22T201246.500.json
+<> 2022-02-22T201222.500.json
+<> 2022-02-22T200906.500.json
+<> 2022-02-22T200903.500.json
+<> 2022-02-22T200859.500.json
+<> 2022-02-22T195445.500.json
+<> 2022-02-22T195443.200.json
+<> 2022-02-22T195441.200.json
+<> 2022-02-22T195027.200.json
+<> 2022-02-22T195021.200.json
+<> 2022-02-22T194846.200.json
+<> 2022-02-22T194816.415.json
+<> 2022-02-22T194509.200.json
+<> 2022-02-22T193844.500.json
+

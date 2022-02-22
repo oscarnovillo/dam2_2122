@@ -82,6 +82,10 @@ private fun Title(mediaItem: MediaItem) {
 @Composable
 fun MediaListItemPreview() {
     MyMoviesApp {
+        Column()
+        {
+
+        }
         val mediaItem = MediaItem(1, "Item 1", "", MediaItem.Type.VIDEO)
         MediaListItem(mediaItem = mediaItem, onClick = {})
     }
