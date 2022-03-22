@@ -32,14 +32,14 @@ public class RestUsuarios {
 
     private ModelMapper mapper;
 
-    @Context
-    private SecurityContext security;
+//    @Context
+//    private SecurityContext security;
 
     @Inject
-    public RestUsuarios(ServiciosUsuarios su, ModelMapper mapper,SecurityContext security) {
+    public RestUsuarios(ServiciosUsuarios su, ModelMapper mapper) {
         this.su = su;
         this.mapper = mapper;
-        this.security = security;
+//        this.security = security;
     }
 
     //para todos los metodos

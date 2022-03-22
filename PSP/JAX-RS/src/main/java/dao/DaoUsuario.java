@@ -55,7 +55,6 @@ public class DaoUsuario {
         }
     }
 
-
     public Either<ApiError, Usuario> dameUno(String id) {
         Usuario u = usuarios.stream()
                 .filter(usuario -> usuario.getId().equals(id))

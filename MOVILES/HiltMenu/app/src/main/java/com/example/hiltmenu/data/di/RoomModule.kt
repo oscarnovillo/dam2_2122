@@ -26,7 +26,7 @@ object RoomModule {
     fun provideDatabase(
         @ApplicationContext context: Context,
         @Named("assetDB") ruta: String
-    ) =
+    )  =
         Room.databaseBuilder(context, PersonaRoomDatabase::class.java, "persona_database")
             .fallbackToDestructiveMigrationFrom(4)
             .createFromAsset(ruta)

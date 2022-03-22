@@ -51,7 +51,7 @@ Accept: application/json
 <> 2022-02-19T212501.200.json
 
 ###
-POST http://localhost:8080/api/pokemon
+POST https://informatica.iesquevedo.es/api/pokemon
 Content-Type: application/json
 
   {

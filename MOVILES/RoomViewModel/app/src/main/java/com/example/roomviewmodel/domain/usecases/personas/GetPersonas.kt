@@ -1,4 +1,4 @@
-package com.example.roomviewmodel.usecases.personas
+package com.example.roomviewmodel.domain.usecases.personas
 
 import com.example.roomviewmodel.data.PersonaRepository
 import com.example.roomviewmodel.data.modelo.toPersona

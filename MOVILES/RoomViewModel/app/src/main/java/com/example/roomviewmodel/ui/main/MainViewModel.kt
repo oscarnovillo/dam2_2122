@@ -2,14 +2,11 @@ package com.example.roomviewmodel.ui.main
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.roomviewmodel.data.modelo.CosaEntity
-import com.example.roomviewmodel.data.modelo.PersonaEntity
-import com.example.roomviewmodel.data.modelo.PersonaWithCosas
-import com.example.roomviewmodel.domain.Persona
-import com.example.roomviewmodel.usecases.personas.GetPersonas
-import com.example.roomviewmodel.usecases.personas.GetPersonasDes
-import com.example.roomviewmodel.usecases.personas.InsertPersona
-import com.example.roomviewmodel.usecases.personas.InsertPersonaWithCosas
+import com.example.roomviewmodel.domain.modelo.Persona
+import com.example.roomviewmodel.domain.usecases.personas.GetPersonas
+import com.example.roomviewmodel.domain.usecases.personas.GetPersonasDes
+import com.example.roomviewmodel.domain.usecases.personas.InsertPersona
+import com.example.roomviewmodel.domain.usecases.personas.InsertPersonaWithCosas
 import kotlinx.coroutines.launch
 import java.lang.Exception
 

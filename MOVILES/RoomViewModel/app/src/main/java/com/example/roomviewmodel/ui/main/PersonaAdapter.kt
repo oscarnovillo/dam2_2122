@@ -8,13 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomviewmodel.R
 import com.example.roomviewmodel.databinding.ViewPersonaBinding
-import com.example.roomviewmodel.data.modelo.PersonaEntity
-import com.example.roomviewmodel.domain.Persona
+import com.example.roomviewmodel.domain.modelo.Persona
 
 class PersonaAdapter:
     ListAdapter<Persona, PersonaAdapter.ItemViewholder>(DiffCallback())  {
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewholder {
         return ItemViewholder(

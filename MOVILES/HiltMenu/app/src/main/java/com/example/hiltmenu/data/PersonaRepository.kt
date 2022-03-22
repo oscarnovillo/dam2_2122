@@ -2,11 +2,12 @@ package com.example.hiltmenu.data
 
 import com.example.hiltmenu.data.modelo.PersonaEntity
 import com.example.hiltmenu.data.modelo.PersonaWithCosas
+import com.example.hiltmenu.data.modelo.toPersona
 import javax.inject.Inject
 
 class PersonaRepository @Inject constructor(private val personaDao: PersonaDao) {
 
-    suspend fun getPersonas() = personaDao.getPersonas()
+    suspend fun getPersonas() = personaDao.getPersonas().map { it.toPersona() }
 
     suspend fun getCosas() = personaDao.getCosas()
 

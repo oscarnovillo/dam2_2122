@@ -1,7 +1,7 @@
 package com.example.roomviewmodel.data.modelo
 
-import com.example.roomviewmodel.domain.Cosa
-import com.example.roomviewmodel.domain.Persona
+import com.example.roomviewmodel.domain.modelo.Cosa
+import com.example.roomviewmodel.domain.modelo.Persona
 
 fun PersonaEntity.toPersona() : Persona {
     return Persona(this.id,this.nombre,this.nacimiento,null)

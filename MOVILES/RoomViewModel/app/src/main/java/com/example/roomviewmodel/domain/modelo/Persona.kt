@@ -1,4 +1,4 @@
-package com.example.roomviewmodel.domain
+package com.example.roomviewmodel.domain.modelo
 
 import java.time.LocalDate
 

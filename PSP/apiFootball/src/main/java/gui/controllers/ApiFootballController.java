@@ -8,6 +8,7 @@ import dao.modelo.Competition;
 import dao.modelo.Usuario;
 import dao.modelo.marvel.Character;
 import io.reactivex.rxjava3.core.Single;
+import javafx.application.Platform;
 import org.pdfsam.rxjavafx.schedulers.JavaFxScheduler;
 //import io.reactivex.rxjavafx.schedulers.JavaFxScheduler;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -70,7 +71,7 @@ public class ApiFootballController implements Initializable {
             @Override
             protected List<Character> call() throws Exception {
                 ServiciosMarvel sm = new ServiciosMarvel();
-               // Thread.sleep(5000);
+                // Thread.sleep(5000);
                 return sm.getCharacteres();
             }
         };
