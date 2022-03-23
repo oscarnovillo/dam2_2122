@@ -7,7 +7,7 @@ interface MainContract {
     sealed class Event {
 
         object PedirDatos : Event()
-        object MensajeMostrado : Event()
+        object MensajeMostrado: Event()
 
     }
 

@@ -33,28 +33,7 @@ class MainViewModel @Inject constructor(
     fun handleEvent(event: MainContract.Event) {
         when (event) {
             MainContract.Event.PedirDatos -> {
-                viewModelScope.launch {
-                    movieRepository.fetchTrendingMovies().catch(action = {cause -> _uiError.send(cause.message ?: "") }).collect { result ->
-                        when (result) {
-                            is NetworkResult.Error -> {
-                                _uiState.update { it.copy(error = result.message) }
-                                //_uiError.send(result.message ?: "Error")
-                            }
-                            is NetworkResult.Loading -> _uiState.update { it.copy(isLoading = true) }
-                            is NetworkResult.Success -> _uiState.update {
-                                it.copy(
-                                    movies = result.data ?: emptyList(), isLoading = false
-                                )
-                            }
-                        }
-                    }
-//                  if (!Utils.hasInternetConnection(appContext))
-//                      _uiError.send("no hay internet"+ BuildConfig.API_KEY)
-//                     // _uiState.value = UiState.Failure("no hay internet")
-//                  else
-//                      _uiError.send("hay internet")
-//                      //_uiState.value = UiState.Failure("hay internet")
-                }
+                pedirDatos()
             }
             MainContract.Event.MensajeMostrado -> {
                 _uiState.update { it.copy(error = null) }
@@ -62,6 +41,32 @@ class MainViewModel @Inject constructor(
         }
 
 
+    }
+
+    private fun pedirDatos() {
+        viewModelScope.launch {
+            movieRepository.fetchTrendingMovies()
+                .catch(action = { cause -> _uiError.send(cause.message ?: "") }).collect { result ->
+                    when (result) {
+                        is NetworkResult.Error -> {
+                            _uiState.update { it.copy(error = result.message) }
+                            //_uiError.send(result.message ?: "Error")
+                        }
+                        is NetworkResult.Loading -> _uiState.update { it.copy(isLoading = true) }
+                        is NetworkResult.Success -> _uiState.update {
+                            it.copy(
+                                movies = result.data ?: emptyList(), isLoading = false
+                            )
+                        }
+                    }
+                }
+    //                  if (!Utils.hasInternetConnection(appContext))
+    //                      _uiError.send("no hay internet"+ BuildConfig.API_KEY)
+    //                     // _uiState.value = UiState.Failure("no hay internet")
+    //                  else
+    //                      _uiError.send("hay internet")
+    //                      //_uiState.value = UiState.Failure("hay internet")
+        }
     }
 
 

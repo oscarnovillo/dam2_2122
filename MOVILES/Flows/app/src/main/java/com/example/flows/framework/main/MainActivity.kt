@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flows.R
 import com.example.flows.databinding.ActivityMainBinding
+import com.example.flows.domain.modelo.Movie
 import com.example.flows.framework.utils.UiState
 import com.example.flows.framework.utils.successData
 import dagger.hilt.android.AndroidEntryPoint

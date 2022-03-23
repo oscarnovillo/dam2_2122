@@ -48,21 +48,27 @@ class MainActivity : AppCompatActivity() {
 
             button.setOnClickListener {
                 val cosas = listOf(Cosa("cosa1", 22))
-                viewModel.insertPersonaWithCosas(Persona(0, "nombre", LocalDate.now(), cosas))
-                viewModel.getPersonasDes()
+                viewModel.handleEvent(
+                    MainEvent.InsertPersona(
+                        Persona(0, "nombre", LocalDate.now(), cosas)
+                    )
+                )
             }
         }
 
-        viewModel.personas.observe(this) { personas ->
-            personasAdapter.submitList(personas)
+
+        viewModel.uiState.observe(this) {
+
+            personasAdapter.submitList(it.personas)
+
+            it.error.let { error ->
+                Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+                viewModel.handleEvent(MainEvent.ErrorVisto)
+            }
+
+
         }
-        viewModel.error.observe(this) {
 
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-
-        }
-
-        viewModel.getPersonas();
 
     }
 }
