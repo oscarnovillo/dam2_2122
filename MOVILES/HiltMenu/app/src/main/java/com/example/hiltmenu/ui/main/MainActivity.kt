@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         // Handle item selection
         return when (item.itemId) {
             R.id.action_action1 -> {
@@ -76,6 +77,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.insertPersonaWithCosas(Persona(0, "nombre", LocalDate.now(), cosas))
             viewModel.getPersonasDes()
         }
+
 
         viewModel.personas.observe(this, { personas ->
 

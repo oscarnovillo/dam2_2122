@@ -15,6 +15,8 @@ public class Login extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //mira en base dde datos usuario correcto.
+
 
         request.getSession().setAttribute("cielito",request.getParameter("nombre"));
 

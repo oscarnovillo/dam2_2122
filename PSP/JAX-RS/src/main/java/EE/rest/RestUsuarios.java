@@ -2,6 +2,7 @@ package EE.rest;
 
 
 import EE.errores.ApiError;
+import EE.filtros.Horario;
 import EE.filtros.Juan;
 import EE.filtros.Writer;
 import dao.modelo.Usuario;
@@ -94,7 +95,7 @@ public class RestUsuarios {
     }
 
     @GET
-    //@Juan
+    @Juan
     public List<Usuario> getAllUsuario() {
         return su.dameTodos();
     }
@@ -107,6 +108,7 @@ public class RestUsuarios {
 
 
     @POST
+    @Horario
     public Usuario addUsuario(Usuario user) {
         return su.addUser(user);
     }

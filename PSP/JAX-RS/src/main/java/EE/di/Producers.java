@@ -18,7 +18,6 @@ public class Producers {
     @Produces
     public ModelMapper producesModelMapper(@Context HttpServletRequest request)
     {
-
         request.getServletContext();
         return new ModelMapper();
     }
@@ -31,4 +30,7 @@ public class Producers {
     {
         return JsonbBuilder.create();
     }
+
+
+
 }

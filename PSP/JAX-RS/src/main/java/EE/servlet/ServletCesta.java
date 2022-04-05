@@ -9,6 +9,7 @@ import java.io.IOException;
 
 @WebServlet(name = "Cesta",urlPatterns = {"/cesta"})
 public class ServletCesta extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -17,7 +18,6 @@ public class ServletCesta extends HttpServlet {
 
             // ha hecho login
             var operador = (String)request.getSession().getAttribute("op");
-
 
             switch(operador)
             {

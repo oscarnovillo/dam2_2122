@@ -20,7 +20,7 @@ public class CreateHash extends HttpServlet {
 
     @Inject
     public CreateHash() {
-        this.passwordHash = null;
+        this.passwordHash=null;
     }
 
 

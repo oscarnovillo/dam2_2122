@@ -25,6 +25,9 @@ public class ServletCielto extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+
         var cielito = (String)request.getSession().getAttribute("cielito");
 
         dao.addUser(new Usuario("prueba","prueba"));
