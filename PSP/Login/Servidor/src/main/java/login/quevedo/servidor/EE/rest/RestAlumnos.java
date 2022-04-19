@@ -54,7 +54,7 @@ public class RestAlumnos {
     @GET
     @RolesAllowed("user")
     public Alumno get() {
-        return Alumno.builder().nombre("kkk").build();
+        return Alumno.builder().nombre(security.getCallerPrincipal().getName()).build();
     }
 
     @GET

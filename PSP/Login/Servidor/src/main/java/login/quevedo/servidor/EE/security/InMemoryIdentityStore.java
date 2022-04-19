@@ -7,6 +7,8 @@ import jakarta.security.enterprise.identitystore.CredentialValidationResult;
 import jakarta.security.enterprise.identitystore.IdentityStore;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import static jakarta.security.enterprise.identitystore.CredentialValidationResult.INVALID_RESULT;
 
@@ -26,10 +28,14 @@ public class InMemoryIdentityStore implements IdentityStore {
                     .class.cast(credential);
 
 
+            HashSet<String> roles = new HashSet<>();
+            roles.add("admin");
+            roles.add("user");
+
 
             switch (user.getCaller()) {
                 case "admin":
-                    return new CredentialValidationResult("admin", Collections.singleton("ADMIN"));
+                    return new CredentialValidationResult("admin", Set.of("ADMIN"));// Collections.singleton("ADMIN"));
                 case "paco":
                     return new CredentialValidationResult("paco", Collections.singleton("user"));
                 case "user":

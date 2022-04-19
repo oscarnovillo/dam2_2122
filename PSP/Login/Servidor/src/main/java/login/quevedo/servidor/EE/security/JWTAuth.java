@@ -32,6 +32,7 @@ public class JWTAuth implements HttpAuthenticationMechanism
         CredentialValidationResult c = CredentialValidationResult.INVALID_RESULT;
 
 
+
         String header = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
         if (header != null) {
             String[] valores = header.split(" ");
