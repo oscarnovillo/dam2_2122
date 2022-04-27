@@ -16,7 +16,9 @@ class MovieRemoteDataSource @Inject constructor(private val movieService: MovieS
 
     suspend fun fetchTrendingMovies(): NetworkResult<List<Movie>> {
 
-        return safeApiCall(apiCall = {movieService.getPopularMovies()}, transform = { it.results?.map { it.toMovie()} ?: emptyList()})
+        return safeApiCall(apiCall = {movieService.getPopularMovies()},
+            transform = { trendingMovieResponse -> trendingMovieResponse
+                .results?.map { movieEntity ->  movieEntity.toMovie()} ?: emptyList()})
 
     }
 

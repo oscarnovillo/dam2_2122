@@ -46,7 +46,8 @@ class MainViewModel @Inject constructor(
     private fun pedirDatos() {
         viewModelScope.launch {
             movieRepository.fetchTrendingMovies()
-                .catch(action = { cause -> _uiError.send(cause.message ?: "") }).collect { result ->
+                .catch(action = { cause -> _uiError.send(cause.message ?: "") })
+                .collect { result ->
                     when (result) {
                         is NetworkResult.Error -> {
                             _uiState.update { it.copy(error = result.message) }
