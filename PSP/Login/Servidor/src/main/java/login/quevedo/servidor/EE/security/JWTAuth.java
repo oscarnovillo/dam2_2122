@@ -44,7 +44,7 @@ public class JWTAuth implements HttpAuthenticationMechanism
                         , userPassSeparado[1]));
 
                 if (c.getStatus() == CredentialValidationResult.Status.VALID) {
-                    httpServletRequest.getSession().setAttribute("LOGIN", c);
+                    //httpServletRequest.getSession().setAttribute("LOGIN", c);
                     //generar token
 
 
@@ -52,6 +52,11 @@ public class JWTAuth implements HttpAuthenticationMechanism
 
 
                 }
+            }
+            else if (valores[0].equalsIgnoreCase("Bearer")) {
+
+
+
             }
             //  else del bearer, bearer, bearer,beaer Ijust conat to wiat to vb warer
 

@@ -70,7 +70,7 @@ public class MainAesTest {
 
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, secretKey, ivspec);
-            return new String(cipher.doFinal(Base64.getUrlDecoder().decode(strToDecrypt)));
+            return new String(cipher.doFinal(Base64.getUrlDecoder().decode(strToDecrypt)),StandardCharsets.UTF_8);
         } catch (Exception e) {
             System.out.println("Error while decrypting: " + e.toString());
         }

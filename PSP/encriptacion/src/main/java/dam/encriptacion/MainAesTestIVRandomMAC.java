@@ -6,6 +6,8 @@
 package dam.encriptacion;
 
 import com.google.common.primitives.Bytes;
+
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
@@ -29,17 +31,18 @@ import javax.crypto.spec.SecretKeySpec;
 public class MainAesTestIVRandomMAC {
 
     private static String sSecretKey = "boooooooooom!!!!";
-   
+
 
     public static String encrypt(String strToEncrypt, String secret) {
         try {
-            byte[] iv = new byte[12];
+
+            byte [] iv = new byte[12];
             byte []salt = new byte[16];
             SecureRandom sr = new SecureRandom();
             sr.nextBytes(iv);
             sr.nextBytes(salt);
             GCMParameterSpec parameterSpec = new GCMParameterSpec(128, iv);
-            
+
 
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
             // en el jdk8 esta limitado a 128 bits, desde el 9 puede ser de 256
@@ -50,7 +53,7 @@ public class MainAesTestIVRandomMAC {
             Cipher cipher = Cipher.getInstance("AES/GCM/noPadding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey, parameterSpec);
             return Base64.getUrlEncoder().encodeToString(Bytes.concat(iv,salt,
-                cipher.doFinal(strToEncrypt.getBytes("UTF-8"))));
+                cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8))));
         } catch (Exception e) {
             System.out.println("Error while encrypting: " + e.toString());
         }
@@ -60,7 +63,7 @@ public class MainAesTestIVRandomMAC {
     public static String decrypt(String strToDecrypt, String secret) {
         try {
             byte[] decoded = Base64.getUrlDecoder().decode(strToDecrypt);
-            
+
             byte[] iv = Arrays.copyOf(decoded, 12);
             byte []salt = Arrays.copyOfRange(decoded, 12,28);
 
@@ -73,7 +76,7 @@ public class MainAesTestIVRandomMAC {
 
             Cipher cipher = Cipher.getInstance("AES/GCM/noPADDING");
             cipher.init(Cipher.DECRYPT_MODE, secretKey, parameterSpec);
-            return new String(cipher.doFinal(Arrays.copyOfRange(decoded, 28, decoded.length)));
+            return new String(cipher.doFinal(Arrays.copyOfRange(decoded, 28, decoded.length)), StandardCharsets.UTF_8);
         } catch (Exception e) {
             System.out.println("Error while decrypting: " + e.toString());
         }

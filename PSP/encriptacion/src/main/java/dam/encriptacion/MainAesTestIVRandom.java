@@ -34,7 +34,7 @@ public class MainAesTestIVRandom {
 
     public static String encrypt(String strToEncrypt, String secret) {
         try {
-            byte[] iv = {100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            byte[] iv = new byte[16];
 
             SecureRandom sr = new SecureRandom();
             sr.nextBytes(iv);
@@ -69,7 +69,7 @@ public class MainAesTestIVRandom {
 
             Cipher cipher = Cipher.getInstance("AES/CTR/noPADDING");
             cipher.init(Cipher.DECRYPT_MODE, secretKey, ivspec);
-            return new String(cipher.doFinal(Arrays.copyOfRange(decoded, 16, decoded.length)));
+            return new String(cipher.doFinal(Arrays.copyOfRange(decoded, 16, decoded.length)),StandardCharsets.UTF_8);
         } catch (Exception e) {
             System.out.println("Error while decrypting: " + e.toString());
         }

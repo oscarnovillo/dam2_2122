@@ -85,7 +85,6 @@ public class RestAlumnos {
         String jws = Jwts.builder()
                 .setSubject("Joe")
                 .setIssuer("yo")
-
                 .setExpiration(Date
                         .from(LocalDateTime.now().plusSeconds(60).atZone(ZoneId.systemDefault())
                                 .toInstant()))

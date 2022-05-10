@@ -31,13 +31,15 @@ public class AuthorizationInterceptor implements Interceptor {
         else
         {
             request = original.newBuilder()
-                    .header("JWT", ca.getJwt()).build();
+                    .header("JWT", "Bearer "+ca.getJwt()).build();
 
         }
 
         Response response = chain.proceed(request);
         if (response.header("Authorization") !=null)
             ca.setJwt(response.header("Authorization"));
+
+
         if (!response.isSuccessful())
         {
             //reintentar
