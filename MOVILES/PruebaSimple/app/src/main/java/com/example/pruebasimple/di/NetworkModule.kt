@@ -1,12 +1,12 @@
 package com.example.pruebasimple.di
 
 
-import com.example.flows.Config
+import com.example.pruebasimple.Config
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.buildwithnd.demotmdb.network.services.UserService
+import com.example.pruebasimple.network.services.UserService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

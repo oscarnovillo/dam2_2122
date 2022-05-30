@@ -18,17 +18,19 @@ import com.example.pruebasimple.domain.model.MediaItem
 import com.example.pruebasimple.domain.model.getMedia
 import com.example.pruebasimple.framework.ui.PruebaSimpleApp
 import com.example.pruebasimple.R
+import com.example.pruebasimple.domain.model.TipoUsuario
 
 
 @Composable
 fun MediaList(
-    onClick: (MediaItem) -> Unit,
+    lista: List<TipoUsuario>,
+    onClick: (TipoUsuario) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier
     ) {
-        items(getMedia()) {
+        items(lista) {
             MediaListItem(
                 mediaItem = it,
                 onClick = { onClick(it) },
@@ -41,7 +43,7 @@ fun MediaList(
 
 @Composable
 fun MediaListItem(
-    mediaItem: MediaItem,
+    mediaItem: TipoUsuario,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -49,14 +51,13 @@ fun MediaListItem(
         modifier = modifier.clickable { onClick() }
     ) {
         Column {
-            Thumb(mediaItem)
             Title(mediaItem)
         }
     }
 }
 
 @Composable
-private fun Title(mediaItem: MediaItem) {
+private fun Title(mediaItem: TipoUsuario) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -65,20 +66,9 @@ private fun Title(mediaItem: MediaItem) {
             .padding(dimensionResource(R.dimen.padding_medium))
     ) {
         Text(
-            text = mediaItem.title,
+            text = mediaItem.tipo,
             style = MaterialTheme.typography.h6
         )
     }
 }
 
-
-@Preview
-@Composable
-fun MediaListItemPreview() {
-    PruebaSimpleApp {
-
-
-        val mediaItem = MediaItem(1, "Item 1", "", MediaItem.Type.VIDEO)
-        MediaListItem(mediaItem = mediaItem, onClick = {})
-    }
-}

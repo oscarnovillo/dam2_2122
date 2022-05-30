@@ -1,4 +1,4 @@
-package io.buildwithnd.demotmdb.network.services
+package com.example.pruebasimple.network.services
 
 import com.example.pruebasimple.domain.model.TipoUsuario
 import retrofit2.Response
@@ -10,7 +10,7 @@ import retrofit2.http.Path
  */
 interface UserService {
 
-    @GET("/api/usuarios/allTipos")
+    @GET("api/usuarios/allTipos")
     suspend fun getTiposUsuario() : Response<List<TipoUsuario>>
 
 }

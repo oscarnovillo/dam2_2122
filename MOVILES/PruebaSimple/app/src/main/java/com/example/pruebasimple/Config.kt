@@ -1,6 +1,5 @@
-package com.example.flows
+package com.example.pruebasimple
 
 object Config {
-    const val BASE_URL = "https://192.168.1.5:8080/tfg"
-    const val IMAGE_URL = "https://image.tmdb.org/t/p/original";
+    const val BASE_URL = "http://192.168.1.7:8080/tfg/"
 }
