@@ -1,4 +1,4 @@
-package com.example.pruebasimple.ui.screens.shared
+package com.example.pruebasimple.framework.ui.screens.shared
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -13,7 +13,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import coil.compose.rememberImagePainter
 import com.example.pruebasimple.R
-import com.example.pruebasimple.model.MediaItem
+import com.example.pruebasimple.domain.model.MediaItem
 
 
 @Composable

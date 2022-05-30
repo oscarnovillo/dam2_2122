@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.pruebasimple.R
-import com.example.pruebasimple.ui.PruebaSimpleApp
+import com.example.pruebasimple.framework.ui.PruebaSimpleApp
 
 @Composable
 fun MainAppBar() {

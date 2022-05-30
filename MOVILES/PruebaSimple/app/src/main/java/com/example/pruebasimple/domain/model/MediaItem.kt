@@ -1,6 +1,6 @@
-package com.example.pruebasimple.model
+package com.example.pruebasimple.domain.model
 
-import com.example.pruebasimple.model.MediaItem.*
+import com.example.pruebasimple.domain.model.MediaItem.*
 
 data class MediaItem(
     val id: Int,

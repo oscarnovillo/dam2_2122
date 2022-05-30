@@ -1,4 +1,4 @@
-package com.example.pruebasimple.ui.navigation
+package com.example.pruebasimple.framework.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
@@ -6,8 +6,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.pruebasimple.ui.screens.detail.DetailScreen
-import com.example.pruebasimple.ui.screens.main.MainScreen
+import com.example.pruebasimple.framework.ui.screens.detail.DetailScreen
+import com.example.pruebasimple.framework.ui.screens.main.MainScreen
 
 
 @Composable

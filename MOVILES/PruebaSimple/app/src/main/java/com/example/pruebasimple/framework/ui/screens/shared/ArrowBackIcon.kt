@@ -1,4 +1,4 @@
-package com.example.pruebasimple.ui.screens.shared
+package com.example.pruebasimple.framework.ui.screens.shared
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton

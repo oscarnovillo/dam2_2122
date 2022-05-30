@@ -13,15 +13,18 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.io.IOException;
 
-public class MainFX  {
+public class MainFX extends Application {
+
+  public static void main(String[] args) {
+    launch(args);
+  }
 
   @Inject
   FXMLLoader fxmlLoader;
 
-  public void start(@Observes @StartupScene Stage stage) {
+  public void start(@Observes @StartupScene Stage stage) throws IOException {
     try {
-      //fxmlLoader = new FXMLLoader();
-      //URL arquivoFXML = getClass().getResource("./hello-world.fxml");
+      fxmlLoader = new FXMLLoader(getClass().getResource("./hello-world.fxml"));
 //			SeContainerInitializer initializer = SeContainerInitializer.newInstance();
 //			final SeContainer container = initializer.initialize();
 //			FXMLLoader loaderMenu = new FXMLLoader(

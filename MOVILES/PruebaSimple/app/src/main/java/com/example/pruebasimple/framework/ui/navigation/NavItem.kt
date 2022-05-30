@@ -1,4 +1,4 @@
-package com.example.pruebasimple.ui.navigation
+package com.example.pruebasimple.framework.ui.navigation
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument

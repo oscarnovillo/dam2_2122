@@ -68,17 +68,9 @@ public class ConfigurationSingleton_OkHttpClient {
                     )
                     .cookieJar(new JavaNetCookieJar(cookieManager))
                     .build();
-            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
-                @Override
-                public LocalDateTime deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-                    return LocalDateTime.parse(json.getAsJsonPrimitive().getAsString());
-                }
-            }).registerTypeAdapter(LocalDateTime.class, new JsonSerializer<LocalDateTime>() {
-                        @Override
-                        public JsonElement serialize(LocalDateTime localDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
-                            return new JsonPrimitive(localDateTime.toString());
-                        }
-                    }
+            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class,
+                    (JsonDeserializer<LocalDateTime>) (json, type, jsonDeserializationContext) -> LocalDateTime.parse(json.getAsJsonPrimitive().getAsString())).registerTypeAdapter(LocalDateTime.class,
+                    (JsonSerializer<LocalDateTime>) (localDateTime, type, jsonSerializationContext) -> new JsonPrimitive(localDateTime.toString())
             ).create();
             retrofit = new Retrofit.Builder()
                     .baseUrl(ConfigurationSingleton_Client.getInstance().getPath_base())

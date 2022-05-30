@@ -1,14 +1,14 @@
-package com.example.pruebasimple.ui.screens.detail
+package com.example.pruebasimple.framework.ui.screens.detail
 
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import com.example.pruebasimple.ui.screens.shared.ArrowBackIcon
-import com.example.pruebasimple.model.getMedia
+import com.example.pruebasimple.framework.ui.screens.shared.ArrowBackIcon
+import com.example.pruebasimple.domain.model.getMedia
 
-import com.example.pruebasimple.ui.screens.shared.Thumb
+import com.example.pruebasimple.framework.ui.screens.shared.Thumb
 
 
 @Composable

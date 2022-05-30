@@ -1,4 +1,4 @@
-package com.example.pruebasimple.ui.screens.main
+package com.example.pruebasimple.framework.ui.screens.main
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,10 +13,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.pruebasimple.ui.screens.shared.Thumb
-import com.example.pruebasimple.model.MediaItem
-import com.example.pruebasimple.model.getMedia
-import com.example.pruebasimple.ui.PruebaSimpleApp
+import com.example.pruebasimple.framework.ui.screens.shared.Thumb
+import com.example.pruebasimple.domain.model.MediaItem
+import com.example.pruebasimple.domain.model.getMedia
+import com.example.pruebasimple.framework.ui.PruebaSimpleApp
 import com.example.pruebasimple.R
 
 

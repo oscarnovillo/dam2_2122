@@ -1,9 +1,9 @@
-package com.example.pruebasimple.ui
+package com.example.pruebasimple.framework.ui
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import com.example.pruebasimple.ui.theme.PruebaSimpleTheme
+import com.example.pruebasimple.framework.ui.theme.PruebaSimpleTheme
 
 
 @Composable

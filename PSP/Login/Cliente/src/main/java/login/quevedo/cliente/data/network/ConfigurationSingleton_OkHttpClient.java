@@ -20,7 +20,7 @@ import java.time.temporal.ChronoUnit;
 
 @Log4j2
 public class ConfigurationSingleton_OkHttpClient {
-    private static OkHttpClient clientOK;
+    public static OkHttpClient clientOK;
 
     private static Retrofit retrofit;
 
