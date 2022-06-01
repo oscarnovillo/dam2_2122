@@ -10,6 +10,7 @@ interface MainContract {
         object PedirDatos : Event()
         object MensajeMostrado: Event()
 
+
     }
 
     data class State(

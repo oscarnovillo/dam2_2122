@@ -17,7 +17,6 @@ fun Greeting(
     modifier: Modifier = Modifier
 ) {
     Text(
-
         text = "Hello $name!",
         fontFamily = FontFamily.Monospace,
         fontWeight = FontWeight.W600,

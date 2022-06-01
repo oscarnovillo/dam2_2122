@@ -2,3 +2,7 @@ ruta: jdbc:mysql://dam2.mysql.iesquevedo.es:3335/oscar?useSSL=false
 user: root
 password: quevedo2dam
 driver: com.mysql.cj.jdbc.Driver
+#rutaKeyStores: /opt/payara/deployments/
+rutaKeyStores: C:\tools\payara-5.2021.8\payara5\deployments\
+
+

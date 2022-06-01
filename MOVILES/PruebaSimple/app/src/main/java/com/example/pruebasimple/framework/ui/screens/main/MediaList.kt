@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -24,18 +25,26 @@ import com.example.pruebasimple.domain.model.TipoUsuario
 @Composable
 fun MediaList(
     lista: List<TipoUsuario>,
+    onPedirDatos: () -> Unit,
     onClick: (TipoUsuario) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        modifier = modifier
-    ) {
-        items(lista) {
-            MediaListItem(
-                mediaItem = it,
-                onClick = { onClick(it) },
-                modifier = Modifier.padding(dimensionResource(R.dimen.padding_xsmall))
-            )
+
+    Column() {
+        Button(onClick = onPedirDatos) {
+            Text("pedir Datos")
+        }
+
+        LazyColumn(
+            modifier = modifier
+        ) {
+            items(lista) {
+                MediaListItem(
+                    mediaItem = it,
+                    onClick = { onClick(it) },
+                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_xsmall))
+                )
+            }
         }
     }
 }

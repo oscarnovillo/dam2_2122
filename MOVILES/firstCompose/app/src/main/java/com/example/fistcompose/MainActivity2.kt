@@ -60,8 +60,8 @@ fun Navigation() {
         ) {
             PantallaLista(
                 text = "1",
-                onNavigate = {
-                    navController.navigate(Routes.DETALLE + "?todoId=${it}")
+                onNavigate = { id ->
+                    navController.navigate(Routes.DETALLE + "?todoId=${id}")
                 }
             )
         }
@@ -126,17 +126,17 @@ fun PantallaLista(
     text: String,
     onNavigate: (Int) -> Unit,
 ) {
-    var texto by rememberSaveable { mutableStateOf(text) }
+    val texto  = viewModel.text.collectAsState()
     val listadoData = viewModel.listado.collectAsState(initial = emptyList())
 
     Column(modifier = Modifier.fillMaxWidth()) {
 
         PrimerTrozo(
-            text = texto,
+            text = texto.value,
             onNavigate = onNavigate,
-            onTextChange = { texto = it }
+            onTextChange = { viewModel.changeText(it) }
         )
-        Button(onClick = { texto = (texto.toInt() + 1).toString() }) {
+        Button(onClick = { viewModel.changeText((texto.value.toInt() + 1).toString()) }) {
             Text(text = "suma")
         }
 

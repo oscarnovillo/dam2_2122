@@ -30,6 +30,10 @@ class MainViewModel @Inject constructor(
     }
     val uiState: StateFlow<State> = _uiState
 
+
+    private val _error =  Channel<String>()
+    val error = _error.receiveAsFlow()
+
     fun handleEvent(event: Event) {
         when (event) {
             Event.PedirDatos -> {
@@ -44,12 +48,12 @@ class MainViewModel @Inject constructor(
     private fun pedirDatos() {
         viewModelScope.launch {
             userRepository.fetchTiposUsuario()
-                .catch(action = { cause ->  _uiState.update { it.copy(error = cause.message ?: "") }})
+                .catch(action = { cause ->  _uiState.update { it.copy(error = cause.message ?: "", isLoading = false) }})
                 .collect { result ->
                     when (result) {
                         is NetworkResult.Error -> {
-                            _uiState.update { it.copy(error = result.message) }
-                            //_uiError.send(result.message ?: "Error")
+                            _uiState.update { it.copy(error = result.message, isLoading = false) }
+                            _error.send(result.message ?: "Error")
                         }
                         is NetworkResult.Loading -> _uiState.update { it.copy(isLoading = true) }
                         is NetworkResult.Success -> _uiState.update {

@@ -14,4 +14,15 @@ class PantallaListaViewModel  @Inject constructor(
 
     val listado = repository.getData()
 
+    val _text = MutableStateFlow<String>("")
+    val text : StateFlow<String> = _text
+
+
+
+
+    fun changeText(texto: String)
+    {
+
+    }
+
 }

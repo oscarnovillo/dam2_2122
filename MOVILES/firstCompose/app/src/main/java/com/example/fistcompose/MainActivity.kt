@@ -1,7 +1,6 @@
 package com.example.fistcompose
 
 import android.content.Intent
-import android.opengl.GLES31
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -10,16 +9,17 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BatteryUnknown
-import androidx.compose.material.icons.outlined.BatteryUnknown
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.material.icons.twotone.Earbuds
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -63,9 +63,11 @@ fun PrimerBox() {
         contentAlignment = Alignment.Center
 
     ) {
+
         val snackbarHostState = remember { SnackbarHostState() }
 
 
+        val i = 0;
         val context = LocalContext.current
         val circularProgressDrawable: CircularProgressDrawable = remember {
             val c = CircularProgressDrawable(context)
@@ -89,13 +91,55 @@ fun PrimerBox() {
 
 
         )
+        val lista =
+            listOf(3, 1, 1, 1)
+
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Gray)
+        ) {
+
+
+            items(lista) { numero ->
+                val color = MaterialTheme.colors
+                var background by remember{ mutableStateOf(color.primary) }
+                Row(
+                    Modifier
+                        .clickable {
+                            background =
+                                if (background == color.secondary) color.primary else color.secondary
+                        }
+                        .background(background)) {
+                    Button(
+                        onClick = {
+
+                        },
+
+                        ) {
+                        Text(text = "Hola $numero")
+                    }
+                    if (background != color.secondary) {
+                        Text(
+                            text = numero.toString(),
+
+
+                            style = MaterialTheme.typography.h6,
+                        )
+                    }
+                }
+            }
+        }
+
+
 
         Greeting(
-            name = "JJJ",
+            name = "JJrf J",
             modifier = Modifier.align(Alignment.TopStart)
         )
         Greeting(
-            name = "JJddJ",
+            name = "JJaa ddJ",
             modifier = Modifier.align(Alignment.TopStart)
         )
         Greeting(
@@ -112,7 +156,7 @@ fun PrimerBox() {
 
             Icon(
 
-                imageVector = Icons.Outlined.BatteryUnknown,
+                imageVector = Icons.TwoTone.Earbuds,
                 contentDescription = null,
                 modifier = Modifier
                     .size(200.dp)

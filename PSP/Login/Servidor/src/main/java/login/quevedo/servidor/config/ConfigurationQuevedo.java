@@ -21,6 +21,7 @@ public class ConfigurationQuevedo {
     private String user;
     private String password;
     private String driver;
+    private String rutaKeyStores;
 
     public ConfigurationQuevedo() {
 
@@ -37,6 +38,7 @@ public class ConfigurationQuevedo {
             this.password = m.get("password");
             this.user = m.get("user");
             this.driver = m.get("driver");
+            this.rutaKeyStores    = m.get("rutaKeyStores");
 
 
         } catch (Exception ex) {

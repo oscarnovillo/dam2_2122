@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import coil.annotation.ExperimentalCoilApi
 import com.antonioleiva.mymovies.model.getMedia
+import com.antonioleiva.mymovies.ui.screens.main.MainAppBar
 import com.antonioleiva.mymovies.ui.screens.shared.ArrowBackIcon
 import com.antonioleiva.mymovies.ui.screens.shared.Thumb
 
