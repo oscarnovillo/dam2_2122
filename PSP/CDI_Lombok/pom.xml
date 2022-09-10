@@ -42,7 +42,7 @@
         <dependency>
             <groupId>io.github.palexdev</groupId>
             <artifactId>materialfx</artifactId>
-            <version>11.12.0</version>
+            <version>11.13.4</version>
         </dependency>
 
         <dependency>
