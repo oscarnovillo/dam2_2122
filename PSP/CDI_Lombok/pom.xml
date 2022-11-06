@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <jacksonVersion>2.12.5</jacksonVersion>
+        <jacksonVersion>2.14.0</jacksonVersion>
     </properties>
     <dependencies>
 
