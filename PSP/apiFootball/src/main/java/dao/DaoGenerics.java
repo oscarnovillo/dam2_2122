@@ -46,6 +46,7 @@ abstract class DaoGenerics {
                 .onErrorReturn(throwable -> {
                     Either<String, T> error = Either.left("Error de comunicacion");
                     if (throwable instanceof HttpException) {
+                        //((HttpException)throwable).code()
                         if (Objects.equals(((HttpException) throwable).response().errorBody().contentType(), MediaType.get("application/json"))) {
                             Gson g = new Gson();
                             dao.modelo.marvel.ApiError apierror = g.fromJson(((HttpException) throwable).response().errorBody().string(), dao.modelo.marvel.ApiError.class);

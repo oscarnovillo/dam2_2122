@@ -37,6 +37,7 @@ module apiFootball {
     exports dao.modelo.jax;
     //needed for JavaFX
     opens gui.controllers to javafx.fxml;
+    opens dao.modelo.marvel;
 
     // yaml
    //opens config to org.yaml.snakeyaml.Yaml;
