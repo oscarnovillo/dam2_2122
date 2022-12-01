@@ -65,6 +65,14 @@ public class MainMarvel {
 
         MarvelApi marvelAPI = retrofit.create(MarvelApi.class);
 
+
+
+        marvelAPI.getCharactersRx().blockingSubscribe(marvelCharacters -> {
+            System.out.println(marvelCharacters);
+        }, throwable -> {
+            System.out.println(throwable);
+        });
+
         Response<MarvelCharacters> response = marvelAPI.getCharacters("spider").execute();
 
         if (response.isSuccessful())

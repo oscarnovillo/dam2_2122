@@ -38,11 +38,15 @@ abstract class DaoGenerics {
                 .subscribeOn(Schedulers.io())
                 .onErrorReturn(throwable -> {
                     Either<String, T> error = Either.left("Error de comunicacion");
+
                     if (throwable instanceof HttpException) {
+                        ((HttpException) throwable).code();
                         if (Objects.equals(((HttpException) throwable).response().errorBody().contentType(), MediaType.get("application/json"))) {
                             Gson g = new Gson();
 
                             error = Either.left("No se que decir");
+
+                            error = Either.right(T);
                         } else {
                             error = Either.left(((HttpException) throwable).response().message());
                         }

@@ -19,6 +19,8 @@ public class DaoEstupido extends DaoGenerics{
     public Single<Either<String,Alumno>> getAlumno(){
         EstupidoAPI estu = ConfigurationSingleton_OkHttpClient.getInstance(cache).create(EstupidoAPI.class);
 
+
+
         return safeSingleApicall(estu.getAlumno())
                 //.map(either -> either.map(alumno -> alumno.setNombre("mapeado")))
                 .subscribeOn(Schedulers.io());
