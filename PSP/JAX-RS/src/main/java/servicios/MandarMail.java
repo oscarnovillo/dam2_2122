@@ -53,6 +53,7 @@ public class MandarMail {
         mailServerProperties.put("mail.smtp.port", Integer.parseInt("587"));
         mailServerProperties.put("mail.smtp.auth", "true");
         mailServerProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+//        mailServerProperties.put("mail.smtp.ssl.trust", "smtp01.educa.madrid.org");
         mailServerProperties.put("mail.smtp.starttls.enable", "true");
 
         // Step2
@@ -73,7 +74,8 @@ public class MandarMail {
         // if you have 2FA enabled then provide App Specific Password
         transport.connect("smtp.gmail.com",
                 "alumnosdamquevedo@gmail.com",
-                "quevedo2021");
+                "ayuaklckgxbbooph");
+
         transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
         transport.close();
     }
